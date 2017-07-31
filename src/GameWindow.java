@@ -21,4 +21,11 @@ public class GameWindow extends JFrame implements Setting{
         });
         this.setVisible(true);
     }
+
+    @Override
+    public void paint(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.black);
+        g2d.fillRect(0,0,600,800);
+    }
 }
