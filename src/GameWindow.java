@@ -7,15 +7,6 @@ import java.awt.event.WindowEvent;
  */
 public class GameWindow extends JFrame{
     public GameWindow(){
-        this.setResizable(false);
-        this.setSize(600,600);
-        this.setTitle("the first son");
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
-        this.setVisible(true);
+   
     }
 }
