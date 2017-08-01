@@ -21,7 +21,7 @@ public class Player extends GameObject{
 
     public Player(){
         super();
-        this.renderer = new ImageRenderer(Utils.Loadimage("assets/image/player/1.png"));
+        this.renderer = new ImageRenderer(Utils.loadImage("assets/image/player/1.png"));
         this.velocity = new Vector2D();
         instence = this;
         vUp = new Vector2D(0,-4);
