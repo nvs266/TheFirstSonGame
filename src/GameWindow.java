@@ -1,8 +1,8 @@
-import Utils.Utils;
 import bases.GameObject;
+import bases.GameObjectPool;
 import bases.Setting;
-import bases.renderers.ImageRenderer;
 import inputs.InputManager;
+import players.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +24,13 @@ public class GameWindow extends JFrame implements Setting{
     public GameWindow(){
         setUpgameWindow();
         setupInputs();
+        addPlayer();
         this.setVisible(true);
+    }
+
+    private void addPlayer() {
+        Player player = GameObjectPool.recycle(Player.class);
+        player.setInputManager(this.inputManager);
     }
 
     private void setupInputs() {
@@ -48,7 +54,7 @@ public class GameWindow extends JFrame implements Setting{
 
     private void setUpgameWindow() {
         this.setResizable(false);
-        this.setSize(widthScreen,heightScreen);
+        this.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         this.setLocation(400, 50);
         this.setTitle("the first son");
         this.addWindowListener(new WindowAdapter() {
@@ -57,7 +63,7 @@ public class GameWindow extends JFrame implements Setting{
                 System.exit(0);
             }
         });
-        buffBackground = new BufferedImage(widthScreen, heightScreen, BufferedImage.TYPE_INT_ARGB);
+        buffBackground = new BufferedImage(WIDTH_SCREEN, HEIGHT_SCREEN, BufferedImage.TYPE_INT_ARGB);
         buffBackgroundGraphics2d = (Graphics2D) buffBackground.getGraphics();
     }
 
@@ -65,7 +71,7 @@ public class GameWindow extends JFrame implements Setting{
     public void loop(){
         while (true) {
             long currentTime = System.currentTimeMillis();
-            if (currentTime - lastUpdateTime > Setting.Delay){
+            if (currentTime - lastUpdateTime > Setting.DELAY){
                 run();
                 render();
             }
@@ -74,7 +80,7 @@ public class GameWindow extends JFrame implements Setting{
 
     private void render() {
         buffBackgroundGraphics2d.setColor(Color.BLACK);
-        buffBackgroundGraphics2d.fillRect(0,0,widthScreen, heightScreen);
+        buffBackgroundGraphics2d.fillRect(0,0, WIDTH_SCREEN, HEIGHT_SCREEN);
 
         GameObject.renderAll(buffBackgroundGraphics2d);
 
