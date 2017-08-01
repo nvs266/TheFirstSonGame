@@ -1,6 +1,7 @@
 package bases.renderers;
 
 import bases.FrameCounter;
+import bases.Setting;
 import bases.Vector2D;
 
 import java.awt.*;
@@ -23,7 +24,7 @@ public class Animation implements Renderer {
     }
 
     public Animation(BufferedImage... imageArr) {
-        this(5, true, imageArr);
+        this(Setting.delayFrameDefault, true, imageArr);
     }
 
 
