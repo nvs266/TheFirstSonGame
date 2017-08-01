@@ -2,9 +2,12 @@ import Utils.Utils;
 import bases.GameObject;
 import bases.Setting;
 import bases.renderers.ImageRenderer;
+import inputs.InputManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -16,20 +19,43 @@ public class GameWindow extends JFrame implements Setting{
 
     BufferedImage buffBackground;
     Graphics2D buffBackgroundGraphics2d;
+    InputManager inputManager = new InputManager();
 
     public GameWindow(){
         setUpgameWindow();
+
         GameObject gameObject = new GameObject();
         gameObject.renderer = new ImageRenderer(Utils.Loadimage("assets/image/enemy/enemy1/0.png"));
         gameObject.position.set(200,200);
         gameObject.add(gameObject);
 
+        setupInputs();
         this.setVisible(true);
+    }
+
+    private void setupInputs() {
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                inputManager.keyPressed(e);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                inputManager.keyRealeased(e);
+            }
+        });
     }
 
     private void setUpgameWindow() {
         this.setResizable(false);
         this.setSize(widthScreen,heightScreen);
+        this.setLocation(400, 50);
         this.setTitle("the first son");
         this.addWindowListener(new WindowAdapter() {
             @Override
