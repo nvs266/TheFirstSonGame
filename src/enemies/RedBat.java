@@ -1,12 +1,16 @@
 package enemies;
 
+import Utils.Utils;
 import bases.GameObject;
-import bases.Vector2D;
-import bases.renderers.ImageRenderer;
+import bases.renderers.Animation;
 
 public class RedBat extends GameObject {
     public RedBat() {
         super();
-//        renderer = new ImageRenderer(Utils.LoadImage(""));
+        renderer = new Animation(
+                Utils.loadImage("assets/image/enemy/enemy1/0.png"),
+                Utils.loadImage("assets/image/enemy/enemy1/1.png"),
+                Utils.loadImage("assets/image/enemy/enemy1/2.png")
+        );
     }
 }
