@@ -23,12 +23,6 @@ public class GameWindow extends JFrame implements Setting{
 
     public GameWindow(){
         setUpgameWindow();
-
-        GameObject gameObject = new GameObject();
-        gameObject.renderer = new ImageRenderer(Utils.Loadimage("assets/image/enemy/enemy1/0.png"));
-        gameObject.position.set(200,200);
-        gameObject.add(gameObject);
-
         setupInputs();
         this.setVisible(true);
     }
