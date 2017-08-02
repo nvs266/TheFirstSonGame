@@ -40,6 +40,7 @@ public class GameWindow extends JFrame implements Setting{
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 12; j++) {
                 int c = fis.read();
+                if (c == ' ') j--;
                 char f = (char) c;
                 System.out.print(f);
                 switch(c) {
@@ -60,13 +61,13 @@ public class GameWindow extends JFrame implements Setting{
 
     private void addRedBat(int x, int y) {
         RedBat redBat = GameObjectPool.recycle(RedBat.class);
-        redBat.position.set(x * 32 + 16, y * redBat.renderer.getHeight() + redBat.renderer.getHeight() / 2);
+        redBat.position.set(x * redBat.renderer.getWidth() + 16, y * redBat.renderer.getHeight() + 30);
 //        System.out.println(redBat.screenPosition);
     }
 
     private void addBrick(int x, int y) {
         Brick brick = GameObjectPool.recycle(Brick.class);
-        brick.position.set(x * brick.renderer.getWidth() + brick.renderer.getWidth() / 2, y * brick.renderer.getHeight());
+        brick.position.set(x * brick.renderer.getWidth() + 16, y * brick.renderer.getHeight() + 30);
     }
 
     private void addPlayer() {
