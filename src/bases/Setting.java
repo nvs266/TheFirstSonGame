@@ -7,6 +7,6 @@ public interface Setting {
     int DELAY_ANIMATION_DEFAULT = 5;
     float ANCHOR_X_DEFAULT = 0.5f;
     float ANCHOR_Y_DEFAULT = 0.5f;
-    float SPEED_PLAYER = 2;
+    float SPEED_PLAYER = 1.5f;
     enum HIT_LOCATION{HIT_UPPER, HIT_LOWER, HIT_LEFT, HIT_RIGHT}
 }

@@ -1,7 +1,8 @@
 import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
-import enemies.RedBat;
+import bases.renderers.Animation;
+import enemies.BatEnemy;
 import inputs.InputManager;
 import players.Player;
 import scenes.Brick;
@@ -14,8 +15,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.Random;
-import java.util.Scanner;
 
 /**
  * Created by cuonghx2709 on 7/31/2017.
@@ -31,14 +30,14 @@ public class GameWindow extends JFrame implements Setting{
         setUpgameWindow();
         setupInputs();
         loadMap();
-//        addPlayer();
+        addPlayer();
         this.setVisible(true);
     }
 
     private void loadMap() throws IOException {
         FileInputStream fis = new FileInputStream("assets/map/map.txt");
 
-        for (int i = 0; i < 28; i++) {
+        for (int i = 0; i < 28 * 2; i++) {
             for (int j = 0; j < 12; j++) {
                 int c = fis.read();
                 if (c == ' ') j--;
@@ -61,7 +60,7 @@ public class GameWindow extends JFrame implements Setting{
     }
 
     private void addRedBat(int x, int y) {
-        RedBat redBat = GameObjectPool.recycle(RedBat.class);
+        BatEnemy redBat = GameObjectPool.recycle(BatEnemy.class);
         redBat.position.set(x * redBat.renderer.getWidth() + 16, y * redBat.renderer.getHeight() + 30);
 //        System.out.println(redBat.screenPosition);
     }
@@ -126,7 +125,6 @@ public class GameWindow extends JFrame implements Setting{
         buffBackgroundGraphics2d.fillRect(0,0, WIDTH_SCREEN, HEIGHT_SCREEN);
 
         GameObject.renderAll(buffBackgroundGraphics2d);
-
         Graphics2D graphics2D = (Graphics2D) this.getGraphics();
         graphics2D.drawImage(buffBackground, 0, 0, null);
     }
