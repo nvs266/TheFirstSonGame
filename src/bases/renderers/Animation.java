@@ -1,6 +1,7 @@
 package bases.renderers;
 
 import bases.FrameCounter;
+import bases.Setting;
 import bases.Vector2D;
 
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
 
-public class Animation implements Renderer {
+public class Animation implements Renderer, Setting {
     private List<BufferedImage> images;
     private int imageIndex;
     private FrameCounter frameCounter;
@@ -23,7 +24,7 @@ public class Animation implements Renderer {
     }
 
     public Animation(BufferedImage... imageArr) {
-        this(5, true, imageArr);
+        this(Setting.DELAY_ANIMATION_DEFAULT, true, imageArr);
     }
 
 
@@ -39,7 +40,7 @@ public class Animation implements Renderer {
         }
         BufferedImage image = images.get(imageIndex);
         g2d.drawImage(image,
-                (int) (position.x - image.getWidth()/ 2), (int) (position.y - image.getHeight() / 2), null);
+                (int) (position.x - image.getWidth() * ANCHOR_X_DEFAULT), (int) (position.y - image.getHeight() * ANCHOR_Y_DEFAULT), null);
     }
 
     private void changeIndex() {
