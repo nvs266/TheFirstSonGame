@@ -2,7 +2,7 @@ package bases;
 
 public interface Setting {
     int HEIGHT_SCREEN = 600;
-    int WIDTH_SCREEN = 600;
+    int WIDTH_SCREEN = 384;
     int DELAY = 17 ; // 17 frame ~= 60 fps
     int DELAY_ANIMATION_DEFAULT = 5;
     float ANCHOR_X_DEFAULT = 0.5f;
