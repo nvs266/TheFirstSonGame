@@ -1,8 +1,10 @@
 import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
+import enemies.RedBat;
 import inputs.InputManager;
 import players.Player;
+import scenes.Brick;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +13,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Created by cuonghx2709 on 7/31/2017.
@@ -21,11 +26,47 @@ public class GameWindow extends JFrame implements Setting{
     Graphics2D buffBackgroundGraphics2d;
     InputManager inputManager = new InputManager();
 
-    public GameWindow(){
+    public GameWindow() throws IOException {
         setUpgameWindow();
         setupInputs();
-        addPlayer();
+        loadMap();
+//        addPlayer();
         this.setVisible(true);
+    }
+
+    private void loadMap() throws IOException {
+        FileInputStream fis = new FileInputStream("assets/map/map.txt");
+
+        for (int i = 0; i < 28; i++) {
+            for (int j = 0; j < 12; j++) {
+                int c = fis.read();
+                char f = (char) c;
+                System.out.print(f);
+                switch(c) {
+                    case '1':
+                        addBrick(j,i);
+                        break;
+                    case '2':
+                        addRedBat(j,i);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            System.out.println();
+        }
+        fis.close();
+    }
+
+    private void addRedBat(int x, int y) {
+        RedBat redBat = GameObjectPool.recycle(RedBat.class);
+        redBat.position.set(x * 32 + 16, y * redBat.renderer.getHeight() + redBat.renderer.getHeight() / 2);
+//        System.out.println(redBat.screenPosition);
+    }
+
+    private void addBrick(int x, int y) {
+        Brick brick = GameObjectPool.recycle(Brick.class);
+        brick.position.set(x * brick.renderer.getWidth() + brick.renderer.getWidth() / 2, y * brick.renderer.getHeight());
     }
 
     private void addPlayer() {

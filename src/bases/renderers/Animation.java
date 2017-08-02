@@ -43,6 +43,16 @@ public class Animation implements Renderer, Setting {
                 (int) (position.x - image.getWidth() * ANCHOR_X_DEFAULT), (int) (position.y - image.getHeight() * ANCHOR_Y_DEFAULT), null);
     }
 
+    @Override
+    public float getWidth() {
+        return images.get(imageIndex).getWidth();
+    }
+
+    @Override
+    public float getHeight() {
+        return images.get(imageIndex).getHeight();
+    }
+
     private void changeIndex() {
         if (imageIndex >= images.size() - 1) {
             if (repeat) {
