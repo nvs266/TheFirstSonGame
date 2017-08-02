@@ -1,6 +1,9 @@
 package inputs;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class InputManager {
     public boolean upPressed;
@@ -9,6 +12,22 @@ public class InputManager {
     public boolean rightPressed;
     public boolean spacePressed;
     public boolean enterPressed;
+
+    public static final InputManager instance = new InputManager();
+
+    private List<InputListener> inputListeners;
+
+    public void register(InputListener inputListener) {
+        this.inputListeners.add(inputListener);
+    }
+
+    public void unregister(InputListener inputListener) {
+        inputListeners.remove(inputListener);
+    }
+
+    private InputManager(){
+        inputListeners = new ArrayList<>();
+    }
 
     public void keyPressed(KeyEvent keyEvent) {
         switch(keyEvent.getKeyCode()) {
@@ -32,6 +51,10 @@ public class InputManager {
                 break;
             default:
                 break;
+        }
+
+        for (InputListener inputListener : inputListeners) {
+            inputListener.onKeyPressed(keyEvent.getKeyCode());
         }
     }
 
@@ -57,6 +80,14 @@ public class InputManager {
                 break;
             default:
                 break;
+        }
+
+        Iterator<InputListener> iterator = inputListeners.iterator();
+        while (iterator.hasNext()) {
+            InputListener inputListener = iterator.next();
+            if (inputListener.onKeyReleased(keyEvent.getKeyCode())) {
+                iterator.remove();
+            }
         }
     }
 }

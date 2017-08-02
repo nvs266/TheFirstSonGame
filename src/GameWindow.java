@@ -24,7 +24,8 @@ public class GameWindow extends JFrame implements Setting{
 
     BufferedImage buffBackground;
     Graphics2D buffBackgroundGraphics2d;
-    InputManager inputManager = new InputManager();
+    //InputManager inputManager = new InputManager();
+    InputManager inputManager = InputManager.instance;
 
     public GameWindow() throws IOException {
         setUpgameWindow();
