@@ -1,4 +1,4 @@
-package scenes;
+package platforms;
 
 import Utils.Utils;
 import bases.GameObject;
