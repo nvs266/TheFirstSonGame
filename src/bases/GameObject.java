@@ -18,7 +18,7 @@ public class GameObject {
     private boolean isActive;
     public Renderer renderer;
 
-    public static Camera camera;
+    public static Camera camera = new Camera();
 
     public GameObject(){
         this.position = new Vector2D();
@@ -26,7 +26,6 @@ public class GameObject {
         this.isActive = true;
         this.children = new Vector<>();
         this.renderer = null;
-        camera = new Camera();
     }
     public static void  add(GameObject gameObject){
         newGameObject.add(gameObject);
@@ -53,8 +52,10 @@ public class GameObject {
     }
 
     public void render(Graphics2D g2d){
-        if (renderer != null){
+        if (renderer != null && this.getClass() != Player.class){
             renderer.render(g2d, screenPosition.substract(camera.getPosition()));
+        } else if (renderer != null) {
+            renderer.render(g2d, screenPosition.substract(camera.getPosition()).add(Player.velocity));
         }
     }
 

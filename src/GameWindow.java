@@ -1,11 +1,10 @@
 import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
-import bases.renderers.Animation;
 import enemies.BatEnemy;
 import inputs.InputManager;
 import players.Player;
-import scenes.Brick;
+import platforms.Brick;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,7 +71,6 @@ public class GameWindow extends JFrame implements Setting{
 
     private void addPlayer() {
         Player player = GameObjectPool.recycle(Player.class);
-        player.setInputManager(this.inputManager);
     }
 
     private void setupInputs() {

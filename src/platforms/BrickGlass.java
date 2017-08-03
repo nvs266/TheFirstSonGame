@@ -1,4 +1,4 @@
-package scenes;
+package platforms;
 
 public class BrickGlass {
 }
