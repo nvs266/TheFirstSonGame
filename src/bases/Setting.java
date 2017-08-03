@@ -8,5 +8,7 @@ public interface Setting {
     float ANCHOR_X_DEFAULT = 0.5f;
     float ANCHOR_Y_DEFAULT = 0.5f;
     float SPEED_PLAYER = 1.5f;
+    int WIDTH_GRID = 32;
+    int HEIGHT_GRID = 32;
     enum HIT_LOCATION{HIT_UPPER, HIT_LOWER, HIT_LEFT, HIT_RIGHT}
 }
