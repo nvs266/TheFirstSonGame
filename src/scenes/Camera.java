@@ -27,6 +27,7 @@ public class Camera implements Setting{
     public void setPosition(GameObject gameObject) {
 //        if (gameObject.position.y - HEIGHT_SCREEN / 2 > this.position.y) {
             this.position.y = gameObject.position.y -  HEIGHT_SCREEN / 2;
+            this.position.x = gameObject.position.x -  WIDTH_SCREEN / 2;
 //        }
     }
 
