@@ -46,7 +46,6 @@ public class BoxCollider extends GameObject {
 
     public boolean collideWith(BoxCollider other) {
         return collideWith(other.top(), other.bottom(), other.left(), other.right());
-
     }
 
     @Override
