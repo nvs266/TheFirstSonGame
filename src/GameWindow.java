@@ -40,8 +40,7 @@ public class GameWindow extends JFrame implements Setting{
             for (int j = 0; j < 12; j++) {
                 int c = fis.read();
                 if (c == ' ') j--;
-                char f = (char) c;
-                System.out.print(f);
+
                 switch(c) {
                     case '1':
                         addBrick(j,i);

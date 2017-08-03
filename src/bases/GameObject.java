@@ -1,6 +1,8 @@
 package bases;
 
 import bases.renderers.Renderer;
+import physics.Physics;
+import physics.PhysicsBody;
 import players.Player;
 import scenes.Camera;
 
@@ -13,7 +15,7 @@ public class GameObject {
 
     private static Vector<GameObject> gameObjects = new Vector<>();
     private static Vector<GameObject> newGameObject = new Vector<>();
-    private Vector<GameObject> children ;
+    public Vector<GameObject> children ;
 
     private boolean isActive;
     public Renderer renderer;
@@ -29,6 +31,9 @@ public class GameObject {
     }
     public static void  add(GameObject gameObject){
         newGameObject.add(gameObject);
+        if (gameObject instanceof PhysicsBody){
+            Physics.add((PhysicsBody) gameObject);
+        }
     }
 
     public static void runAll(){
