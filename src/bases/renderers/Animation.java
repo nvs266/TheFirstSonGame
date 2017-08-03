@@ -1,6 +1,7 @@
 package bases.renderers;
 
 import bases.FrameCounter;
+import bases.GameObject;
 import bases.Setting;
 import bases.Vector2D;
 
@@ -41,7 +42,9 @@ public class Animation implements Renderer, Setting {
         BufferedImage image = images.get(imageIndex);
         g2d.drawImage(image,
                 (int) (position.x - image.getWidth() * ANCHOR_X_DEFAULT), (int) (position.y - image.getHeight() * ANCHOR_Y_DEFAULT), null);
+
     }
+
 
     @Override
     public float getWidth() {
@@ -67,4 +70,5 @@ public class Animation implements Renderer, Setting {
         imageIndex = 0;
         finished = false;
     }
+
 }

@@ -1,6 +1,8 @@
 package bases;
 
 import bases.renderers.Renderer;
+import players.Player;
+import scenes.Camera;
 
 import java.awt.*;
 import java.util.Vector;
@@ -16,25 +18,27 @@ public class GameObject {
     private boolean isActive;
     public Renderer renderer;
 
+    public static Camera camera;
+
     public GameObject(){
         this.position = new Vector2D();
         this.screenPosition = new Vector2D();
         this.isActive = true;
         this.children = new Vector<>();
         this.renderer = null;
+        camera = new Camera();
     }
     public static void  add(GameObject gameObject){
         newGameObject.add(gameObject);
     }
-    public void render(Graphics2D g2d){
-        if (renderer != null){
-            renderer.render(g2d, screenPosition);
-        }
-    }
+
     public static void runAll(){
         for (GameObject gameObject : gameObjects){
             if (gameObject.isActive){
                 gameObject.run(Vector2D.ZERO);
+                if (gameObject.getClass() == Player.class) {
+                    camera.setPosition(gameObject);
+                }
             }
         }
         gameObjects.addAll(newGameObject);
@@ -47,16 +51,25 @@ public class GameObject {
         }
 
     }
+
+    public void render(Graphics2D g2d){
+        if (renderer != null){
+            renderer.render(g2d, screenPosition.substract(camera.getPosition()));
+        }
+    }
+
     public static void renderAll(Graphics2D g2d){
         for (GameObject gameObject : gameObjects){
             if (gameObject.isActive){
                 gameObject.render(g2d);
             }
         }
+
     }
     public void refresh(){
         this.isActive = true;
     }
+
     public boolean isActive(){
         return isActive;
     }
