@@ -1,10 +1,10 @@
 import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
-import enemies.*;
+import enemies.BatEnemy;
 import inputs.InputManager;
-import platforms.*;
 import players.Player;
+import platforms.Brick;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,69 +34,19 @@ public class GameWindow extends JFrame implements Setting{
     }
 
     private void loadMap() throws IOException {
-        FileInputStream fis = new FileInputStream("assets/map/newmap.txt");
+        FileInputStream fis = new FileInputStream("assets/map/map.txt");
 
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 30; j++) {
+        for (int i = 0; i < 28 * 2; i++) {
+            for (int j = 0; j < 12; j++) {
                 int c = fis.read();
-                if (c == ',') j--;
-                char f = (char) c;
-                System.out.print(f);
+                if (c == ' ') j--;
+
                 switch(c) {
+                    case '1':
+                        addBrick(j,i);
+                        break;
                     case '2':
-                        BrickItem brickItem = new BrickItem();
-                        brickItem.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(brickItem);
-                        break;
-                    case '3':
-                        Brick brick = new Brick();
-                        brick.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(brick);
-                        break;
-                    case '4':
-                        Platform platform = new Platform();
-                        platform.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(platform);
-                        break;
-                    case '5':
-                        DirtGlass dirtGlass = new DirtGlass();
-                        dirtGlass.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(dirtGlass);
-                        break;
-                    case '7':
-                        BatEnemy batEnemy = new BatEnemy();
-                        batEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(batEnemy);
-                        break;
-                    case '8':
-                        GumEnemy gumEnemy = new GumEnemy();
-                        gumEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(gumEnemy);
-                        break;
-                    case '9':
-                        SnakeEnemy snakeEnemy = new SnakeEnemy();
-                        snakeEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(snakeEnemy);
-                        break;
-                    case 'A':
-                        GhostEnemy ghostEnemy = new GhostEnemy();
-                        ghostEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(ghostEnemy);
-                        break;
-                    case 'B':
-                        FrogEnemy frogEnemy = new FrogEnemy();
-                        frogEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(frogEnemy);
-                        break;
-                    case 'C':
-                        SpikeStick spikeStick = new SpikeStick();
-                        spikeStick.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(spikeStick);
-                        break;
-                    case 'D':
-                        Item item = new Item();
-                        item.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(item);
+                        addRedBat(j,i);
                         break;
                     default:
                         break;
@@ -105,6 +55,17 @@ public class GameWindow extends JFrame implements Setting{
             System.out.println();
         }
         fis.close();
+    }
+
+    private void addRedBat(int x, int y) {
+        BatEnemy redBat = GameObjectPool.recycle(BatEnemy.class);
+        redBat.position.set(x * redBat.renderer.getWidth() + 16, y * redBat.renderer.getHeight() + 30);
+//        System.out.println(redBat.screenPosition);
+    }
+
+    private void addBrick(int x, int y) {
+        Brick brick = GameObjectPool.recycle(Brick.class);
+        brick.position.set(x * brick.renderer.getWidth() + 16, y * brick.renderer.getHeight() + 30);
     }
 
     private void addPlayer() {
