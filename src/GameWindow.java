@@ -49,9 +49,9 @@ public class GameWindow extends JFrame implements Setting{
                         GameObject.add(brickItem);
                         break;
                     case '3':
-                        BrickGrey brickGrey = new BrickGrey();
-                        brickGrey.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(brickGrey);
+                        Brick brick = new Brick();
+                        brick.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
+                        GameObject.add(brick);
                         break;
                     case '4':
                         Platform platform = new Platform();
