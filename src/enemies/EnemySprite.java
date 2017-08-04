@@ -22,10 +22,10 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
         if (player!= null){
             float botPlayer = player.position.y + player.renderer.getHeight()/2;
             if (botPlayer <= position.y + 5 ){
-                Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
-                setActive(false);
+//                Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
+//                setActive(false);
             }else {
-                player.setActive(false);
+//                player.setActive(false);
             }
         }
     }

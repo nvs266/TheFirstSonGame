@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Animation implements Renderer, Setting {
     private List<BufferedImage> images;
-    private int imageIndex;
+    public int imageIndex;
     private FrameCounter frameCounter;
     private boolean finished;
     private boolean repeat;
@@ -21,7 +21,6 @@ public class Animation implements Renderer, Setting {
         this.images = Arrays.asList(imageArr);
         frameCounter = new FrameCounter(delayFrame);
         this.repeat = repeat;
-        this.finished = false;
     }
 
     public Animation(BufferedImage... imageArr) {
@@ -36,7 +35,11 @@ public class Animation implements Renderer, Setting {
     @Override
     public void render(Graphics2D g2d, Vector2D position) {
         if (frameCounter.run()) {
-            changeIndex();
+            if (!finished){
+                changeIndex();
+            }else {
+
+            }
             frameCounter.reset();
         }
         BufferedImage image = images.get(imageIndex);
@@ -59,8 +62,10 @@ public class Animation implements Renderer, Setting {
     private void changeIndex() {
         if (imageIndex >= images.size() - 1) {
             if (repeat) {
-                imageIndex = 0;
-            } else finished = true;
+                reset();
+            } else {
+                finished = true;
+            }
         } else {
             imageIndex++;
         }
