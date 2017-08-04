@@ -2,6 +2,7 @@ package enemies;
 
 import Utils.Utils;
 import bases.GameObject;
+import bases.Setting;
 import bases.Vector2D;
 import bases.renderers.Animation;
 import physics.BoxCollider;
@@ -9,9 +10,12 @@ import physics.Physics;
 import physics.PhysicsBody;
 import players.Player;
 
+import java.util.Set;
+
 public class BatEnemy extends GameObject implements PhysicsBody {
     private BoxCollider boxCollider;
     private Vector2D velocity;
+    private Vector2D target;
 
     public BatEnemy() {
         super();
@@ -33,6 +37,23 @@ public class BatEnemy extends GameObject implements PhysicsBody {
     }
 
     private void move() {
+        if (this.position.distance(Player.instance.position) < Setting.SIZE_ENEMY_ACTIVE) {
+            movetoPlayer();
+        }
+    }
+
+    private void movetoPlayer() {
+        GameObject player = Physics.find(Player.class);
+        if (player != null) {
+            this.target = player.position;
+        }
+        if (this.position.distance(Player.instance.position) > Setting.SIZE_ENEMY_ACTIVE - 100) {
+            velocity = target.substract(position).normalize().multiply((float) 0.3);
+        } else if (this.position.distance(Player.instance.position) <= Setting.SIZE_ENEMY_ACTIVE - 100) {
+            velocity = target.substract(position).normalize().multiply((float) 0.6);
+        }
+
+        position.addUp(velocity);
     }
 
     private void hitPlayer() {
@@ -45,7 +66,6 @@ public class BatEnemy extends GameObject implements PhysicsBody {
                 player.setActive(false);
             }
         }
-
     }
 
     @Override

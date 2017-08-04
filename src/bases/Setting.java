@@ -11,4 +11,5 @@ public interface Setting {
     int WIDTH_GRID = 32;
     int HEIGHT_GRID = 32;
     enum HIT_LOCATION{HIT_UPPER, HIT_LOWER, HIT_LEFT, HIT_RIGHT}
+    float SIZE_ENEMY_ACTIVE = 200;
 }
