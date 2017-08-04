@@ -6,12 +6,12 @@ import bases.renderers.Animation;
 import physics.BoxCollider;
 import physics.PhysicsBody;
 
-public class BrickGrey extends GameObject implements PhysicsBody{
+public class BrickGrey extends PlatformSprite {
 
     public BrickGrey() {
         super();
         renderer = new Animation(Utils.loadImage("assets/image/brick/brick_grey.png"));
-        boxCollider = new BoxCollider(32, 32);
+        boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
         children.add(boxCollider);
     }
 

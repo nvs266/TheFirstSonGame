@@ -1,6 +1,15 @@
 package platforms;
 
-import bases.Vector2D;
+import bases.GameObject;
+import physics.BoxCollider;
+import physics.PhysicsBody;
 
-public interface PlatformSprite {
+/**
+ * Created by cuonghx2709 on 8/4/2017.
+ */
+public class PlatformSprite extends GameObject implements PhysicsBody{
+
+    public BoxCollider getBoxCollider() {
+        return boxCollider;
+    }
 }

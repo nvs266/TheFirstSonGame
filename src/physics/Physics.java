@@ -38,6 +38,21 @@ public class Physics {
 
         return null;
     }
+    public static <T extends PhysicsBody> T bodyInRectofPlatform(Vector2D position, float width, float height) {
+        float left = position.x - width / 2;
+        float right = position.x + width / 2;
+        float top = position.y - height / 2;
+        float bottom = position.y + height / 2;
+
+        for(PhysicsBody body: bodies) {
+            if (body.isActive() && body.getBoxCollider().collideWith(top, bottom, left, right)) {
+                if (body instanceof PlatformSprite)
+                    return (T) body;
+            }
+        }
+
+        return null;
+    }
 
     public static<T extends PhysicsBody> T find(Class<T> classz){
         for (PhysicsBody body : bodies){
