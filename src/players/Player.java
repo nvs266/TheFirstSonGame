@@ -1,6 +1,5 @@
 package players;
 
-import Utils.Utils;
 import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
@@ -9,14 +8,23 @@ import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
-import platforms.BrickGrey;
+// <<<<<<< sonfix
+// import platforms.BrickGrey;
+// =======
+// >>>>>>> master
 
 
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
     public  static  Vector2D velocity = new Vector2D();
     private boolean bulletDisable;
-    private AnimationPlayer animationPlayer;
+// <<<<<<< sonfix
+//     private AnimationPlayer animationPlayer;
+// =======
+
+//     private AnimationPlayer animationPlayer;
+
+// >>>>>>> master
 
     public Player(){
         super();
@@ -61,7 +69,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         }
 
         if (InputManager.instance.upPressed) {
-            if (Physics.bodyInRect(position.add(0, 1), boxCollider.width, boxCollider.height, BrickGrey.class) != null) {
+            if (Physics.bodyInRectofPlatform(position.add(0, 1), boxCollider.width, boxCollider.height) != null) {
                 velocity.y = SPEED_JUMP_PLAYER;
             }
         }
@@ -74,9 +82,10 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     private void moveHorizontal() {
         float deltaX = velocity.x > 0 ? 1 : -1;
-        PhysicsBody body = Physics.bodyInRect(position.add(velocity.x, 0), boxCollider.width, boxCollider.height, BrickGrey.class);
+        PhysicsBody body = Physics.bodyInRectofPlatform(position.add(velocity.x, 0), boxCollider.width, boxCollider.height);
         if (body != null){
-            while (Physics.bodyInRect(position.add(deltaX, 0), boxCollider.width, boxCollider.height, BrickGrey.class) == null){
+
+            while (Physics.bodyInRectofPlatform(position.add(deltaX, 0), boxCollider.width, boxCollider.height) == null){
                 position.addUp(deltaX,0);
             }
             velocity.x = 0;
@@ -85,9 +94,9 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     private void moveVertical() {
         float deltaY = velocity.y > 0 ? 1: -1;
-        PhysicsBody body = Physics.bodyInRect(position.add(0, velocity.y), boxCollider.width, boxCollider.height,BrickGrey.class);
+        PhysicsBody body = Physics.bodyInRectofPlatform(position.add(0, velocity.y), boxCollider.width, boxCollider.height);
         if (body != null) {
-            while(Physics.bodyInRect(position.add(0, deltaY), boxCollider.width, boxCollider.height, BrickGrey.class) == null) {
+            while(Physics.bodyInRectofPlatform(position.add(0, deltaY), boxCollider.width, boxCollider.height) == null) {
                 position.addUp(0, deltaY);
             }
             velocity.y = 0;
