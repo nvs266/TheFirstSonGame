@@ -9,12 +9,16 @@ import physics.PhysicsBody;
 
 import javax.swing.*;
 
-public class SnakeEnemy extends GameObject implements PhysicsBody{
-    private BoxCollider boxCollider;
+public class SnakeEnemy extends EnemySprite{
     private Vector2D velocity;
 
     public SnakeEnemy() {
         super();
+        this.velocity = new Vector2D();
+    }
+
+    @Override
+    protected void setRenderer() {
         renderer = new Animation(40, true,
                 Utils.loadImage("assets/image/enemy/enemy3/0.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/1.png"),
@@ -24,27 +28,10 @@ public class SnakeEnemy extends GameObject implements PhysicsBody{
                 Utils.loadImage("assets/image/enemy/enemy3/5.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/6.png")
         );
-        this.boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
-        children.add(boxCollider);
-        this.velocity = new Vector2D();
     }
 
     @Override
-    public void run(Vector2D parentPosition) {
-        super.run(parentPosition);
-        move();
-        hitPlayer();
-    }
+    protected void move() {
 
-    private void hitPlayer() {
-
-    }
-
-    private void move() {
-    }
-
-    @Override
-    public BoxCollider getBoxCollider() {
-        return boxCollider;
     }
 }

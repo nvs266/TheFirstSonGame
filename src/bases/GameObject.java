@@ -1,6 +1,7 @@
 package bases;
 
 import bases.renderers.Renderer;
+import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import players.Player;
@@ -22,6 +23,7 @@ public class GameObject {
 
     public static Camera camera = new Camera();
 
+    public BoxCollider boxCollider;
     public GameObject(){
         this.position = new Vector2D();
         this.screenPosition = new Vector2D();

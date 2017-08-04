@@ -7,7 +7,6 @@ import physics.BoxCollider;
 import physics.PhysicsBody;
 
 public class BrickGrey extends GameObject implements PhysicsBody{
-    BoxCollider boxCollider;
 
     public BrickGrey() {
         super();
