@@ -6,11 +6,12 @@ import bases.renderers.Animation;
 import physics.BoxCollider;
 import physics.PhysicsBody;
 
-public class DirtGlass extends GameObject implements PhysicsBody{
+public class DirtGlass extends PlatformSprite{
 
     public DirtGlass() {
         renderer = new Animation(Utils.loadImage("assets/image/land/dirt_grass.png"));
         boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
+        children.add(boxCollider);
     }
 
     @Override

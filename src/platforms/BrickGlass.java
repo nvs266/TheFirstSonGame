@@ -7,7 +7,7 @@ import bases.renderers.Animation;
 import physics.BoxCollider;
 import physics.PhysicsBody;
 
-public class BrickGlass extends GameObject implements PhysicsBody, PlatformSprite {
+public class BrickGlass extends PlatformSprite {
 
     public BrickGlass() {
         super();
