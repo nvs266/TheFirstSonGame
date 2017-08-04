@@ -5,6 +5,7 @@ import bases.GameObject;
 import bases.Setting;
 import bases.Vector2D;
 import bases.renderers.Animation;
+import bases.renderers.Renderer;
 import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
@@ -17,13 +18,20 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
     public  static  Vector2D velocity = new Vector2D();
     private boolean bulletDisable;
+<<<<<<< sonfix
+=======
+    private BoxCollider boxCollider;
+    private float gravity = 0.01f;
+    private AnimationPlayer animationPlayer;
+>>>>>>> master
 
     public Player(){
         super();
-        this.renderer = new Animation(Utils.loadImage("assets/image/player/1.png"));
         instance = this;
         position.set(100, 100);
-        boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
+        this.animationPlayer = new AnimationPlayer();
+        this.renderer = animationPlayer;
+        boxCollider = new BoxCollider(40, 50);
         children.add(boxCollider);
     }
 
@@ -31,8 +39,12 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public void run(Vector2D parentPosition) {
         super.run(parentPosition);
         move();
-
+        updateAnimation();
         makeBullet();
+    }
+
+    private void updateAnimation() {
+        animationPlayer.run();
     }
 
     private void makeBullet() {
