@@ -2,28 +2,21 @@ package players;
 
 import Utils.Utils;
 import bases.GameObject;
+import bases.GameObjectPool;
 import bases.Setting;
 import bases.Vector2D;
-import bases.renderers.Animation;
-import bases.renderers.Renderer;
 import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import platforms.BrickGrey;
-import platforms.PlatformSprite;
 
 
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
     public  static  Vector2D velocity = new Vector2D();
     private boolean bulletDisable;
-<<<<<<< sonfix
-=======
-    private BoxCollider boxCollider;
-    private float gravity = 0.01f;
     private AnimationPlayer animationPlayer;
->>>>>>> master
 
     public Player(){
         super();
@@ -48,12 +41,10 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     }
 
     private void makeBullet() {
-        if (!bulletDisable){
             if (InputManager.instance.spacePressed){
-                //todo
-
+                ClassicBullet classicBullet = GameObjectPool.recycle(ClassicBullet.class);
+                classicBullet.position.set(this.position.add(0, this.renderer.getHeight()));
             }
-        }
     }
 
     private void move() {
