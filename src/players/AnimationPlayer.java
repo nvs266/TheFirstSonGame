@@ -3,6 +3,7 @@ package players;
 import Utils.Utils;
 import bases.Vector2D;
 import bases.renderers.Animation;
+import bases.renderers.ImageRenderer;
 import bases.renderers.Renderer;
 
 import java.awt.*;
@@ -14,9 +15,12 @@ public class AnimationPlayer implements Renderer{
     private Animation leftAnimation;
     private Animation rightAnimation;
     private Animation straightAnimation;
-    private Animation jumpleftAnimation;
+    private Animation jumpleftAnimation1;
+    private Animation jumpleftAnimation2;
     private Animation currentAnimation;
-    public boolean jump;
+    private Animation jumprightAnimation1;
+    private Animation jumprightAnimation2;
+
     public AnimationPlayer(){
         straightAnimation = new Animation(50,true,
                 Utils.loadImage("assets/image/player/9.png"),
@@ -38,17 +42,37 @@ public class AnimationPlayer implements Renderer{
                 Utils.loadImage("assets/image/player/5 - copy.png"),
                 Utils.loadImage("assets/image/player/6 - copy.png")
         );
-        jumpleftAnimation = new Animation(100,false,
-                Utils.loadImage("assets/image/player/7.png"),
-                Utils.loadImage("assets/image/player/8.png")
+        jumpleftAnimation1 = new Animation(100,false,
+                Utils.loadImage("assets/image/player/7.png")
                 );
+        jumpleftAnimation2 = new Animation(100,false,
+                Utils.loadImage("assets/image/player/8.png")
+        );
+        jumprightAnimation1 = new Animation(100,false,
+                Utils.loadImage("assets/image/player/7 - copy.png")
+        );
+        jumprightAnimation2 = new Animation(100,false,
+                Utils.loadImage("assets/image/player/8 - copy.png")
+        );
 
     }
     public void run(){
         if (Player.velocity.x > 0){
-            currentAnimation  = rightAnimation;
+            if (Player.velocity.y < 0){
+                currentAnimation = jumpleftAnimation1;
+            }else if (Player.velocity.y > 0){
+                currentAnimation = jumpleftAnimation2;
+            }else {
+                currentAnimation = rightAnimation;
+            }
         }else if (Player.velocity.x < 0){
-            currentAnimation = leftAnimation;
+            if (Player.velocity.y < 0){
+                currentAnimation = jumprightAnimation1;
+            }else if (Player.velocity.y > 0){
+                currentAnimation = jumprightAnimation2;
+            }else {
+                currentAnimation = leftAnimation;
+            }
         }else {
             currentAnimation = straightAnimation;
         }
