@@ -70,6 +70,12 @@ public class Vector2D {
         s = Math.sqrt(x*x + y*y);
         return (float) s;
     }
+
+    public float distance(Vector2D other) {
+        return (float) Math.sqrt((x - other.x) * (x - other.x)
+                                + (y - other.y) * (y - other.y));
+    }
+
     public Vector2D substract(float x, float y) {
         return new Vector2D(this.x - x ,this.y - y);
     }

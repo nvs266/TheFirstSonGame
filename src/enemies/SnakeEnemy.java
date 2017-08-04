@@ -2,11 +2,19 @@ package enemies;
 
 import Utils.Utils;
 import bases.GameObject;
+import bases.Vector2D;
 import bases.renderers.Animation;
+import physics.BoxCollider;
+import physics.PhysicsBody;
+
+import javax.swing.*;
 
 public class SnakeEnemy extends EnemySprite{
+    private Vector2D velocity;
+
     public SnakeEnemy() {
         super();
+        this.velocity = new Vector2D();
     }
 
     @Override

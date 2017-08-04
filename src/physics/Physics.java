@@ -39,7 +39,14 @@ public class Physics {
         return null;
     }
 
-
+    public static<T extends PhysicsBody> T find(Class<T> classz){
+        for (PhysicsBody body : bodies){
+            if (body.isActive() && (body.getClass() == classz)){
+                return (T) body;
+            }
+        }
+        return null;
+    }
 
     public static void clear() {
         bodies.clear();
