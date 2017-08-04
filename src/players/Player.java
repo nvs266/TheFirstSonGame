@@ -10,14 +10,13 @@ import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import platforms.BrickGrey;
+import platforms.PlatformSprite;
 
 
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
     public  static  Vector2D velocity = new Vector2D();
     private boolean bulletDisable;
-    private BoxCollider boxCollider;
-    private float gravity = 0.01f;
 
     public Player(){
         super();
@@ -47,27 +46,27 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     private void move() {
 
-        this.velocity.y += gravity;
-        this.velocity.x = 0;
+        velocity.y += GRAVITY_PLAYER;
+        velocity.x = 0;
 
         if (InputManager.instance.leftPressed) {
-            this.velocity.x -= 0.5f;
+            velocity.x -= SPEED_PLAYER;
         }
 
         if (InputManager.instance.rightPressed) {
-            this.velocity.x += 0.5f;
+            velocity.x += SPEED_PLAYER;
         }
 
         if (InputManager.instance.upPressed) {
             if (Physics.bodyInRect(position.add(0, 1), boxCollider.width, boxCollider.height, BrickGrey.class) != null) {
-                this.velocity.y = -1.5f;
+                velocity.y = SPEED_JUMP_PLAYER;
             }
         }
 
         moveVertical();
         moveHorizontal();
 
-        this.position.addUp(this.velocity);
+        this.position.addUp(velocity);
     }
 
     private void moveHorizontal() {
@@ -88,7 +87,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
             while(Physics.bodyInRect(position.add(0, deltaY), boxCollider.width, boxCollider.height, BrickGrey.class) == null) {
                 position.addUp(0, deltaY);
             }
-            this.velocity.y = 0;
+            velocity.y = 0;
         }
     }
 

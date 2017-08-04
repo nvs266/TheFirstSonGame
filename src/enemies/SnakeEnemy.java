@@ -4,8 +4,13 @@ import Utils.Utils;
 import bases.GameObject;
 import bases.renderers.Animation;
 
-public class SnakeEnemy extends GameObject {
+public class SnakeEnemy extends EnemySprite{
     public SnakeEnemy() {
+        super();
+    }
+
+    @Override
+    protected void setRenderer() {
         renderer = new Animation(40, true,
                 Utils.loadImage("assets/image/enemy/enemy3/0.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/1.png"),
@@ -15,5 +20,10 @@ public class SnakeEnemy extends GameObject {
                 Utils.loadImage("assets/image/enemy/enemy3/5.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/6.png")
         );
+    }
+
+    @Override
+    protected void move() {
+
     }
 }

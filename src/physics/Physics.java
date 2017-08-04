@@ -1,6 +1,7 @@
 package physics;
 
 import bases.Vector2D;
+import platforms.PlatformSprite;
 
 import java.util.Vector;
 
@@ -19,7 +20,6 @@ public class Physics {
                     return (T) body;
             }
         }
-
         return null;
     }
 
