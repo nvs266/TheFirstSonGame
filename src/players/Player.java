@@ -55,7 +55,10 @@ public class Player extends GameObject implements Setting, PhysicsBody {
                     classicBullet.position.set(this.position.add(0, this.renderer.getHeight()));
                     velocity.y = 0;
                     frameCounter.reset();
+                    animationPlayer.setActack(true);
                 }
+            }else {
+                animationPlayer.setActack(false);
             }
     }
 
