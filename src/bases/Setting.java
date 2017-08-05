@@ -14,10 +14,10 @@ public interface Setting {
     float ANCHOR_X_DEFAULT = 0.5f;
     float ANCHOR_Y_DEFAULT = 0.5f;
     //Player
-    float SPEED_PLAYER = 0.5f;
-    float GRAVITY_PLAYER = 0.01f;
-    float SPEED_JUMP_PLAYER = -1.5f;
-    float SPEED_JUMPP_HIT_ENEMY = -1;
+    float SPEED_PLAYER = 1f;
+    float GRAVITY_PLAYER = 0.02f;
+    float SPEED_JUMP_PLAYER = -2.2f;
+    float SPEED_JUMPP_HIT_ENEMY = -0.5f;
     enum HIT_LOCATION{HIT_UPPER, HIT_LOWER, HIT_LEFT, HIT_RIGHT}
     float SIZE_ENEMY_ACTIVE = 200;
 }

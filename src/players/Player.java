@@ -6,24 +6,14 @@ import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import platforms.PlatformSprite;
-// <<<<<<< sonfix
-// import platforms.BrickGrey;
-// =======
-// >>>>>>> master
-
 
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
     public  static  Vector2D velocity = new Vector2D();
     private FrameCounter frameCounter;
-    private boolean bulletDisable;
-// <<<<<<< sonfix
-     private AnimationPlayer animationPlayer;
-// =======
-
-//     private AnimationPlayer animationPlayer;
-
-// >>>>>>> master
+    public boolean shootEnable;
+    private AnimationPlayer animationPlayer;
+    private float posYBeforeShoot;
 
     public Player(){
         super();
@@ -38,10 +28,12 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     @Override
     public void run(Vector2D parentPosition) {
+
         super.run(parentPosition);
-        move();
-        updateAnimation();
         makeBullet();
+        move();
+        this.position.addUp(velocity);
+        updateAnimation();
     }
 
     private void updateAnimation() {
@@ -49,19 +41,28 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     }
 
     private void makeBullet() {
+        if (velocity.y > 0) {
+            shootEnable = true;
+        } else {
+            shootEnable = false;
+        }
+
+        velocity.y += GRAVITY_PLAYER;
+        velocity.x = 0;
+
             if (InputManager.instance.spacePressed){
-                if (frameCounter.run()){
-                    frameCounter.reset();
+                if (frameCounter.run() && shootEnable){
                     ClassicBullet classicBullet = GameObjectPool.recycle(ClassicBullet.class);
                     classicBullet.position.set(this.position.add(0, this.renderer.getHeight()));
+                    velocity.y = 0;
+                    frameCounter.reset();
                 }
             }
     }
 
     private void move() {
 
-        velocity.y += GRAVITY_PLAYER;
-        velocity.x = 0;
+
 
         if (InputManager.instance.leftPressed) {
             velocity.x -= SPEED_PLAYER;
@@ -71,16 +72,18 @@ public class Player extends GameObject implements Setting, PhysicsBody {
             velocity.x += SPEED_PLAYER;
         }
 
-        if (InputManager.instance.upPressed) {
+
+        if (InputManager.instance.spacePressed) {
             if (Physics.bodyInRectofsuper(position.add(0, 1), boxCollider.width, boxCollider.height, PlatformSprite.class) != null) {
                 velocity.y = SPEED_JUMP_PLAYER;
+                shootEnable = false;
             }
         }
 
         moveVertical();
         moveHorizontal();
 
-        this.position.addUp(velocity);
+
     }
 
     private void moveHorizontal() {
