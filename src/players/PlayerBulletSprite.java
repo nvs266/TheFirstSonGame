@@ -1,5 +1,6 @@
 package players;
 
+import bases.FrameCounter;
 import bases.GameObject;
 import enemies.EnemySprite;
 import physics.BoxCollider;
@@ -7,6 +8,7 @@ import physics.Physics;
 import physics.PhysicsBody;
 
 public abstract class PlayerBulletSprite extends GameObject implements PhysicsBody {
+    FrameCounter frameCounter;
     public PlayerBulletSprite() {
         super();
         setRenderer();
@@ -17,7 +19,7 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
     abstract void setRenderer();
 
     void hitEnemy() {
-        EnemySprite enemySprite = Physics.bodyInRect(this.position, renderer.getWidth(), renderer.getHeight(), EnemySprite.class);
+        EnemySprite enemySprite = Physics.bodyInRectofsuper(this.position, renderer.getWidth(), renderer.getHeight(),EnemySprite.class);
         if (enemySprite != null) {
             this.setActive(false);
             enemySprite.setActive(false);

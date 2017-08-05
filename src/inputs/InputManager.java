@@ -6,12 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class InputManager {
-    public boolean upPressed;
-    public boolean downPressed;
     public boolean leftPressed;
     public boolean rightPressed;
     public boolean spacePressed;
-    public boolean enterPressed;
 
     public static final InputManager instance = new InputManager();
 
@@ -31,12 +28,6 @@ public class InputManager {
 
     public void keyPressed(KeyEvent keyEvent) {
         switch(keyEvent.getKeyCode()) {
-            case KeyEvent.VK_UP:
-                upPressed = true;
-                break;
-            case KeyEvent.VK_DOWN:
-                downPressed = true;
-                break;
             case KeyEvent.VK_LEFT:
                 leftPressed = true;
                 break;
@@ -45,9 +36,6 @@ public class InputManager {
                 break;
             case KeyEvent.VK_SPACE:
                 spacePressed = true;
-                break;
-            case KeyEvent.VK_ENTER:
-                enterPressed = true;
                 break;
             default:
                 break;
@@ -60,12 +48,6 @@ public class InputManager {
 
     public void keyRealeased(KeyEvent keyEvent) {
         switch(keyEvent.getKeyCode()) {
-            case KeyEvent.VK_UP:
-                upPressed = false;
-                break;
-            case KeyEvent.VK_DOWN:
-                downPressed = false;
-                break;
             case KeyEvent.VK_LEFT:
                 leftPressed = false;
                 break;
@@ -74,9 +56,6 @@ public class InputManager {
                 break;
             case KeyEvent.VK_SPACE:
                 spacePressed = false;
-                break;
-            case KeyEvent.VK_ENTER:
-                enterPressed = false;
                 break;
             default:
                 break;

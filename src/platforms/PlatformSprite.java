@@ -7,7 +7,7 @@ import physics.PhysicsBody;
 /**
  * Created by cuonghx2709 on 8/4/2017.
  */
-public class PlatformSprite extends GameObject implements PhysicsBody{
+public abstract class PlatformSprite extends GameObject implements PhysicsBody{
 
     public BoxCollider getBoxCollider() {
         return boxCollider;

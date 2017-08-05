@@ -13,7 +13,6 @@ public class ClassicBullet extends PlayerBulletSprite {
 
     public ClassicBullet() {
         super();
-        Player.velocity.y = Setting.SPEED_JUMPP_HIT_ENEMY;
     }
 
     @Override
