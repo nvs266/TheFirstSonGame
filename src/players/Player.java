@@ -10,21 +10,9 @@ import platforms.PlatformSprite;
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
     public  static  Vector2D velocity = new Vector2D();
-// <<<<<<< danghai1996
-//     private boolean bulletDisable;
-// // <<<<<<< sonfix
-// //     private AnimationPlayer animationPlayer;
-// // =======
-
-//      private AnimationPlayer animationPlayer;
-
-// // >>>>>>> master
-// =======
     private FrameCounter frameCounter;
     public boolean shootEnable;
     private AnimationPlayer animationPlayer;
-    private float posYBeforeShoot;
-// >>>>>>> master
 
     public Player(){
         super();
