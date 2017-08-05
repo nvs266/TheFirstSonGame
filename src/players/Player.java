@@ -22,7 +22,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 //     private AnimationPlayer animationPlayer;
 // =======
 
-//     private AnimationPlayer animationPlayer;
+     private AnimationPlayer animationPlayer;
 
 // >>>>>>> master
 

@@ -19,5 +19,5 @@ public interface Setting {
     float SPEED_JUMP_PLAYER = -1.5f;
     float SPEED_JUMPP_HIT_ENEMY = -1;
     enum HIT_LOCATION{HIT_UPPER, HIT_LOWER, HIT_LEFT, HIT_RIGHT}
-    float SIZE_ENEMY_ACTIVE = 200;
+    float SIZE_ENEMY_ACTIVE = 150;
 }
