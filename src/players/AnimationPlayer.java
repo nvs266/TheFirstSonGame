@@ -20,6 +20,7 @@ public class AnimationPlayer implements Renderer{
     private Animation currentAnimation;
     private Animation jumprightAnimation1;
     private Animation jumprightAnimation2;
+    private Animation fallstraight;
 
     public AnimationPlayer(){
         straightAnimation = new Animation(50,true,
@@ -55,6 +56,12 @@ public class AnimationPlayer implements Renderer{
                 Utils.loadImage("assets/image/player/8 - copy.png")
         );
 
+        fallstraight = new Animation(20, true,
+                Utils.loadImage("assets/image/player/14.png"),
+                Utils.loadImage("assets/image/player/15.png"),
+                Utils.loadImage("assets/image/player/16.png")
+                );
+
     }
     public void run(){
         if (Player.velocity.x > 0){
@@ -74,7 +81,11 @@ public class AnimationPlayer implements Renderer{
                 currentAnimation = leftAnimation;
             }
         }else {
-            currentAnimation = straightAnimation;
+            if (Player.velocity.y > 0){
+                currentAnimation = fallstraight;
+            }else {
+                currentAnimation = straightAnimation;
+            }
         }
     }
 

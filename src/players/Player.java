@@ -1,9 +1,6 @@
 package players;
 
-import bases.GameObject;
-import bases.GameObjectPool;
-import bases.Setting;
-import bases.Vector2D;
+import bases.*;
 import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
@@ -17,9 +14,10 @@ import physics.PhysicsBody;
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
     public  static  Vector2D velocity = new Vector2D();
+    private FrameCounter frameCounter;
     private boolean bulletDisable;
 // <<<<<<< sonfix
-//     private AnimationPlayer animationPlayer;
+     private AnimationPlayer animationPlayer;
 // =======
 
 //     private AnimationPlayer animationPlayer;
@@ -34,6 +32,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         this.renderer = animationPlayer;
         boxCollider = new BoxCollider(40, 50);
         children.add(boxCollider);
+        this.frameCounter = new FrameCounter(30);
     }
 
     @Override
@@ -50,8 +49,11 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     private void makeBullet() {
             if (InputManager.instance.spacePressed){
-                ClassicBullet classicBullet = GameObjectPool.recycle(ClassicBullet.class);
-                classicBullet.position.set(this.position.add(0, this.renderer.getHeight()));
+                if (frameCounter.run()){
+                    frameCounter.reset();
+                    ClassicBullet classicBullet = GameObjectPool.recycle(ClassicBullet.class);
+                    classicBullet.position.set(this.position.add(0, this.renderer.getHeight()));
+                }
             }
     }
 
