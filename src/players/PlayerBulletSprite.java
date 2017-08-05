@@ -19,7 +19,7 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
     abstract void setRenderer();
 
     void hitEnemy() {
-        EnemySprite enemySprite = Physics.bodyInRectofEnemy(this.position, renderer.getWidth(), renderer.getHeight());
+        EnemySprite enemySprite = Physics.bodyInRectofsuper(this.position, renderer.getWidth(), renderer.getHeight(),EnemySprite.class);
         if (enemySprite != null) {
             this.setActive(false);
             enemySprite.setActive(false);

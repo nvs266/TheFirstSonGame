@@ -5,6 +5,7 @@ import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
+import platforms.PlatformSprite;
 // <<<<<<< sonfix
 // import platforms.BrickGrey;
 // =======
@@ -71,7 +72,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         }
 
         if (InputManager.instance.upPressed) {
-            if (Physics.bodyInRectofPlatform(position.add(0, 1), boxCollider.width, boxCollider.height) != null) {
+            if (Physics.bodyInRectofsuper(position.add(0, 1), boxCollider.width, boxCollider.height, PlatformSprite.class) != null) {
                 velocity.y = SPEED_JUMP_PLAYER;
             }
         }
@@ -84,10 +85,10 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     private void moveHorizontal() {
         float deltaX = velocity.x > 0 ? 1 : -1;
-        PhysicsBody body = Physics.bodyInRectofPlatform(position.add(velocity.x, 0), boxCollider.width, boxCollider.height);
+        PhysicsBody body = Physics.bodyInRectofsuper(position.add(velocity.x, 0), boxCollider.width, boxCollider.height, PlatformSprite.class);
         if (body != null){
 
-            while (Physics.bodyInRectofPlatform(position.add(deltaX, 0), boxCollider.width, boxCollider.height) == null){
+            while (Physics.bodyInRectofsuper(position.add(deltaX, 0), boxCollider.width, boxCollider.height, PlatformSprite.class) == null){
                 position.addUp(deltaX,0);
             }
             velocity.x = 0;
@@ -96,9 +97,9 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     private void moveVertical() {
         float deltaY = velocity.y > 0 ? 1: -1;
-        PhysicsBody body = Physics.bodyInRectofPlatform(position.add(0, velocity.y), boxCollider.width, boxCollider.height);
+        PhysicsBody body = Physics.bodyInRectofsuper(position.add(0, velocity.y), boxCollider.width, boxCollider.height, PlatformSprite.class);
         if (body != null) {
-            while(Physics.bodyInRectofPlatform(position.add(0, deltaY), boxCollider.width, boxCollider.height) == null) {
+            while(Physics.bodyInRectofsuper(position.add(0, deltaY), boxCollider.width, boxCollider.height, PlatformSprite.class) == null) {
                 position.addUp(0, deltaY);
             }
             velocity.y = 0;
