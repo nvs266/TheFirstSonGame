@@ -1,6 +1,10 @@
 package players;
 
 import bases.*;
+import bases.actions.Action;
+import bases.actions.RepeatForeverAction;
+import bases.actions.SequenceAction;
+import bases.actions.WaitAction;
 import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
@@ -21,7 +25,10 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     private PlayerBulletSprite bulletSprite;
     public int life;
     public boolean immortal; // bat tu
+    private boolean added;
+    private boolean hero;
     private FrameCounter immortalCounter;
+    private Action immortalAction;
 
     public Player(){
         super();
@@ -40,22 +47,38 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
         immortal = false;
         immortalCounter = new FrameCounter(300);
+        immortalAction = new RepeatForeverAction(
+          new SequenceAction(
+                  new PlayerAction(),
+                  new WaitAction(5)
+          )
+        );
     }
 
     @Override
     public void run(Vector2D parentPosition) {
-        if (renderer.getCurrentImage() != null) {
+
+
+        if (renderer != null && renderer.getCurrentImage() != null && hero) {
             Trail trail = GameObjectPool.recycle(Trail.class);
             trail.setTrail(this.position, 0.02f, renderer.getCurrentImage());
         }
 
         if (immortal) {
+            hero = false;
+            if (!added){
+                addAction(immortalAction);
+                added = true;
+            }
             if (immortalCounter.run()) {
                 immortal = false;
                 immortalCounter.reset();
+                remoteAction(immortalAction);
+                added = false;
+                renderer = animationPlayer;
             }
-        }
 
+        }
         super.run(parentPosition);
         makeBullet();
         move();
@@ -71,6 +94,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         }
         if (item != null){
             item.setActive(false);
+            hero = true;
         }
     }
 
