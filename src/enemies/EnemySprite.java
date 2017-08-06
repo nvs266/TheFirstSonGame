@@ -25,32 +25,26 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
     protected abstract void setRenderer();
 
     void hitEnemy() {
-        Player player = Physics.bodyInRect(position.add(0,0), boxCollider.width, boxCollider.height,Player.class);
-        if (player!= null){
+        Player player = Physics.bodyInRect(position.add(0, 0), boxCollider.width, boxCollider.height, Player.class);
+        if (player != null) {
             float botPlayer = 0;
             float topthis = 0;
-            if (player.renderer != null){
-                botPlayer = player.position.y + player.renderer.getHeight()/2;
-                topthis = position.y - renderer.getHeight()/2;
+            if (player.renderer != null) {
+                botPlayer = player.position.y + player.renderer.getHeight() / 2;
+                topthis = position.y - renderer.getHeight() / 2;
             }
-            if (botPlayer < topthis){
+            if (botPlayer < topthis) {
                 Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
                 setActive(false);
                 EnemyExplosion enemyExplosion = GameObjectPool.recycle(EnemyExplosion.class);
                 enemyExplosion.position.set(this.position);
                 enemyExplosion.renderer.reset();
-            }else {
-// <<<<<<< sonfix
-//                 if (!Player.instance.immortal) {
-//                     Player.instance.life--;
-//                     Player.instance.immortal = true;
-//                 }
-// =======
-
-// //                player.setActive(false);
-// >>>>>>> master
+            } else {
+                if (!Player.instance.immortal) {
+                    Player.instance.life--;
+                    Player.instance.immortal = true;
+                }
             }
-
         }
     }
 
