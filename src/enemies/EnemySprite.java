@@ -4,10 +4,15 @@ import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
 import bases.Vector2D;
+import bases.actions.RepeatForeverAction;
+import bases.actions.RepeatnAction;
+import bases.actions.SequenceAction;
+import bases.actions.WaitAction;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import players.Player;
+import players.PlayerAction;
 
 public abstract class EnemySprite extends GameObject implements PhysicsBody, Setting {
 
@@ -22,8 +27,12 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
     void hitEnemy() {
         Player player = Physics.bodyInRect(position.add(0,0), boxCollider.width, boxCollider.height,Player.class);
         if (player!= null){
-            float botPlayer = player.position.y + player.renderer.getHeight()/2;
-            float topthis = position.y - renderer.getHeight()/2;
+            float botPlayer = 0;
+            float topthis = 0;
+            if (player.renderer != null){
+                botPlayer = player.position.y + player.renderer.getHeight()/2;
+                topthis = position.y - renderer.getHeight()/2;
+            }
             if (botPlayer < topthis){
                 Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
                 setActive(false);
@@ -31,10 +40,15 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
                 enemyExplosion.position.set(this.position);
                 enemyExplosion.renderer.reset();
             }else {
-                if (!Player.instance.immortal) {
-                    Player.instance.life--;
-                    Player.instance.immortal = true;
-                }
+// <<<<<<< sonfix
+//                 if (!Player.instance.immortal) {
+//                     Player.instance.life--;
+//                     Player.instance.immortal = true;
+//                 }
+// =======
+
+// //                player.setActive(false);
+// >>>>>>> master
             }
 
         }

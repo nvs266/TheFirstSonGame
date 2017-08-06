@@ -94,9 +94,8 @@ public class GameWindow extends JFrame implements Setting{
                         GameObject.add(spikeStick);
                         break;
                     case 'D':
-                        Item item = new Item();
+                        Item item = GameObjectPool.recycle(Item.class);
                         item.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(item);
                         break;
                     default:
                         break;
@@ -167,5 +166,6 @@ public class GameWindow extends JFrame implements Setting{
 
     private void run(){
         GameObject.runAll();
+        GameObject.runAllAction();
     }
 }
