@@ -34,7 +34,7 @@ public class Physics {
 
         for(PhysicsBody body: bodies) {
             if (body.isActive() && body.getBoxCollider().collideWith(top, bottom, left, right)) {
-                if (body.getClass().isInstance(classz))
+                if (body.getClass()== classz)
                     return (T) body;
             }
         }
