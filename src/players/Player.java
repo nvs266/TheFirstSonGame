@@ -5,6 +5,7 @@ import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
+import platforms.Item;
 import platforms.PlatformSprite;
 
 public class Player extends GameObject implements Setting, PhysicsBody {
@@ -37,6 +38,17 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         move();
         this.position.addUp(velocity);
         updateAnimation();
+        checkItem();
+    }
+
+    private void checkItem() {
+        Item item = Physics.bodyInRect(position.add(2,2),boxCollider.width, boxCollider.height,Item.class);
+        if (item == null){
+            item = Physics.bodyInRect(position.add(-2,-2),boxCollider.width, boxCollider.height,Item.class);
+        }
+        if (item != null){
+            item.setActive(false);
+        }
     }
 
     private void updateAnimation() {
@@ -116,5 +128,8 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     @Override
     public BoxCollider getBoxCollider() {
         return boxCollider;
+    }
+    public void add(Vector2D position){
+        position.addUp(position);
     }
 }

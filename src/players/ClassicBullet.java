@@ -1,9 +1,13 @@
 package players;
 
 import Utils.Utils;
+import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Vector2D;
 import bases.renderers.Animation;
+import physics.Physics;
+import physics.PhysicsBody;
+import platforms.*;
 
 public class ClassicBullet extends PlayerBulletSprite {
 
@@ -33,7 +37,27 @@ public class ClassicBullet extends PlayerBulletSprite {
     @Override
     void move() {
         this.position.y += 4;
-        if (this.position.y - Player.instance.position.y > 200) this.setActive(false);
+        PhysicsBody physicsBody = Physics.bodyInRectofsuper(position.add(0,1),boxCollider.width, boxCollider.height, PlatformSprite.class);
+        if (physicsBody != null){
+            if (physicsBody.getClass() == BrickGrey.class){
+                setActive(false);
+            }
+            else if (physicsBody.getClass() == BrickItem.class){
+                BrickItem brickItem = (BrickItem) physicsBody;
+                brickItem.setActive(false);
+                Item item = GameObjectPool.recycle(Item.class);
+                item.position.set(position);
+                setActive(false);
+            }
+            else if (physicsBody.getClass() == DirtGlass.class){
+                DirtGlass dirtGlass = (DirtGlass) physicsBody;
+                dirtGlass.setActive(false);
+                setActive(false);
+            }
+        }
+        if (this.position.y - Player.instance.position.y > 200){
+            this.setActive(false);
+        }
     }
 
     @Override
