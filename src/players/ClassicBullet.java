@@ -1,18 +1,15 @@
 package players;
 
 import Utils.Utils;
-import bases.Setting;
+import bases.GameObjectPool;
 import bases.Vector2D;
 import bases.renderers.Animation;
-import enemies.EnemySprite;
-import physics.BoxCollider;
-import physics.Physics;
-import physics.PhysicsBody;
 
 public class ClassicBullet extends PlayerBulletSprite {
 
     public ClassicBullet() {
         super();
+        totalBulletsPerShoot = 1;
     }
 
     @Override
@@ -35,8 +32,14 @@ public class ClassicBullet extends PlayerBulletSprite {
 
     @Override
     void move() {
-        this.position.y += 2;
-        if (this.position.y - Player.instance.position.y > 400) this.setActive(false);
+        this.position.y += 4;
+        if (this.position.y - Player.instance.position.y > 200) this.setActive(false);
+    }
+
+    @Override
+    void shoot() {
+        ClassicBullet bullet = GameObjectPool.recycle(ClassicBullet.class);
+        bullet.position.set(Player.instance.position);
     }
 
 }

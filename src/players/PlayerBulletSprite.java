@@ -8,7 +8,8 @@ import physics.Physics;
 import physics.PhysicsBody;
 
 public abstract class PlayerBulletSprite extends GameObject implements PhysicsBody {
-    FrameCounter frameCounter;
+    int totalBulletsPerShoot;
+
     public PlayerBulletSprite() {
         super();
         setRenderer();
@@ -32,6 +33,8 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
     }
 
     abstract void move();
+
+    abstract void shoot();
 
     @Override
     public BoxCollider getBoxCollider() {

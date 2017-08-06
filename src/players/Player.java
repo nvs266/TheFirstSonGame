@@ -11,8 +11,10 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
     public  static  Vector2D velocity = new Vector2D();
     private FrameCounter frameCounter;
-    public boolean shootEnable;
+    private boolean shootEnable;
+    private int totalBullets;
     private AnimationPlayer animationPlayer;
+    private PlayerBulletSprite bulletSprite;
 
     public Player(){
         super();
@@ -22,7 +24,9 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         this.renderer = animationPlayer;
         boxCollider = new BoxCollider(40, 50);
         children.add(boxCollider);
-        this.frameCounter = new FrameCounter(30);
+        this.frameCounter = new FrameCounter(COOLDOWN);
+        totalBullets = 8;
+        bulletSprite = new ClassicBullet();
     }
 
     @Override
@@ -49,22 +53,20 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         velocity.y += GRAVITY_PLAYER;
         velocity.x = 0;
 
-            if (InputManager.instance.spacePressed){
-                if (frameCounter.run() && shootEnable){
-                    ClassicBullet classicBullet = GameObjectPool.recycle(ClassicBullet.class);
-                    classicBullet.position.set(this.position.add(0, this.renderer.getHeight()));
-                    velocity.y = 0;
-                    frameCounter.reset();
-                    animationPlayer.setActack(true);
-                }
-            }else {
-                animationPlayer.setActack(false);
+        if (InputManager.instance.spacePressed){
+            if (frameCounter.run() && shootEnable && totalBullets > 0){
+                bulletSprite.shoot();
+                velocity.y = 0;
+                totalBullets -= bulletSprite.totalBulletsPerShoot;
+                frameCounter.reset();
+                animationPlayer.setActack(true);
             }
+        }else {
+            animationPlayer.setActack(false);
+        }
     }
 
     private void move() {
-
-
 
         if (InputManager.instance.leftPressed) {
             velocity.x -= SPEED_PLAYER;
@@ -85,7 +87,6 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         moveVertical();
         moveHorizontal();
 
-
     }
 
     private void moveHorizontal() {
@@ -104,6 +105,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         float deltaY = velocity.y > 0 ? 1: -1;
         PhysicsBody body = Physics.bodyInRectofsuper(position.add(0, velocity.y), boxCollider.width, boxCollider.height, PlatformSprite.class);
         if (body != null) {
+            totalBullets = 8;
             while(Physics.bodyInRectofsuper(position.add(0, deltaY), boxCollider.width, boxCollider.height, PlatformSprite.class) == null) {
                 position.addUp(0, deltaY);
             }
