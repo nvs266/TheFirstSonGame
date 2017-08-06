@@ -18,15 +18,17 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
     protected abstract void setRenderer();
 
     void hitEnemy() {
-        Player player = Physics.bodyInRect(position.add(0,20), boxCollider.width, boxCollider.height,Player.class);
+        Player player = Physics.bodyInRect(position.add(0,0), boxCollider.width, boxCollider.height,Player.class);
         if (player!= null){
             float botPlayer = player.position.y + player.renderer.getHeight()/2;
-            if (botPlayer <= position.y + 5 ){
+            float topthis = position.y - renderer.getHeight()/2;
+            if (botPlayer < topthis){
                 Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
                 setActive(false);
             }else {
                 player.setActive(false);
             }
+
         }
     }
 
