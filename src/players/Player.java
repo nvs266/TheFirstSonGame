@@ -77,8 +77,9 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         }
 
 
-        if (InputManager.instance.spacePressed) {
-            if (Physics.bodyInRectofsuper(position.add(0, 1), boxCollider.width, boxCollider.height, PlatformSprite.class) != null) {
+        if (Physics.bodyInRectofsuper(position.add(0, 1), boxCollider.width, boxCollider.height, PlatformSprite.class) != null) {
+            totalBullets = 8;
+            if (InputManager.instance.spacePressed) {
                 velocity.y = SPEED_JUMP_PLAYER;
                 shootEnable = false;
             }
@@ -105,7 +106,6 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         float deltaY = velocity.y > 0 ? 1: -1;
         PhysicsBody body = Physics.bodyInRectofsuper(position.add(0, velocity.y), boxCollider.width, boxCollider.height, PlatformSprite.class);
         if (body != null) {
-            totalBullets = 8;
             while(Physics.bodyInRectofsuper(position.add(0, deltaY), boxCollider.width, boxCollider.height, PlatformSprite.class) == null) {
                 position.addUp(0, deltaY);
             }
