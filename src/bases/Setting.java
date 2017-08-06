@@ -19,11 +19,8 @@ public interface Setting {
     float SPEED_JUMP_PLAYER = -2.2f;
     float SPEED_JUMPP_HIT_ENEMY = -1f;
     enum HIT_LOCATION{HIT_UPPER, HIT_LOWER, HIT_LEFT, HIT_RIGHT}
-// <<<<<<< sonfix
-//     float SIZE_ENEMY_ACTIVE = 400;
-// =======
-//     float SIZE_ENEMY_ACTIVE = 250;
-// >>>>>>> master
+
+     float SIZE_ENEMY_ACTIVE = 400;
     int COOLDOWN = 30;
     int START_LIFE = 4;
     int START_TOTAL_BULLETS = 8;
