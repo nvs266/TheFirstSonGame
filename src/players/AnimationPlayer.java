@@ -7,6 +7,8 @@ import bases.renderers.ImageRenderer;
 import bases.renderers.Renderer;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 
 /**
  * Created by cuonghx2709 on 8/4/2017.
@@ -118,4 +120,28 @@ public class AnimationPlayer implements Renderer{
     public float getHeight() {
         return 0;
     }
+
+    @Override
+    public void reset() {
+
+    }
+
+    @Override
+    public int getIndexImage() {
+        return 0;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
+
+    @Override
+    public BufferedImage getCurrentImage() {
+        if (currentAnimation != null) {
+            return currentAnimation.getCurrentImage();
+        }
+        return null;
+    }
+
 }

@@ -7,30 +7,53 @@ import physics.Physics;
 import physics.PhysicsBody;
 import platforms.PlatformSprite;
 
+import java.awt.*;
+
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
     public  static  Vector2D velocity = new Vector2D();
     private FrameCounter frameCounter;
     private boolean shootEnable;
+    private int bullets;
     private int totalBullets;
     private AnimationPlayer animationPlayer;
     private PlayerBulletSprite bulletSprite;
+    public int life;
+    public boolean immortal; // bat tu
+    private FrameCounter immortalCounter;
 
     public Player(){
         super();
-        instance = this;
         position.set(100, 100);
+        life = START_LIFE;
+        instance = this;
+        bullets = totalBullets = START_TOTAL_BULLETS;
+        bulletSprite = new ClassicBullet();
+        this.frameCounter = new FrameCounter(COOLDOWN);
+
         this.animationPlayer = new AnimationPlayer();
         this.renderer = animationPlayer;
+
         boxCollider = new BoxCollider(40, 50);
         children.add(boxCollider);
-        this.frameCounter = new FrameCounter(COOLDOWN);
-        totalBullets = 8;
-        bulletSprite = new ClassicBullet();
+
+        immortal = false;
+        immortalCounter = new FrameCounter(300);
     }
 
     @Override
     public void run(Vector2D parentPosition) {
+        if (renderer.getCurrentImage() != null) {
+            Trail trail = GameObjectPool.recycle(Trail.class);
+            trail.setTrail(this.position, 0.02f, renderer.getCurrentImage());
+        }
+
+        if (immortal) {
+            if (immortalCounter.run()) {
+                immortal = false;
+                immortalCounter.reset();
+            }
+        }
 
         super.run(parentPosition);
         makeBullet();
@@ -54,10 +77,10 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         velocity.x = 0;
 
         if (InputManager.instance.spacePressed){
-            if (frameCounter.run() && shootEnable && totalBullets > 0){
+            if (frameCounter.run() && shootEnable && bullets > 0){
                 bulletSprite.shoot();
                 velocity.y = 0;
-                totalBullets -= bulletSprite.totalBulletsPerShoot;
+                bullets -= bulletSprite.totalBulletsPerShoot;
                 frameCounter.reset();
                 animationPlayer.setActack(true);
             }
@@ -78,10 +101,9 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
 
         if (Physics.bodyInRectofsuper(position.add(0, 1), boxCollider.width, boxCollider.height, PlatformSprite.class) != null) {
-            totalBullets = 8;
+            bullets = totalBullets;
             if (InputManager.instance.spacePressed) {
                 velocity.y = SPEED_JUMP_PLAYER;
-                shootEnable = false;
             }
         }
 
