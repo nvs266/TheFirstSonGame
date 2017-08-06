@@ -65,6 +65,9 @@ public class GameObject {
             Physics.add((PhysicsBody) gameObject);
         }
     }
+    public void remoteAction(Action action){
+        actions.remove(action);
+    }
 
     public static void runAll(){
         for (GameObject gameObject : gameObjects){
