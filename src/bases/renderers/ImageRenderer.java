@@ -33,4 +33,26 @@ public class ImageRenderer implements Renderer, Setting {
     public float getHeight() {
         return 0;
     }
+
+    @Override
+    public void reset() {
+
+    }
+
+    @Override
+    public int getIndexImage() {
+        return 0;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
+
+    @Override
+    public BufferedImage getCurrentImage() {
+        return null;
+    }
+
+
 }

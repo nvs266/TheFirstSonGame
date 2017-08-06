@@ -33,12 +33,15 @@ public class Animation implements Renderer, Setting {
     }
 
     @Override
+    public BufferedImage getCurrentImage() {
+        return images.get(imageIndex);
+    }
+
+    @Override
     public void render(Graphics2D g2d, Vector2D position) {
         if (frameCounter.run()) {
             if (!finished){
                 changeIndex();
-            }else {
-
             }
             frameCounter.reset();
         }
@@ -76,4 +79,8 @@ public class Animation implements Renderer, Setting {
         finished = false;
     }
 
+    @Override
+    public int getIndexImage() {
+        return imageIndex;
+    }
 }

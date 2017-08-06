@@ -6,6 +6,7 @@ import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import players.Player;
+import players.Trail;
 import scenes.Camera;
 
 import java.awt.*;
@@ -100,7 +101,9 @@ public class GameObject {
                 gameObject.render(g2d);
             }
         }
-
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(new Font("serif", Font.BOLD, 10));
+        g2d.drawString("LIFE: " + Player.instance.life, 50, 50 );
     }
     public void refresh(){
         this.isActive = true;

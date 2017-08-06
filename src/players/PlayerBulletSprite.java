@@ -2,6 +2,8 @@ package players;
 
 import bases.FrameCounter;
 import bases.GameObject;
+import bases.GameObjectPool;
+import enemies.EnemyExplosion;
 import enemies.EnemySprite;
 import physics.BoxCollider;
 import physics.Physics;
@@ -24,6 +26,10 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
         if (enemySprite != null) {
             this.setActive(false);
             enemySprite.setActive(false);
+
+            EnemyExplosion enemyExplosion = GameObjectPool.recycle(EnemyExplosion.class);
+            enemyExplosion.position.set(enemySprite.position);
+            enemyExplosion.renderer.reset();
         }
     }
 

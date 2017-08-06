@@ -1,6 +1,7 @@
 package enemies;
 
 import bases.GameObject;
+import bases.GameObjectPool;
 import bases.Setting;
 import bases.Vector2D;
 import bases.actions.RepeatForeverAction;
@@ -14,6 +15,7 @@ import players.Player;
 import players.PlayerAction;
 
 public abstract class EnemySprite extends GameObject implements PhysicsBody, Setting {
+
     public EnemySprite() {
         super();
         setRenderer();
@@ -34,9 +36,19 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
             if (botPlayer < topthis){
                 Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
                 setActive(false);
+                EnemyExplosion enemyExplosion = GameObjectPool.recycle(EnemyExplosion.class);
+                enemyExplosion.position.set(this.position);
+                enemyExplosion.renderer.reset();
             }else {
+// <<<<<<< sonfix
+//                 if (!Player.instance.immortal) {
+//                     Player.instance.life--;
+//                     Player.instance.immortal = true;
+//                 }
+// =======
 
-//                player.setActive(false);
+// //                player.setActive(false);
+// >>>>>>> master
             }
 
         }
