@@ -1,5 +1,6 @@
 package bases;
 
+import bases.actions.Action;
 import bases.renderers.Renderer;
 import physics.BoxCollider;
 import physics.Physics;
@@ -8,7 +9,7 @@ import players.Player;
 import scenes.Camera;
 
 import java.awt.*;
-import java.util.Vector;
+import java.util.*;
 
 public class GameObject {
     public Vector2D position;
@@ -16,6 +17,8 @@ public class GameObject {
 
     private static Vector<GameObject> gameObjects = new Vector<>();
     private static Vector<GameObject> newGameObject = new Vector<>();
+    private Vector<Action> actions;
+    private java.util.List<Action> newAction;
     public Vector<GameObject> children ;
 
     private boolean isActive;
@@ -30,6 +33,31 @@ public class GameObject {
         this.isActive = true;
         this.children = new Vector<>();
         this.renderer = null;
+        this.actions = new Vector<>();
+        this.newAction = new Vector<>();
+    }
+    public void runAction(){
+        Iterator<Action> iterator = actions.iterator();
+        while (iterator.hasNext()){
+            Action action = iterator.next();
+            if (action.run(this)){
+                iterator.remove();
+            }
+        }
+        this.actions.addAll(this.newAction);
+        newAction.clear();
+    }
+    public static void runAllAction(){
+        for (GameObject gameObject : gameObjects){
+            if (gameObject.isActive()){
+                gameObject.runAction();
+            }
+        }
+
+    }
+
+    public void addAction(Action action){
+        newAction.add(action);
     }
     public static void  add(GameObject gameObject){
         newGameObject.add(gameObject);
