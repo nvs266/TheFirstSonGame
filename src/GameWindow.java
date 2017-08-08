@@ -106,5 +106,6 @@ public class GameWindow extends JFrame implements Setting{
         GameObject.runAll();
         GameObject.runAllAction();
         map.readMap(Player.instance);
+        GameObject.removeAll();
     }
 }
