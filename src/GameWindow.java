@@ -5,6 +5,7 @@ import enemies.*;
 import inputs.InputManager;
 import platforms.*;
 import players.Player;
+import scenes.Map;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,86 +25,23 @@ public class GameWindow extends JFrame implements Setting{
     Graphics2D buffBackgroundGraphics2d;
     //InputManager inputManager = new InputManager();
     InputManager inputManager = InputManager.instance;
+    Map map;
 
     public GameWindow() throws IOException {
         setUpgameWindow();
         setupInputs();
         loadMap();
         addPlayer();
+        addBoss();
         this.setVisible(true);
     }
 
-    private void loadMap() throws IOException {
-        FileInputStream fis = new FileInputStream("assets/map/newmap.txt");
+    private void addBoss() {
 
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 30; j++) {
-                int c = fis.read();
-                if (c == ',') j--;
-                char f = (char) c;
-                System.out.print(f);
-                switch(c) {
-                    case '2':
-                        BrickItem brickItem = new BrickItem();
-                        brickItem.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(brickItem);
-                        break;
-                    case '3':
-                        BrickGrey brickGrey = new BrickGrey();
-                        brickGrey.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(brickGrey);
-                        break;
-                    case '4':
-                        Platform platform = new Platform();
-                        platform.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(platform);
-                        break;
-                    case '5':
-                        DirtGlass dirtGlass = new DirtGlass();
-                        dirtGlass.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(dirtGlass);
-                        break;
-                    case '7':
-                        BatEnemy batEnemy = new BatEnemy();
-                        batEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(batEnemy);
-                        break;
-                    case '8':
-                        GumEnemy gumEnemy = new GumEnemy();
-                        gumEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(gumEnemy);
-                        break;
-                    case '9':
-                        SnakeEnemy snakeEnemy = new SnakeEnemy();
-                        snakeEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(snakeEnemy);
-                        break;
-                    case 'A':
-                        GhostEnemy ghostEnemy = new GhostEnemy();
-                        ghostEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(ghostEnemy);
-                        break;
-                    case 'B':
-                        FrogEnemy frogEnemy = new FrogEnemy();
-                        frogEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(frogEnemy);
-                        break;
-                    case 'C':
-                        SpikeStick spikeStick = new SpikeStick();
-                        spikeStick.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        GameObject.add(spikeStick);
-                        break;
-                    case 'D':
-                        Item item = GameObjectPool.recycle(Item.class);
-                        item.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            System.out.println();
-        }
-        fis.close();
+    }
+
+    private void loadMap() throws IOException {
+        map = new Map(30, 280, "assets/map/map4.txt");
     }
 
     private void addPlayer() {
@@ -167,5 +105,6 @@ public class GameWindow extends JFrame implements Setting{
     private void run(){
         GameObject.runAll();
         GameObject.runAllAction();
+        map.readMap(Player.instance);
     }
 }

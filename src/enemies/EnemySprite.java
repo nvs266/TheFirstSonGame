@@ -41,7 +41,7 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
                 enemyExplosion.renderer.reset();
             } else {
                 if (!Player.instance.immortal) {
-                    Player.instance.life--;
+//                    Player.instance.life--;
                     Player.instance.immortal = true;
                 }
             }
