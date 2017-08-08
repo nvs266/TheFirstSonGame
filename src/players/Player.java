@@ -5,12 +5,14 @@ import bases.actions.Action;
 import bases.actions.RepeatForeverAction;
 import bases.actions.SequenceAction;
 import bases.actions.WaitAction;
+import enemies.boss.Boss;
 import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import platforms.Item;
 import platforms.PlatformSprite;
+import scenes.Camera;
 
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
@@ -86,6 +88,12 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         this.position.addUp(velocity);
         updateAnimation();
         checkItem();
+
+        if (Boss.instance == null && this.position.y / HEIGHT_GRID >= 10) {
+            Boss boss = GameObjectPool.recycle(Boss.class);
+            boss.position.set(255 + boss.renderer.getWidth() / 2, this.position.y + 200);
+            Camera.instance.setFollowGameObject(boss);
+        }
     }
 
     private void checkItem() {
