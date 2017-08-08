@@ -12,8 +12,6 @@ import physics.PhysicsBody;
 import platforms.Item;
 import platforms.PlatformSprite;
 
-import java.awt.*;
-
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
     public  static  Vector2D velocity = new Vector2D();
@@ -33,7 +31,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     public Player() {
         super();
-        position.set(100, 100);
+        position.set(300, 100);
         life = START_LIFE;
         instance = this;
         bullets = totalBullets = START_TOTAL_BULLETS;

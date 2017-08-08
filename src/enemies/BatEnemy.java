@@ -7,6 +7,9 @@ import bases.Vector2D;
 import bases.renderers.Animation;
 import physics.BoxCollider;
 import physics.Physics;
+import physics.PhysicsBody;
+import platforms.BrickGrey;
+import platforms.PlatformSprite;
 import players.Player;
 
 public class BatEnemy extends EnemySprite {
@@ -46,7 +49,30 @@ public class BatEnemy extends EnemySprite {
         } else if (this.position.distance(target) <= Setting.SIZE_ENEMY_ACTIVE /2) {
             velocity = target.substract(position).normalize().multiply((float) 0.5);
         }
-
+        moveVertical();
+        moveHorizontal();
         position.addUp(velocity);
+    }
+    private void moveHorizontal() {
+        float deltaX = velocity.x > 0 ? 1 : -1;
+        PhysicsBody body = Physics.bodyInRectofsuper(position.add(velocity.x, 0), boxCollider.width, boxCollider.height, PlatformSprite.class);
+        if (body instanceof BrickGrey){
+
+            while (Physics.bodyInRectofsuper(position.add(deltaX, 0), boxCollider.width, boxCollider.height, PlatformSprite.class) == null){
+                position.addUp(deltaX,0);
+            }
+            velocity.x = 0;
+        }
+    }
+
+    private void moveVertical() {
+        float deltaY = velocity.y > 0 ? 1: -1;
+        PhysicsBody body = Physics.bodyInRectofsuper(position.add(0, velocity.y), boxCollider.width, boxCollider.height, PlatformSprite.class);
+        if (body instanceof BrickGrey) {
+            while(Physics.bodyInRectofsuper(position.add(0, deltaY), boxCollider.width, boxCollider.height, PlatformSprite.class) == null) {
+                position.addUp(0, deltaY);
+            }
+            velocity.y = 0;
+        }
     }
 }
