@@ -18,6 +18,7 @@ public class GameObject {
 
     private static Vector<GameObject> gameObjects = new Vector<>();
     private static Vector<GameObject> newGameObject = new Vector<>();
+    private static Vector<GameObject> gameObjectsRemove = new Vector<>();
     private Vector<Action> actions;
     private java.util.List<Action> newAction;
     public Vector<GameObject> children ;
@@ -81,12 +82,12 @@ public class GameObject {
         gameObjects.addAll(newGameObject);
         newGameObject.clear();
     }
+
     public void run(Vector2D parentPosition){
         screenPosition = parentPosition.add(position);
         for (GameObject child : children){
             child.run(screenPosition);
         }
-
     }
 
     public void render(Graphics2D g2d){
@@ -114,6 +115,24 @@ public class GameObject {
             g2d.drawString("LOOSED", 100, 300 );
         }
     }
+
+    public void remove() {
+        gameObjectsRemove.add(this);
+        for (GameObject chil: this.children) {
+            chil.remove();
+        }
+    }
+
+    public static void removeAll() {
+        for (GameObject gameObject: gameObjects) {
+            if (gameObject.isActive && Player.instance.position.y - gameObject.position.y > 500) {
+                gameObject.remove();
+            }
+        }
+        gameObjects.removeAll(gameObjectsRemove);
+        gameObjectsRemove.clear();
+    }
+
     public void refresh(){
         this.isActive = true;
     }

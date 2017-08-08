@@ -25,9 +25,13 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public boolean immortal; // bat tu
     private boolean added;
     private boolean hero;
-    private FrameCounter immortalCounter;
-     private Action immortalAction;
+// <<<<<<< sonfix
+//     private FrameCounter frameCounterTrails;
+// =======
+//     private FrameCounter immortalCounter;
+//      private Action immortalAction;
 
+// >>>>>>> master
 
     public Player() {
         super();
@@ -47,22 +51,34 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         immortal = false;
         immortalCounter = new FrameCounter(300);
 
-        immortalAction = new RepeatForeverAction(
-                new SequenceAction(
-                        new PlayerAction(),
-                        new WaitAction(5)
-                )
-        );
+// <<<<<<< sonfix
+//         hero = false;
+
+//         frameCounterTrails = new FrameCounter(5);
+//     }
+// =======
+//         immortalAction = new RepeatForeverAction(
+//                 new SequenceAction(
+//                         new PlayerAction(),
+//                         new WaitAction(5)
+//                 )
+//         );
+// >>>>>>> master
 
     }
     @Override
     public void run(Vector2D parentPosition) {
+// <<<<<<< sonfix
+//         if (renderer.getCurrentImage() != null && renderer != null && hero && frameCounterTrails.run()) {
+// =======
 
 
-         if (renderer != null && renderer.getCurrentImage() != null && hero) {
+//          if (renderer != null && renderer.getCurrentImage() != null && hero) {
 
+// >>>>>>> master
             Trail trail = GameObjectPool.recycle(Trail.class);
             trail.setTrail(this.position, 0.02f, renderer.getCurrentImage());
+            frameCounterTrails.reset();
         }
 
         if (immortal) {
