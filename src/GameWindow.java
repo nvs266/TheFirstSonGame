@@ -2,9 +2,11 @@ import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
 import enemies.*;
+import enemies.boss.Boss;
 import inputs.InputManager;
 import platforms.*;
 import players.Player;
+import scenes.Camera;
 import scenes.Map;
 
 import javax.swing.*;
@@ -32,12 +34,7 @@ public class GameWindow extends JFrame implements Setting{
         setupInputs();
         loadMap();
         addPlayer();
-        addBoss();
         this.setVisible(true);
-    }
-
-    private void addBoss() {
-
     }
 
     private void loadMap() throws IOException {
@@ -46,6 +43,7 @@ public class GameWindow extends JFrame implements Setting{
 
     private void addPlayer() {
         Player player = GameObjectPool.recycle(Player.class);
+        Camera.instance.setFollowGameObject(player);
     }
 
     private void setupInputs() {

@@ -5,6 +5,7 @@ import bases.FrameCounter;
 import bases.GameObject;
 import bases.Vector2D;
 import bases.renderers.Animation;
+import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import platforms.PlatformSprite;
@@ -20,6 +21,12 @@ public class FrogEnemy extends EnemySprite {
         super();
         this.velocity = new Vector2D();
         frameCounter = new FrameCounter(500);//~= 3s to start jump
+    }
+
+    @Override
+    void setBoxCollider() {
+        boxCollider = new BoxCollider(renderer.getWidth() - 20, renderer.getHeight());
+        this.children.add(boxCollider);
     }
 
     @Override

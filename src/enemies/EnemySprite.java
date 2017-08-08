@@ -33,7 +33,7 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
                 botPlayer = player.position.y + player.renderer.getHeight() / 2;
                 topthis = position.y - renderer.getHeight() / 2;
             }
-            if (botPlayer < topthis) {
+            if (botPlayer < topthis && this.getClass() != GumEnemy.class) {
                 Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
                 setActive(false);
                 EnemyExplosion enemyExplosion = GameObjectPool.recycle(EnemyExplosion.class);

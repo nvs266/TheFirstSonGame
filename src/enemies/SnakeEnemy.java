@@ -8,6 +8,7 @@ import bases.renderers.Animation;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
+import platforms.PlatformSprite;
 import players.Player;
 
 import javax.swing.*;
@@ -38,18 +39,34 @@ public class SnakeEnemy extends EnemySprite{
 
     @Override
     protected void move() {
-            movetoPlayer();
+        velocity.y += GRAVITY_PLAYER;
+
+        moveVertical();
+        moveHorizontal();
+        position.addUp(velocity);
     }
 
-    private void movetoPlayer() {
-        GameObject player = Physics.find(Player.class);
-        if (player != null) {
-            this.target = player.position;
+    private void moveHorizontal() {
+        float deltaX = velocity.x > 0 ? 1 : -1;
+        PhysicsBody body = Physics.bodyInRectofsuper(position.add(velocity.x, 0), boxCollider.width, boxCollider.height, PlatformSprite.class);
+        if (body != null){
+
+            while (Physics.bodyInRectofsuper(position.add(deltaX, 0), boxCollider.width, boxCollider.height, PlatformSprite.class) == null){
+                position.addUp(deltaX,0);
+            }
+            velocity.x = 0;
         }
-        if (Math.abs(this.position.y  - Player.instance.position.y)  < 20
-                    && Math.abs(this.position.x - target.x) <= Setting.SIZE_ENEMY_ACTIVE) {
-                velocity.set((float) ((target.x - this.position.x) / (Math.abs(this.position.x - target.x)) *  0.1), 0);
-        } else velocity.set(0 , 0);
-        this.position.addUp(velocity);
     }
+
+    private void moveVertical() {
+        float deltaY = velocity.y > 0 ? 1: -1;
+        PhysicsBody body = Physics.bodyInRectofsuper(position.add(0, velocity.y), boxCollider.width, boxCollider.height, PlatformSprite.class);
+        if (body != null) {
+            while(Physics.bodyInRectofsuper(position.add(0, deltaY), boxCollider.width, boxCollider.height, PlatformSprite.class) == null) {
+                position.addUp(0, deltaY);
+            }
+            velocity.y = 0;
+        }
+    }
+
 }

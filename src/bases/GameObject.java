@@ -28,6 +28,7 @@ public class GameObject {
     public static Camera camera = new Camera();
 
     public BoxCollider boxCollider;
+
     public GameObject(){
         this.position = new Vector2D();
         this.screenPosition = new Vector2D();
@@ -54,13 +55,13 @@ public class GameObject {
                 gameObject.runAction();
             }
         }
-
     }
 
     public void addAction(Action action){
         newAction.add(action);
     }
-    public static void  add(GameObject gameObject){
+
+    public static void add(GameObject gameObject){
         newGameObject.add(gameObject);
         if (gameObject instanceof PhysicsBody){
             Physics.add((PhysicsBody) gameObject);
@@ -74,8 +75,8 @@ public class GameObject {
         for (GameObject gameObject : gameObjects){
             if (gameObject.isActive){
                 gameObject.run(Vector2D.ZERO);
-                if (gameObject.getClass() == Player.class) {
-                    camera.setPosition(gameObject);
+                if (gameObject.getClass() == Camera.instance.getFollowGameObject().getClass()) {
+                    camera.setPosition();
                 }
             }
         }
@@ -91,10 +92,8 @@ public class GameObject {
     }
 
     public void render(Graphics2D g2d){
-        if (renderer != null && this.getClass() != Player.class){
-            renderer.render(g2d, screenPosition.substract(camera.getPosition()));
-        } else if (renderer != null) {
-            renderer.render(g2d, screenPosition.substract(camera.getPosition()).add(Player.velocity));
+        if (renderer != null){
+            renderer.render(g2d, camera.posInCamera(this ,screenPosition));
         }
     }
 
@@ -107,6 +106,12 @@ public class GameObject {
         g2d.setColor(Color.WHITE);
         g2d.setFont(new Font("serif", Font.BOLD, 10));
         g2d.drawString("LIFE: " + Player.instance.life, 50, 50 );
+
+        if (Player.instance.immortal) {
+            g2d.setColor(Color.RED);
+            g2d.setFont(new Font("serif", Font.BOLD, 20));
+            g2d.drawString("-1", Player.instance.position.x - Camera.instance.getPosition().x + 20, Player.instance.position.y - Camera.instance.getPosition().y - 20);
+        }
         if (Player.instance.life == 0) {
             Player.instance.setActive(false);
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f));
