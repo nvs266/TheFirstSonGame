@@ -26,6 +26,12 @@ public class FireBullet extends GameObject implements PhysicsBody {
     }
 
     @Override
+    public void render(Graphics2D g2d) {
+//        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+        super.render(g2d);
+    }
+
+    @Override
     public void run(Vector2D parentPosition) {
         super.run(parentPosition);
         this.position.set(position.substract(velocity));
