@@ -9,6 +9,7 @@ public class RepeatnAction implements Action{
     private int count = 0;
     private int countMax ;
     private Action action;
+
     public RepeatnAction(int count, Action action){
         this.countMax = count;
         this.action = action;
@@ -22,7 +23,7 @@ public class RepeatnAction implements Action{
         }else {
             if (action.run(gameObject)){
                 action.reset();
-                count--;
+                count++;
             }
             return false;
         }
@@ -30,5 +31,6 @@ public class RepeatnAction implements Action{
 
     @Override
     public void reset() {
+        action.reset();
     }
 }
