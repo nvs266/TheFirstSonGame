@@ -72,54 +72,44 @@ public class Map implements Setting{
     private void addObject(char c, int i, int j) {
         switch(c) {
             case '3':
-                BrickItem brickItem = new BrickItem();
+                BrickItem brickItem = GameObjectPool.recycle(BrickItem.class);
                 brickItem.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                GameObject.add(brickItem);
                 break;
             case '1':
-                BrickGrey brickGrey = new BrickGrey();
+                BrickGrey brickGrey = GameObjectPool.recycle(BrickGrey.class);
                 brickGrey.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                GameObject.add(brickGrey);
                 break;
             case 'C':
-                Platform platform = new Platform();
+                Platform platform = GameObjectPool.recycle(Platform.class);
                 platform.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                GameObject.add(platform);
                 break;
             case 'A':
-                DirtGlass dirtGlass = new DirtGlass();
+                DirtGlass dirtGlass = GameObjectPool.recycle(DirtGlass.class);
                 dirtGlass.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                GameObject.add(dirtGlass);
                 break;
             case '4':
-                BatEnemy batEnemy = new BatEnemy();
+                BatEnemy batEnemy = GameObjectPool.recycle(BatEnemy.class);
                 batEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                GameObject.add(batEnemy);
                 break;
             case '5':
-                GumEnemy gumEnemy = new GumEnemy();
+                GumEnemy gumEnemy = GameObjectPool.recycle(GumEnemy.class);
                 gumEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                GameObject.add(gumEnemy);
                 break;
             case '6':
-                SnakeEnemy snakeEnemy = new SnakeEnemy();
-                snakeEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                GameObject.add(snakeEnemy);
+                SnakeEnemy snakeEnemy = GameObjectPool.recycle(SnakeEnemy.class);
+                snakeEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 32);
                 break;
             case '7':
-                GhostEnemy ghostEnemy = new GhostEnemy();
+                GhostEnemy ghostEnemy = GameObjectPool.recycle(GhostEnemy.class);
                 ghostEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                GameObject.add(ghostEnemy);
                 break;
             case '8':
-                FrogEnemy frogEnemy = new FrogEnemy();
+                FrogEnemy frogEnemy = GameObjectPool.recycle(FrogEnemy.class);
                 frogEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                GameObject.add(frogEnemy);
                 break;
             case 'D':
-                SpikeStick spikeStick = new SpikeStick();
+                SpikeStick spikeStick = GameObjectPool.recycle(SpikeStick.class);
                 spikeStick.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
-                GameObject.add(spikeStick);
                 break;
             case '9':
                 Item item = GameObjectPool.recycle(Item.class);

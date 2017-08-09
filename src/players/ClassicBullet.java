@@ -55,7 +55,10 @@ public class ClassicBullet extends PlayerBulletSprite {
                 setActive(false);
             }
         }
-        if (this.position.y - Player.instance.position.y > 200){
+        if (this.position.y - Player.instance.position.y > 200 && !Player.instance.hero){
+            this.setActive(false);
+        }
+        else if (this.position.y - Player.instance.position.y > 400) {
             this.setActive(false);
         }
     }

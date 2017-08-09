@@ -20,7 +20,8 @@ public class SnakeEnemy extends EnemySprite{
     public SnakeEnemy() {
         super();
         this.velocity = new Vector2D();
-        this.boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight() / 2);
+        velocity.x = -0.5f;
+        this.boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
         children.add(boxCollider);
     }
 
@@ -40,7 +41,6 @@ public class SnakeEnemy extends EnemySprite{
     @Override
     protected void move() {
         velocity.y += GRAVITY_PLAYER;
-
         moveVertical();
         moveHorizontal();
         position.addUp(velocity);

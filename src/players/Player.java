@@ -26,7 +26,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public int life;
     public boolean immortal; // bat tu
     private boolean added;
-    private boolean hero;
+    public boolean hero;
     private FrameCounter frameCounterTrails;
     private FrameCounter immortalCounter;
     private Action immortalAction;
@@ -148,7 +148,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
 
         if (Physics.bodyInRectofsuper(position.add(0, 1), boxCollider.width, boxCollider.height, PlatformSprite.class) != null) {
-            bullets = totalBullets;
+            resetBullet();
             if (InputManager.instance.spacePressed) {
                 velocity.y = SPEED_JUMP_PLAYER;
             }
@@ -189,4 +189,9 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public void add(Vector2D position){
         position.addUp(position);
     }
+
+    public void resetBullet() {
+        bullets = totalBullets;
+    }
+
 }

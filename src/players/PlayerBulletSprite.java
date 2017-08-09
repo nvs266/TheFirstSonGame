@@ -8,6 +8,7 @@ import enemies.EnemySprite;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
+import platforms.Item;
 
 public abstract class PlayerBulletSprite extends GameObject implements PhysicsBody {
     int totalBulletsPerShoot;
@@ -30,6 +31,9 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
             EnemyExplosion enemyExplosion = GameObjectPool.recycle(EnemyExplosion.class);
             enemyExplosion.position.set(enemySprite.position);
             enemyExplosion.renderer.reset();
+
+            Item item = GameObjectPool.recycle(Item.class);
+            item.position.set(enemySprite.position);
         }
     }
 
