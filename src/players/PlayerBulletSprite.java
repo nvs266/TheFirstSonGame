@@ -38,6 +38,11 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
         this.children.add(boxCollider);
     }
 
+    void addCartouche() {
+        Cartouche cartouche = GameObjectPool.recycle(Cartouche.class);
+        cartouche.setCartouche(Player.instance.position);
+    }
+
     abstract void move();
 
     abstract void shoot();

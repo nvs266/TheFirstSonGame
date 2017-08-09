@@ -89,11 +89,11 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         updateAnimation();
         checkItem();
 
-        if (Boss.instance == null && this.position.y / HEIGHT_GRID >= 10) {
-            Boss boss = GameObjectPool.recycle(Boss.class);
-            boss.position.set(255 + boss.renderer.getWidth() / 2, this.position.y + 200);
-            Camera.instance.setFollowGameObject(boss);
-        }
+//        if (Boss.instance == null && this.position.y / HEIGHT_GRID >= 10) {
+//            Boss boss = GameObjectPool.recycle(Boss.class);
+//            boss.position.set(255 + boss.renderer.getWidth() / 2, this.position.y + 200);
+//            Camera.instance.setFollowGameObject(boss);
+//        }
     }
 
     private void checkItem() {
@@ -125,6 +125,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         if (InputManager.instance.spacePressed){
             if (frameCounter.run() && shootEnable && bullets > 0){
                 bulletSprite.shoot();
+                bulletSprite.addCartouche();
                 velocity.y = 0;
                 bullets -= bulletSprite.totalBulletsPerShoot;
                 frameCounter.reset();
