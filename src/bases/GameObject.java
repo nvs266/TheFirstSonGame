@@ -8,6 +8,9 @@ import physics.PhysicsBody;
 import players.Player;
 import players.Trail;
 import scenes.Camera;
+import scenes.Scene;
+import scenes.SceneManager;
+import scenes.StartingScene;
 
 import java.awt.*;
 import java.util.*;
@@ -67,7 +70,7 @@ public class GameObject {
             Physics.add((PhysicsBody) gameObject);
         }
     }
-    public void remoteAction(Action action){
+    public void removeAction(Action action){
         actions.remove(action);
     }
 
@@ -75,9 +78,6 @@ public class GameObject {
         for (GameObject gameObject : gameObjects){
             if (gameObject.isActive){
                 gameObject.run(Vector2D.ZERO);
-                if (gameObject.getClass() == Camera.instance.getFollowGameObject().getClass()) {
-                    camera.setPosition();
-                }
             }
         }
         gameObjects.addAll(newGameObject);
@@ -93,7 +93,9 @@ public class GameObject {
 
     public void render(Graphics2D g2d){
         if (renderer != null){
-            renderer.render(g2d, camera.posInCamera(this ,screenPosition));
+            if (camera.getFollowGameObject() != null) {
+                renderer.render(g2d, camera.posInCamera(this ,screenPosition));
+            } else renderer.render(g2d, screenPosition);
         }
     }
 
@@ -103,22 +105,28 @@ public class GameObject {
                 gameObject.render(g2d);
             }
         }
-        g2d.setColor(Color.WHITE);
-        g2d.setFont(new Font("serif", Font.BOLD, 10));
-        g2d.drawString("LIFE: " + Player.instance.life, 50, 50 );
 
-        if (Player.instance.immortal) {
-            g2d.setColor(Color.RED);
-            g2d.setFont(new Font("serif", Font.BOLD, 20));
-            g2d.drawString("-1", Player.instance.position.x - Camera.instance.getPosition().x + 20, Player.instance.position.y - Camera.instance.getPosition().y - 20);
-        }
-        if (Player.instance.life == 0) {
-            Player.instance.setActive(false);
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f));
+        Scene scene = SceneManager.instance.getCurrentScene();
+
+        if (scene != null && scene.getClass() != StartingScene.class) {
             g2d.setColor(Color.WHITE);
-            g2d.setFont(new Font("serif", Font.BOLD, 40));
-            g2d.drawString("LOOSED", 100, 300 );
+            g2d.setFont(new Font("serif", Font.BOLD, 10));
+            g2d.drawString("LIFE: " + Player.instance.life, 50, 50 );
+
+            if (Player.instance.immortal) {
+                g2d.setColor(Color.RED);
+                g2d.setFont(new Font("serif", Font.BOLD, 20));
+                g2d.drawString("-1", Player.instance.position.x - Camera.instance.getPosition().x + 20, Player.instance.position.y - Camera.instance.getPosition().y - 20);
+            }
+            if (Player.instance.life == 0) {
+                Player.instance.setActive(false);
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f));
+                g2d.setColor(Color.WHITE);
+                g2d.setFont(new Font("serif", Font.BOLD, 40));
+                g2d.drawString("LOOSED", 100, 300 );
+            }
         }
+
     }
 
     public void remove() {
@@ -129,6 +137,9 @@ public class GameObject {
     }
 
     public static void removeAll() {
+        Scene scene = SceneManager.instance.getCurrentScene();
+        if (scene == null || scene.getClass() == StartingScene.class) return;
+
         for (GameObject gameObject: gameObjects) {
             if (gameObject.isActive && Player.instance.position.y - gameObject.position.y > 500) {
                 gameObject.remove();
@@ -148,5 +159,11 @@ public class GameObject {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public static void clear() {
+        gameObjects.clear();
+        GameObjectPool.clear();
+        Physics.clear();
     }
 }

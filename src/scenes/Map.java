@@ -3,8 +3,10 @@ package scenes;
 import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
+import bases.Vector2D;
 import enemies.*;
 import platforms.*;
+import players.Player;
 
 import java.io.*;
 
@@ -12,8 +14,9 @@ public class Map implements Setting{
     private char map[][];
     private int width;
     private int height;
-
     private int currentHeight;
+    private GameObject followGameObject;
+    public static Map instance;
 
     public Map(int width, int height, String fileName) throws IOException {
         this.width = width;
@@ -45,6 +48,15 @@ public class Map implements Setting{
             }
         }
         currentHeight = 29;
+        instance = this;
+    }
+
+    public void setFollowGameObject(GameObject gameObject) {
+        this.followGameObject = gameObject;
+    }
+
+    public GameObject getFollowGameObject() {
+        return followGameObject;
     }
 
     public void printMap() {

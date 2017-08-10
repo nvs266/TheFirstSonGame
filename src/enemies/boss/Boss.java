@@ -8,6 +8,7 @@ import bases.actions.*;
 import bases.renderers.Animation;
 import physics.BoxCollider;
 import physics.PhysicsBody;
+import scenes.Camera;
 
 import java.awt.*;
 
@@ -50,6 +51,10 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
     @Override
     public void run(Vector2D parentPosition) {
         super.run(parentPosition);
+
+        if (Camera.instance.getFollowGameObject() == this) {
+            Camera.instance.setPosition();
+        }
     }
 
     @Override

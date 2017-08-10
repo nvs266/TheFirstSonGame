@@ -6,9 +6,8 @@ import enemies.boss.Boss;
 import inputs.InputManager;
 import platforms.*;
 import players.Player;
-import scenes.Background;
-import scenes.Camera;
-import scenes.Map;
+import scenes.*;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,26 +25,22 @@ public class GameWindow extends JFrame implements Setting{
 
     BufferedImage buffBackground;
     Graphics2D buffBackgroundGraphics2d;
-    //InputManager inputManager = new InputManager();
     InputManager inputManager = InputManager.instance;
-    Map map;
+    Scene startupScene;
 
     public GameWindow() throws IOException {
         setUpgameWindow();
         setupInputs();
-        loadMap();
-        addPlayer();
+        setUpStartupScene();
         this.setVisible(true);
     }
 
-    private void loadMap() throws IOException {
-        map = new Map(30, 280, "assets/map/map4.txt");
+    private void setUpStartupScene() throws IOException {
+        startupScene = new StartingScene();
+        startupScene.init();
     }
 
-    private void addPlayer() {
-        Player player = GameObjectPool.recycle(Player.class);
-        Camera.instance.setFollowGameObject(player);
-    }
+
 
     private void setupInputs() {
         this.addKeyListener(new KeyListener() {
@@ -82,7 +77,7 @@ public class GameWindow extends JFrame implements Setting{
     }
 
     long lastUpdateTime = -1;
-    public void loop(){
+    public void loop() throws IOException {
         while (true) {
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastUpdateTime > Setting.DELAY){
@@ -101,10 +96,10 @@ public class GameWindow extends JFrame implements Setting{
         graphics2D.drawImage(buffBackground, 0, 0, null);
     }
 
-    private void run(){
+    private void run() throws IOException {
         GameObject.runAll();
         GameObject.runAllAction();
-        map.readMap(Player.instance);
         GameObject.removeAll();
+        SceneManager.instance.changeSceneIfNeeded();
     }
 }
