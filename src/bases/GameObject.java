@@ -6,11 +6,10 @@ import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import players.Player;
-import players.Trail;
 import scenes.Camera;
 import scenes.Scene;
 import scenes.SceneManager;
-import scenes.StartingScene;
+import scenes.IntroScene;
 
 import java.awt.*;
 import java.util.*;
@@ -109,7 +108,7 @@ public class GameObject {
 
         Scene scene = SceneManager.instance.getCurrentScene();
 
-        if (scene != null && scene.getClass() != StartingScene.class) {
+        if (scene != null && scene.getClass() != IntroScene.class) {
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font("serif", Font.BOLD, 10));
             g2d.drawString("LIFE: " + Player.instance.life, 50, 50 );
@@ -144,7 +143,7 @@ public class GameObject {
 
     public static void removeAll() {
         Scene scene = SceneManager.instance.getCurrentScene();
-        if (scene == null || scene.getClass() == StartingScene.class) return;
+        if (scene == null || scene.getClass() == IntroScene.class) return;
 
         for (GameObject gameObject: gameObjects) {
             if (gameObject.isActive && Player.instance.position.y - gameObject.position.y > 500) {

@@ -1,15 +1,7 @@
 import bases.GameObject;
-import bases.GameObjectPool;
 import bases.Setting;
-import com.sun.deploy.util.BlackList;
-import enemies.*;
-import enemies.boss.Boss;
 import inputs.InputManager;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.*;
-import platforms.*;
-import players.Player;
 import scenes.*;
 import tklibs.AudioUtils;
 
@@ -24,40 +16,37 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-import static javafx.scene.paint.Color.GREEN;
-
 /**
  * Created by cuonghx2709 on 7/31/2017.
  */
 public class GameWindow extends JFrame implements Setting{
     MediaPlayer mediaPlayer;
-
     BufferedImage buffBackground;
     Graphics2D buffBackgroundGraphics2d;
     InputManager inputManager = InputManager.instance;
-    Scene startupScene;
+    Scene introScene;
 
     public GameWindow() throws IOException {
-
         setUpgameWindow();
         setAudio();
         setupInputs();
         setUpStartupScene();
-
         this.setVisible(true);
     }
 
-    private void setUpStartupScene() throws IOException {
-        startupScene = new StartingScene();
-        startupScene.init();
-    }
-
-    private void setAudio() throws IOException {
+    private void setAudio() {
         AudioUtils.initialize();
         mediaPlayer = AudioUtils.playMedia("assets/music/gameplay/soundtrack.mp3");
         mediaPlayer.setVolume(1d);
         mediaPlayer.play();
     }
+
+    private void setUpStartupScene() throws IOException {
+        introScene = new IntroScene();
+        introScene.init();
+    }
+
+
 
     private void setupInputs() {
         this.addKeyListener(new KeyListener() {
@@ -82,7 +71,7 @@ public class GameWindow extends JFrame implements Setting{
         this.setResizable(false);
         this.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         this.setLocation(400, 50);
-        this.setTitle("The First Son");
+        this.setTitle("the first son");
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -108,7 +97,12 @@ public class GameWindow extends JFrame implements Setting{
     private void render() {
         buffBackgroundGraphics2d.setColor(Color.BLACK);
         buffBackgroundGraphics2d.fillRect(0,0, WIDTH_SCREEN, HEIGHT_SCREEN);
-
+        if (Scene.background != null) {
+            buffBackgroundGraphics2d.drawImage(Scene.background, 0, 0, null);
+        }
+        if (SceneManager.instance != null && SceneManager.instance.getCurrentScene() == null) {
+            introScene.render(buffBackgroundGraphics2d);
+        }
         GameObject.renderAll(buffBackgroundGraphics2d);
         Graphics2D graphics2D = (Graphics2D) this.getGraphics();
         graphics2D.drawImage(buffBackground, 0, 0, null);
