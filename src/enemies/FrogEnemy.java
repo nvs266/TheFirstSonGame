@@ -41,7 +41,7 @@ public class FrogEnemy extends EnemySprite {
     @Override
     protected void move() {
         velocity.y += GRAVITY_PLAYER;
-        if (frameCounter.run() && this.position.y - Player.instance.position.y <= 300 && !jump){
+        if (frameCounter.run() && this.position.y - Player.instance.position.y <= 200 && !jump){
             jump = true;
             velocity.y = SPEED_JUMP_PLAYER;
             if (Player.instance.position.x > this.position.x){
