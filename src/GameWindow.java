@@ -1,9 +1,11 @@
 import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
+import com.sun.deploy.util.BlackList;
 import enemies.*;
 import enemies.boss.Boss;
 import inputs.InputManager;
+import javafx.scene.paint.*;
 import platforms.*;
 import players.Player;
 import scenes.*;
@@ -11,12 +13,15 @@ import scenes.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
+
+import static javafx.scene.paint.Color.GREEN;
 
 /**
  * Created by cuonghx2709 on 7/31/2017.
@@ -79,8 +84,9 @@ public class GameWindow extends JFrame implements Setting{
     long lastUpdateTime = -1;
     public void loop() throws IOException {
         while (true) {
-            long currentTime = System.currentTimeMillis();
+            long currentTime = System.nanoTime();
             if (currentTime - lastUpdateTime > Setting.DELAY){
+                lastUpdateTime = System.nanoTime();
                 run();
                 render();
             }

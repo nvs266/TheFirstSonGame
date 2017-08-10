@@ -18,7 +18,7 @@ public class Thunder extends ItemSprite {
         super.run(parentPosition);
         PlatformSprite platformSprite = Physics.bodyInRectofsuper(position.add(0,1), boxCollider.width, boxCollider.height, PlatformSprite.class);
         if (platformSprite == null){
-            position.addUp(0,1);
+            position.addUp(0,4);
         }
      }
 

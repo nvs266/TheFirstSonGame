@@ -98,7 +98,8 @@ public class GameObject {
             } else renderer.render(g2d, screenPosition);
         }
     }
-
+    public static long start;
+    public static long end;
     public static void renderAll(Graphics2D g2d){
         for (GameObject gameObject : gameObjects){
             if (gameObject.isActive){
@@ -112,6 +113,11 @@ public class GameObject {
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font("serif", Font.BOLD, 10));
             g2d.drawString("LIFE: " + Player.instance.life, 50, 50 );
+            end = System.nanoTime();
+            if (end - start >0) {
+                g2d.drawString("fps: " + 1000000000/(end - start), 50, 60);
+            }
+            start = System.nanoTime();
 
             if (Player.instance.immortal) {
                 g2d.setColor(Color.RED);

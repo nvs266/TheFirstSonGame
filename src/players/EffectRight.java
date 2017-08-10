@@ -12,7 +12,7 @@ import java.awt.*;
 public class EffectRight extends GameObject {
     public EffectRight(){
         super();
-        renderer = new Animation(20, false,
+        renderer = new Animation(4, false,
                 Utils.loadImage("assets/image/New folder/right1.png"),
                 Utils.loadImage("assets/image/New folder/right2.png"),
                 Utils.loadImage("assets/image/New folder/right3.png"),

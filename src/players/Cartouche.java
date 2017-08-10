@@ -19,12 +19,12 @@ public class Cartouche extends GameObject {
         }
         Action action = new SequenceAction(
                 new RepeatnAction(
-                        20,
-                        new MoveByAction(new Vector2D(1, -1f), 1)
+                        4,
+                        new MoveByAction(new Vector2D(4, -4f), 1)
                 ),
                 new RepeatnAction(
-                        30,
-                        new MoveByAction(new Vector2D(1, 1),1)
+                        6,
+                        new MoveByAction(new Vector2D(4, 4),1)
                 )
         );
         actions.add(action);

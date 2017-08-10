@@ -36,13 +36,13 @@ public class AnimationPlayer implements Renderer{
     private boolean isAttack;
 
     public AnimationPlayer(){
-        frameCounterright = new FrameCounter(50);
-        frameCounterleft = new FrameCounter(50);
-        straightAnimation = new Animation(50,true,
+        frameCounterright = new FrameCounter(9);
+        frameCounterleft = new FrameCounter(9);
+        straightAnimation = new Animation(9,true,
                 Utils.loadImage("assets/image/player/9.png"),
                 Utils.loadImage("assets/image/player/10.png")
                 );
-        rightAnimation = new Animation(20,true,
+        rightAnimation = new Animation(4,true,
                 Utils.loadImage("assets/image/player/1.png"),
                 Utils.loadImage("assets/image/player/2.png"),
                 Utils.loadImage("assets/image/player/3.png"),
@@ -50,7 +50,7 @@ public class AnimationPlayer implements Renderer{
                 Utils.loadImage("assets/image/player/5.png"),
                 Utils.loadImage("assets/image/player/6.png")
                 );
-        leftAnimation = new Animation(20,true,
+        leftAnimation = new Animation(4,true,
                 Utils.loadImage("assets/image/player/1 - copy.png"),
                 Utils.loadImage("assets/image/player/2 - copy.png"),
                 Utils.loadImage("assets/image/player/3 - copy.png"),
@@ -58,23 +58,23 @@ public class AnimationPlayer implements Renderer{
                 Utils.loadImage("assets/image/player/5 - copy.png"),
                 Utils.loadImage("assets/image/player/6 - copy.png")
         );
-        jumpleftAnimation1 = new Animation(100,false,
+        jumpleftAnimation1 = new Animation(18,false,
                 Utils.loadImage("assets/image/player/7.png")
                 );
-        jumpleftAnimation2 = new Animation(100,false,
+        jumpleftAnimation2 = new Animation(18,false,
                 Utils.loadImage("assets/image/player/8.png")
         );
-        jumprightAnimation1 = new Animation(100,false,
+        jumprightAnimation1 = new Animation(18,false,
                 Utils.loadImage("assets/image/player/7 - copy.png")
         );
-        jumprightAnimation2 = new Animation(100,false,
+        jumprightAnimation2 = new Animation(18,false,
                 Utils.loadImage("assets/image/player/8 - copy.png")
         );
 
-        fallstraight = new Animation(20, true,
+        fallstraight = new Animation(4, true,
                 Utils.loadImage("assets/image/player/14.png")
                 );
-        attack = new Animation(20,true,
+        attack = new Animation(4,true,
                 Utils.loadImage("assets/image/player/15.png"),
                 Utils.loadImage("assets/image/player/16.png")
                 );

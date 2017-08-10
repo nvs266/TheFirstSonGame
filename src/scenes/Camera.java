@@ -4,9 +4,7 @@ import bases.GameObject;
 import bases.Setting;
 import bases.Vector2D;
 import enemies.boss.Boss;
-import platforms.Platform;
 import players.Player;
-import tklibs.Mathx;
 
 public class Camera implements Setting{
     private Vector2D position;
@@ -42,7 +40,7 @@ public class Camera implements Setting{
                 this.position.x = followGameObject.position.x -  WIDTH_SCREEN / 2;
             }
             else {
-                if (this.position.x <= 254) this.position.x++;
+                if (this.position.x <= 240) this.position.x+= 3;
                 else if (this.position.x >= 256) this.position.x--;
                 this.position.y = followGameObject.position.y -  HEIGHT_SCREEN / 2;
             }

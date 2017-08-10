@@ -44,13 +44,13 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         this.animationPlayer = new AnimationPlayer();
         this.renderer = animationPlayer;
 
-        boxCollider = new BoxCollider(30, 50);
+        boxCollider = new BoxCollider(20, 50);
         children.add(boxCollider);
 
         immortal = false;
         immortalCounter = new FrameCounter(300);
         hero = false;
-        frameCounterTrails = new FrameCounter(5);
+        frameCounterTrails = new FrameCounter(3);
         immortalAction = new RepeatForeverAction(
                 new SequenceAction(
                         new PlayerAction(),
