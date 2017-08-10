@@ -34,7 +34,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     public Player() {
         super();
-        position.set(300, 100);
+        position.set(300, -500);
         life = START_LIFE;
         instance = this;
         bullets = totalBullets = START_TOTAL_BULLETS;
@@ -63,7 +63,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public void run(Vector2D parentPosition) {
          if (frameCounterTrails.run()&& renderer != null &&renderer.getCurrentImage() != null &&  hero ) {
             Trail trail = GameObjectPool.recycle(Trail.class);
-            trail.setTrail(this.position, 0.02f, renderer.getCurrentImage());
+            trail.setTrail(this.position, 0.04f, renderer.getCurrentImage());
             frameCounterTrails.reset();
         }
 
