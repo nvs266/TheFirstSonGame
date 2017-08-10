@@ -19,7 +19,7 @@ public class GameObject {
     private static Vector<GameObject> gameObjects = new Vector<>();
     private static Vector<GameObject> newGameObject = new Vector<>();
     private static Vector<GameObject> gameObjectsRemove = new Vector<>();
-    private Vector<Action> actions;
+    public Vector<Action> actions;
     private java.util.List<Action> newAction;
     public Vector<GameObject> children ;
     private boolean isActive;

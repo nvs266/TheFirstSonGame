@@ -11,6 +11,7 @@ import bases.actions.WaitAction;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
+import platforms.Item;
 import players.Player;
 import players.PlayerAction;
 
@@ -36,11 +37,20 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
             if (botPlayer < topthis && this.getClass() != GumEnemy.class) {
                 Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
                 setActive(false);
+
                 EnemyExplosion enemyExplosion = GameObjectPool.recycle(EnemyExplosion.class);
                 enemyExplosion.position.set(this.position);
                 enemyExplosion.renderer.reset();
+
+                Player.instance.resetBullet();
+
+                Item item = GameObjectPool.recycle(Item.class);
+                item.position.set(this.position);
             } else {
                 if (!Player.instance.immortal) {
+                    if (this.getClass() == GumEnemy.class) {
+                        Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
+                    }
                     Player.instance.life--;
                     Player.instance.immortal = true;
                 }
