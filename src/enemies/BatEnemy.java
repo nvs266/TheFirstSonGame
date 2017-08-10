@@ -45,9 +45,9 @@ public class BatEnemy extends EnemySprite {
             this.target = player.position;
         }
         if (this.position.distance(target) > Setting.SIZE_ENEMY_ACTIVE/2 ) {
-            velocity = target.substract(position).normalize().multiply((float) 0.5);
+            velocity = target.substract(position).normalize().multiply((float) 2);
         } else if (this.position.distance(target) <= Setting.SIZE_ENEMY_ACTIVE /2) {
-            velocity = target.substract(position).normalize().multiply((float) 0.8);
+            velocity = target.substract(position).normalize().multiply((float) 2*2);
         }
         moveVertical();
         moveHorizontal();

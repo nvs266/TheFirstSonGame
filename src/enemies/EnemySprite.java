@@ -33,9 +33,9 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
                 Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
                 setActive(false);
 
-                EnemyExplosion enemyExplosion = GameObjectPool.recycle(EnemyExplosion.class);
-                enemyExplosion.position.set(this.position);
-                enemyExplosion.renderer.reset();
+                EnemyExplosionSmoke enemyExplosionSmoke = GameObjectPool.recycle(EnemyExplosionSmoke.class);
+                enemyExplosionSmoke.position.set(this.position);
+                enemyExplosionSmoke.renderer.reset();
 
                 Player.instance.resetBullet();
 

@@ -11,7 +11,7 @@ public class GumEnemy extends EnemySprite {
 
     @Override
     protected void setRenderer() {
-        renderer = new Animation(50, true,
+        renderer = new Animation(10, true,
                 Utils.loadImage("assets/image/enemy/enemy2/0.png"),
                 Utils.loadImage("assets/image/enemy/enemy2/1.png"),
                 Utils.loadImage("assets/image/enemy/enemy2/2.png"),

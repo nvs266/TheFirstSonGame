@@ -20,7 +20,7 @@ public class FrogEnemy extends EnemySprite {
     public FrogEnemy() {
         super();
         this.velocity = new Vector2D();
-        frameCounter = new FrameCounter(500);//~= 3s to start jump
+        frameCounter = new FrameCounter(117);//~= 2s to start jump
     }
 
     @Override
@@ -31,7 +31,7 @@ public class FrogEnemy extends EnemySprite {
 
     @Override
     protected void setRenderer() {
-        renderer = new Animation(50, true,
+        renderer = new Animation(12, true,
                 Utils.loadImage("assets/image/enemy/enemy5/0.png"),
                 Utils.loadImage("assets/image/enemy/enemy5/1.png"),
                 Utils.loadImage("assets/image/enemy/enemy5/2.png")
@@ -41,13 +41,13 @@ public class FrogEnemy extends EnemySprite {
     @Override
     protected void move() {
         velocity.y += GRAVITY_PLAYER;
-        if (frameCounter.run() && this.position.y - Player.instance.position.y <= 200 && !jump){
+        if (frameCounter.run() && this.position.y - Player.instance.position.y <= 300 && !jump){
             jump = true;
             velocity.y = SPEED_JUMP_PLAYER;
             if (Player.instance.position.x > this.position.x){
-                direction = 1f;
+                direction = 4f;
             }else {
-                direction = -1f;
+                direction = -4f;
             }
         }
         if (jump) {

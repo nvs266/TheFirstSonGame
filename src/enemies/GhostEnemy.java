@@ -23,7 +23,7 @@ public class GhostEnemy extends EnemySprite {
 
     @Override
     protected void setRenderer() {
-        renderer = new Animation(50, true,
+        renderer = new Animation(10, true,
                 Utils.loadImage("assets/image/enemy/enemy4/0.png"),
                 Utils.loadImage("assets/image/enemy/enemy4/1.png"),
                 Utils.loadImage("assets/image/enemy/enemy4/2.png")
@@ -43,9 +43,9 @@ public class GhostEnemy extends EnemySprite {
             this.target = player.position;
         }
         if (this.position.distance(target) > Setting.SIZE_ENEMY_ACTIVE / 2) {
-            velocity = target.substract(position).normalize().multiply((float) 0.3);
+            velocity = target.substract(position).normalize().multiply((float) 2);
         } else if (this.position.distance(Player.instance.position) <= Setting.SIZE_ENEMY_ACTIVE /2) {
-            velocity = target.substract(position).normalize().multiply((float) 0.5);
+            velocity = target.substract(position).normalize().multiply((float) 2);
         }
 
         position.addUp(velocity);

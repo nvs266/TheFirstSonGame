@@ -27,7 +27,7 @@ public class SnakeEnemy extends EnemySprite{
 
     @Override
     protected void setRenderer() {
-        renderer = new Animation(40, true,
+        renderer = new Animation(8, true,
                 Utils.loadImage("assets/image/enemy/enemy3/0.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/1.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/2.png"),
