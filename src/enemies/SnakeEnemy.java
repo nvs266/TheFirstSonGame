@@ -16,18 +16,19 @@ import javax.swing.*;
 public class SnakeEnemy extends EnemySprite{
     private Vector2D velocity;
     private Vector2D target;
+    private float x;
 
     public SnakeEnemy() {
         super();
         this.velocity = new Vector2D();
-        velocity.x = -0.5f;
+        x = -0.1f;
         this.boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
         children.add(boxCollider);
     }
 
     @Override
     protected void setRenderer() {
-        renderer = new Animation(8, true,
+        renderer = new Animation(40, true,
                 Utils.loadImage("assets/image/enemy/enemy3/0.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/1.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/2.png"),
@@ -41,13 +42,30 @@ public class SnakeEnemy extends EnemySprite{
     @Override
     protected void move() {
         velocity.y += GRAVITY_PLAYER;
+        velocity.x = 0;
         moveVertical();
-        moveHorizontal();
+        if (velocity.y == 0) {
+            velocity.x = x;
+            moveHorizontal();
+            if (velocity.x == 0) {
+                x = -x;
+            } else {
+                Vector2D currentPos = this.position.clone();
+                position.addUp(500 * x, 0);
+                velocity.y += GRAVITY_PLAYER;
+                moveVertical();
+                if (velocity.y != 0) {
+                    x = -x;
+                }
+                position.set(currentPos);
+            }
+            velocity.y = 0;
+        }
         position.addUp(velocity);
     }
 
     private void moveHorizontal() {
-        float deltaX = velocity.x > 0 ? 1 : -1;
+        float deltaX = velocity.x > 0 ? 0.1f : -0.1f;
         PhysicsBody body = Physics.bodyInRectofsuper(position.add(velocity.x, 0), boxCollider.width, boxCollider.height, PlatformSprite.class);
         if (body != null){
 
