@@ -5,7 +5,6 @@ import bases.actions.Action;
 import bases.actions.RepeatForeverAction;
 import bases.actions.SequenceAction;
 import bases.actions.WaitAction;
-import enemies.boss.Boss;
 import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
@@ -13,6 +12,7 @@ import physics.PhysicsBody;
 import platforms.Item;
 import platforms.PlatformSprite;
 import scenes.Camera;
+import scenes.Map;
 
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
@@ -76,7 +76,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
             if (immortalCounter.run()) {
                 immortal = false;
                 immortalCounter.reset();
-                remoteAction(immortalAction);
+                removeAction(immortalAction);
                 added = false;
                 renderer = animationPlayer;
             }
@@ -94,6 +94,14 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 //            boss.position.set(255 + boss.renderer.getWidth() / 2, this.position.y + 200);
 //            Camera.instance.setFollowGameObject(boss);
 //        }
+
+        if (Camera.instance.getFollowGameObject() == this) {
+            Camera.instance.setPosition();
+        }
+
+        if (Map.instance != null && Map.instance.getFollowGameObject() == this) {
+            Map.instance.readMap(this);
+        }
     }
 
     private void checkItem() {
