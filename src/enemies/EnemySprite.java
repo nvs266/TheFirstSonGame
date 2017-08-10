@@ -4,16 +4,11 @@ import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
 import bases.Vector2D;
-import bases.actions.RepeatForeverAction;
-import bases.actions.RepeatnAction;
-import bases.actions.SequenceAction;
-import bases.actions.WaitAction;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
-import platforms.Item;
+import platforms.Thunder;
 import players.Player;
-import players.PlayerAction;
 
 public abstract class EnemySprite extends GameObject implements PhysicsBody, Setting {
 
@@ -44,8 +39,8 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
 
                 Player.instance.resetBullet();
 
-                Item item = GameObjectPool.recycle(Item.class);
-                item.position.set(this.position);
+                Thunder thunder = GameObjectPool.recycle(Thunder.class);
+                thunder.position.set(this.position);
             } else {
                 if (!Player.instance.immortal) {
                     if (this.getClass() == GumEnemy.class) {
