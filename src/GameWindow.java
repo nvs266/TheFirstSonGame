@@ -5,10 +5,13 @@ import com.sun.deploy.util.BlackList;
 import enemies.*;
 import enemies.boss.Boss;
 import inputs.InputManager;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.*;
 import platforms.*;
 import players.Player;
 import scenes.*;
+import tklibs.AudioUtils;
 
 
 import javax.swing.*;
@@ -27,6 +30,7 @@ import static javafx.scene.paint.Color.GREEN;
  * Created by cuonghx2709 on 7/31/2017.
  */
 public class GameWindow extends JFrame implements Setting{
+    MediaPlayer mediaPlayer;
 
     BufferedImage buffBackground;
     Graphics2D buffBackgroundGraphics2d;
@@ -34,9 +38,12 @@ public class GameWindow extends JFrame implements Setting{
     Scene startupScene;
 
     public GameWindow() throws IOException {
+
         setUpgameWindow();
+        setAudio();
         setupInputs();
         setUpStartupScene();
+
         this.setVisible(true);
     }
 
@@ -45,7 +52,12 @@ public class GameWindow extends JFrame implements Setting{
         startupScene.init();
     }
 
-
+    private void setAudio() throws IOException {
+        AudioUtils.initialize();
+        mediaPlayer = AudioUtils.playMedia("assets/music/gameplay/soundtrack.mp3");
+        mediaPlayer.setVolume(1d);
+        mediaPlayer.play();
+    }
 
     private void setupInputs() {
         this.addKeyListener(new KeyListener() {
@@ -70,7 +82,7 @@ public class GameWindow extends JFrame implements Setting{
         this.setResizable(false);
         this.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         this.setLocation(400, 50);
-        this.setTitle("the first son");
+        this.setTitle("The First Son");
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
