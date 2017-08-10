@@ -9,7 +9,7 @@ import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
-import platforms.Item;
+import platforms.Thunder;
 import platforms.PlatformSprite;
 import scenes.Camera;
 import scenes.Map;
@@ -105,13 +105,13 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     }
 
     private void checkItem() {
-        Item item = Physics.bodyInRect(position.add(2,2),boxCollider.width, boxCollider.height,Item.class);
-        if (item == null){
-            item = Physics.bodyInRect(position.add(-2,-2),boxCollider.width, boxCollider.height,Item.class);
+        Thunder thunder = Physics.bodyInRect(position.add(2,2),boxCollider.width, boxCollider.height, Thunder.class);
+        if (thunder == null){
+            thunder = Physics.bodyInRect(position.add(-2,-2),boxCollider.width, boxCollider.height, Thunder.class);
         }
-        if (item != null){
+        if (thunder != null){
             hero = true;
-            item.setActive(false);
+            thunder.setActive(false);
             hero = true;
         }
     }

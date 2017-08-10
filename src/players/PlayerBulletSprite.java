@@ -1,6 +1,5 @@
 package players;
 
-import bases.FrameCounter;
 import bases.GameObject;
 import bases.GameObjectPool;
 import enemies.EnemyExplosion;
@@ -8,7 +7,7 @@ import enemies.EnemySprite;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
-import platforms.Item;
+import platforms.Thunder;
 
 public abstract class PlayerBulletSprite extends GameObject implements PhysicsBody {
     int totalBulletsPerShoot;
@@ -32,8 +31,8 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
             enemyExplosion.position.set(enemySprite.position);
             enemyExplosion.renderer.reset();
 
-            Item item = GameObjectPool.recycle(Item.class);
-            item.position.set(enemySprite.position);
+            Thunder thunder = GameObjectPool.recycle(Thunder.class);
+            thunder.position.set(enemySprite.position);
         }
     }
 

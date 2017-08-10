@@ -3,10 +3,8 @@ package scenes;
 import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
-import bases.Vector2D;
 import enemies.*;
 import platforms.*;
-import players.Player;
 
 import java.io.*;
 
@@ -124,8 +122,8 @@ public class Map implements Setting{
                 spikeStick.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
                 break;
             case '9':
-                Item item = GameObjectPool.recycle(Item.class);
-                item.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
+                Thunder thunder = GameObjectPool.recycle(Thunder.class);
+                thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - HEIGHT_GRID);
                 break;
             default:
                 break;

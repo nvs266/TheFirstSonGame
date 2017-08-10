@@ -1,7 +1,6 @@
 package players;
 
 import Utils.Utils;
-import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Vector2D;
 import bases.renderers.Animation;
@@ -45,8 +44,8 @@ public class ClassicBullet extends PlayerBulletSprite {
             else if (physicsBody.getClass() == BrickItem.class){
                 BrickItem brickItem = (BrickItem) physicsBody;
                 brickItem.setActive(false);
-                Item item = GameObjectPool.recycle(Item.class);
-                item.position.set(position);
+                Thunder thunder = GameObjectPool.recycle(Thunder.class);
+                thunder.position.set(position);
                 setActive(false);
             }
             else if (physicsBody.getClass() == DirtGlass.class){
