@@ -159,6 +159,10 @@ public class Player extends GameObject implements Setting, PhysicsBody {
             resetBullet();
             if (InputManager.instance.spacePressed) {
                 velocity.y = SPEED_JUMP_PLAYER;
+                EffectLeft effectLeft = GameObjectPool.recycle(EffectLeft.class);
+                effectLeft.position.set(Player.instance.position.add(-15,15));
+                EffectRight effectRight = GameObjectPool.recycle(EffectRight.class);
+                effectRight.position.set(Player.instance.position.add(15,15));
             }
         }
 
