@@ -48,8 +48,8 @@ public class Animation implements Renderer, Setting {
         BufferedImage image = images.get(imageIndex);
         g2d.drawImage(image,
                 (int) (position.x - image.getWidth() * ANCHOR_X_DEFAULT), (int) (position.y - image.getHeight() * ANCHOR_Y_DEFAULT), null);
-        g2d.setColor(Color.RED);
-        g2d.drawRect((int) (position.x - image.getWidth() * ANCHOR_X_DEFAULT), (int) (position.y - image.getHeight() * ANCHOR_Y_DEFAULT), image.getWidth(), image.getHeight());
+//        g2d.setColor(Color.RED);
+//        g2d.drawRect((int) (position.x - image.getWidth() * ANCHOR_X_DEFAULT), (int) (position.y - image.getHeight() * ANCHOR_Y_DEFAULT), image.getWidth(), image.getHeight());
     }
 
 
