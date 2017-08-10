@@ -6,6 +6,7 @@ import enemies.boss.Boss;
 import inputs.InputManager;
 import platforms.*;
 import players.Player;
+import scenes.Background;
 import scenes.Camera;
 import scenes.Map;
 

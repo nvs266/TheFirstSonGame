@@ -1,10 +1,15 @@
 package players;
 
 import Utils.Utils;
+import bases.FrameCounter;
+import bases.GameObject;
+import bases.GameObjectPool;
 import bases.Vector2D;
 import bases.renderers.Animation;
 import bases.renderers.ImageRenderer;
 import bases.renderers.Renderer;
+import physics.Physics;
+import platforms.PlatformSprite;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -24,10 +29,15 @@ public class AnimationPlayer implements Renderer{
     private Animation jumprightAnimation2;
     private Animation fallstraight;
     private Animation attack;
+    private FrameCounter frameCounterright;
+    private FrameCounter frameCounterleft;
+
 
     private boolean isAttack;
 
     public AnimationPlayer(){
+        frameCounterright = new FrameCounter(50);
+        frameCounterleft = new FrameCounter(50);
         straightAnimation = new Animation(50,true,
                 Utils.loadImage("assets/image/player/9.png"),
                 Utils.loadImage("assets/image/player/10.png")
@@ -71,6 +81,16 @@ public class AnimationPlayer implements Renderer{
 
     }
     public void run(){
+        boolean left = frameCounterleft.run();
+        boolean right = frameCounterright.run();
+
+        if (Player.velocity.y > 0 && Physics.bodyInRectofsuper(Player.instance.position.add(0,1),Player.instance.boxCollider.width, Player.instance.boxCollider.height, PlatformSprite.class) != null){
+            EffectLeft effectLeft = GameObjectPool.recycle(EffectLeft.class);
+            effectLeft.position.set(Player.instance.position.add(-15,15));
+            EffectRight effectRight = GameObjectPool.recycle(EffectRight.class);
+            effectRight.position.set(Player.instance.position.add(15,15));
+
+        }
         if (Player.velocity.x > 0){
             if (Player.velocity.y < 0){
                 currentAnimation = jumpleftAnimation1;
@@ -79,6 +99,12 @@ public class AnimationPlayer implements Renderer{
             }else {
                 currentAnimation = rightAnimation;
             }
+            if (left && Physics.bodyInRectofsuper(Player.instance.position.add(0,1),Player.instance.boxCollider.width, Player.instance.boxCollider.height, PlatformSprite.class) != null){
+                EffectLeft effectLeft = GameObjectPool.recycle(EffectLeft.class);
+                effectLeft.position.set(Player.instance.position.add(0,15));
+
+                frameCounterleft.reset();
+            }
         }else if (Player.velocity.x < 0){
             if (Player.velocity.y < 0){
                 currentAnimation = jumprightAnimation1;
@@ -86,6 +112,11 @@ public class AnimationPlayer implements Renderer{
                 currentAnimation = jumprightAnimation2;
             }else {
                 currentAnimation = leftAnimation;
+            }
+            if (right && Physics.bodyInRectofsuper(Player.instance.position.add(0,1),Player.instance.boxCollider.width, Player.instance.boxCollider.height, PlatformSprite.class) != null){
+                EffectRight effectRight = GameObjectPool.recycle(EffectRight.class);
+                effectRight.position.set(Player.instance.position.add(0,15));
+                frameCounterright.reset();
             }
         }else {
             if (Player.velocity.y != 0){
