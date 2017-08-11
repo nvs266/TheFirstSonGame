@@ -93,7 +93,7 @@ public class Vector2D {
         return new Vector2D(x * f, y * f);
     }
 
-    public Vector2D makeAlpha(float alpha) {
+    public Vector2D  makeAlpha(float alpha) {
         return new Vector2D((float)(x * Math.cos(alpha) - y * Math.sin(alpha)), (float)(x * Math.sin(alpha) + y * Math.cos(alpha)));
     }
 

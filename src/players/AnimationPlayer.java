@@ -158,7 +158,6 @@ public class AnimationPlayer implements Renderer{
         }else{
             animationNomarl();
         }
- 
     }
 
     private void hero() {
