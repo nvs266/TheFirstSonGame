@@ -121,7 +121,7 @@ public class Map implements Setting{
                 break;
             case '8':
                 FrogEnemy frogEnemy = GameObjectPool.recycle(FrogEnemy.class);
-                frogEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
+                frogEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 40);
                 break;
             case 'D':
                 SpikeStick spikeStick = GameObjectPool.recycle(SpikeStick.class);
@@ -129,7 +129,11 @@ public class Map implements Setting{
                 break;
             case '9':
                 Thunder thunder = GameObjectPool.recycle(Thunder.class);
-                thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 32);
+                thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 40);
+                break;
+            case 'B':
+                GravelDirt gravelDirt = GameObjectPool.recycle(GravelDirt.class);
+                gravelDirt.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
                 break;
             default:
                 break;

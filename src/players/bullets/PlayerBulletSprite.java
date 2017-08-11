@@ -8,10 +8,7 @@ import items.Thunder;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
-import platforms.BrickGrey;
-import platforms.BrickItem;
-import platforms.DirtGlass;
-import platforms.PlatformSprite;
+import platforms.*;
 import players.Player;
 
 public abstract class PlayerBulletSprite extends GameObject implements PhysicsBody {
@@ -88,6 +85,10 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
             else if (physicsBody.getClass() == DirtGlass.class){
                 DirtGlass dirtGlass = (DirtGlass) physicsBody;
                 dirtGlass.setActive(false);
+                setActive(false);
+            } else if (physicsBody.getClass() == GravelDirt.class) {
+                GravelDirt gravelDirt = (GravelDirt) physicsBody;
+                gravelDirt.setActive(false);
                 setActive(false);
             }
         }

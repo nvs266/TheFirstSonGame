@@ -8,8 +8,6 @@ import bases.actions.WaitAction;
 import enemies.boss.Boss;
 import inputs.InputManager;
 import items.ItemSprite;
-import items.Nipple;
-import items.Thunder;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
@@ -111,8 +109,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         if (Map.instance != null && Map.instance.getFollowGameObject() == this) {
             Map.instance.readMap(this);
         }
-        System.out.println(position);
-        if (position.y > 1000 && ! boss) {
+        if (position.y > 8100 && ! boss) {
             GameObject.add(Boss.instance);
             Boss.instance.position.set(255 + Boss.instance.renderer.getWidth() / 2, this.position.y + 200);
             Camera.instance.setFollowGameObject(Boss.instance);
