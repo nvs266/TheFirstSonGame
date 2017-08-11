@@ -129,7 +129,8 @@ public class Map implements Setting{
                 break;
             case '9':
                 Thunder thunder = GameObjectPool.recycle(Thunder.class);
-                thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 40);
+                thunder.refresh();
+                thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
                 break;
             case 'B':
                 GravelDirt gravelDirt = GameObjectPool.recycle(GravelDirt.class);
