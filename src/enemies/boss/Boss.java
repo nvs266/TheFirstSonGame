@@ -6,6 +6,7 @@ import bases.Setting;
 import bases.Vector2D;
 import bases.actions.*;
 import bases.renderers.Animation;
+import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
@@ -17,7 +18,7 @@ import java.awt.*;
 
 public class Boss extends GameObject implements PhysicsBody, Setting{
     public static Boss instance = new Boss();
-    public int hp = 10;
+    public int hp = 20;
 
     public Boss() {
         super();
@@ -52,8 +53,9 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
             Camera.instance.setPosition();
         }
         Player player = Physics.bodyInRect(position, boxCollider.width, boxCollider.height, Player.class);
-        if (player!= null){
-            System.out.println(123);
+        if (player!= null && !InputManager.instance.immotal && !player.immortal){
+            player.life--;
+            player.immortal = true;
         }
         if (hp <= 0){
             Player.instance.vitory = true;
