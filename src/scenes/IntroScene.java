@@ -23,7 +23,7 @@ public class IntroScene extends Scene{
     GameObject spaceIcon;
     private Map map;
     Player player;
-    MediaPlayer introAudio;
+    public static MediaPlayer introAudio;
 
 
     @Override
