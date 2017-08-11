@@ -9,6 +9,7 @@ import players.Player;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.nio.Buffer;
 
 public class IntroScene extends Scene{
@@ -18,12 +19,12 @@ public class IntroScene extends Scene{
     GameObject leftIcon;
     GameObject rightIcon;
     GameObject spaceIcon;
-
+    private Map map;
     Player player;
 
 
     @Override
-    public void init() {
+    public void init() throws IOException {
         frameCounter = new FrameCounter(200);
         nameTeam = new GameObject();
         nameTeam.position.set(70, 150);
@@ -50,6 +51,8 @@ public class IntroScene extends Scene{
         );
 
         addBackground();
+
+
     }
 
     @Override
@@ -57,23 +60,39 @@ public class IntroScene extends Scene{
 
     }
 
+    private void loadMap() throws IOException {
+        map = new Map(30, 50, "assets/map/intromap.txt");
+    }
+
     @Override
-    public void render(Graphics2D graphics2D) {
+    public void render(Graphics2D graphics2D) throws IOException {
         if (!frameCounter.run()) {
             graphics2D.setColor(Color.WHITE);
             graphics2D.setFont(new Font("serif", Font.BOLD, 40));
             graphics2D.drawString("CHS TEAM", nameTeam.position.x, nameTeam.position.y);
+            graphics2D.setFont(new Font("serif", Font.BOLD, 15));
+            graphics2D.drawString("Jump/Shoot", nameTeam.position.x - 10, nameTeam.position.y + 100);
+            graphics2D.setFont(new Font("serif", Font.BOLD, 15));
+            graphics2D.drawString("Left", nameTeam.position.x + 135, nameTeam.position.y + 100);
+            graphics2D.setFont(new Font("serif", Font.BOLD, 15));
+            graphics2D.drawString("Right", nameTeam.position.x + 210, nameTeam.position.y + 100);
             playerAnimation.render(graphics2D, new Vector2D(Setting.WIDTH_SCREEN / 2, Setting.HEIGHT_SCREEN / 2));
         } else {
             if (player == null) {
                 addPlayer();
-                player.position.set(Setting.WIDTH_SCREEN / 2, Setting.HEIGHT_SCREEN / 2);
-
+                player.position.set(Setting.WIDTH_SCREEN / 2, -500);
+                loadMap();
             }
             graphics2D.setColor(Color.WHITE);
             graphics2D.setFont(new Font("serif", Font.BOLD, 40));
             Vector2D posNameTeamInCamera = Camera.instance.posInCamera(nameTeam, nameTeam.position);
-            graphics2D.drawString("CHS TEAM", posNameTeamInCamera.x, posNameTeamInCamera.y);
+            graphics2D.drawString("THE FIRST SON", posNameTeamInCamera.x, posNameTeamInCamera.y);
+            graphics2D.setFont(new Font("serif", Font.BOLD, 15));
+            graphics2D.drawString("Jump/Shoot", posNameTeamInCamera.x - 10, posNameTeamInCamera.y + 100);
+            graphics2D.setFont(new Font("serif", Font.BOLD, 15));
+            graphics2D.drawString("Left", posNameTeamInCamera.x + 135, posNameTeamInCamera.y + 100);
+            graphics2D.setFont(new Font("serif", Font.BOLD, 15));
+            graphics2D.drawString("Right", posNameTeamInCamera.x + 210, posNameTeamInCamera.y + 100);
         }
         if (player != null && player.position.y > 800) {
             SceneManager.instance.requestChangeScene(new Level1Scenes());

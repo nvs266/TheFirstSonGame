@@ -32,6 +32,7 @@ public class GameWindow extends JFrame implements Setting{
 
     InputManager inputManager = InputManager.instance;
     Scene introScene;
+    public boolean pause;
 
     public GameWindow() throws IOException {
         setUpgameWindow();
@@ -97,16 +98,20 @@ public class GameWindow extends JFrame implements Setting{
     long lastUpdateTime = -1;
     public void loop() throws IOException {
         while (true) {
-            long currentTime = System.nanoTime();
-            if (currentTime - lastUpdateTime > Setting.DELAY){
-                lastUpdateTime = System.nanoTime();
-                run();
-                render();
+
+            {
+                long currentTime = System.nanoTime();
+                if (currentTime - lastUpdateTime > Setting.DELAY){
+                    lastUpdateTime = System.nanoTime();
+
+                    run();
+                    render();
+                }
             }
         }
     }
 
-    private void render() {
+    private void render() throws IOException {
         buffBackgroundGraphics2d.setColor(Color.BLACK);
         buffBackgroundGraphics2d.fillRect(0,0, WIDTH_SCREEN, HEIGHT_SCREEN);
         buffBackgroundGraphics2dLeft.setColor(Color.BLACK);
@@ -140,9 +145,22 @@ public class GameWindow extends JFrame implements Setting{
     }
 
     private void run() throws IOException {
-        GameObject.runAll();
-        GameObject.runAllAction();
-        GameObject.removeAll();
+        if (inputManager.xPressed){
+            pause = true;
+        }
+        if (inputManager.pPressed){
+            pause = false;
+        }
+       if (!pause){
+           GameObject.runAll();
+           GameObject.runAllAction();
+           GameObject.removeAll();
+       }
         SceneManager.instance.changeSceneIfNeeded();
+
+    }
+
+    public void setPause(boolean pause) {
+        this.pause = pause;
     }
 }
