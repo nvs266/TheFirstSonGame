@@ -119,6 +119,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
 
         if (vitory) {
+            Level1Scenes.lv1Audio.stop();
             SceneManager.instance.requestChangeScene(new Victory());
         }
     }

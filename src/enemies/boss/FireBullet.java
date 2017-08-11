@@ -1,6 +1,7 @@
 package enemies.boss;
 
 import Utils.Utils;
+import bases.Audio;
 import bases.GameObject;
 import bases.Vector2D;
 import bases.renderers.Animation;
@@ -29,6 +30,8 @@ public class FireBullet extends GameObject implements PhysicsBody {
                 Utils.loadImage("assets/image/player/bullet/classicBullet/test8.png"),
                 Utils.loadImage("assets/image/player/bullet/classicBullet/test9.png")
         );
+        Boss.bossAudio = new Audio("assets/music/enmemies/boss/boss.wav");
+        Boss.bossAudio.play();
 
         boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
         this.children.add(boxCollider);
