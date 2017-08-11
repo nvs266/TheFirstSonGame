@@ -45,7 +45,7 @@ public class Camera implements Setting{
             }
         } else if (followGameObject.getClass() == Boss.class) {
             this.position.x = 255;
-            this.position.y = followGameObject.position.y - HEIGHT_SCREEN / 2 - followGameObject.renderer.getHeight()/2;
+            this.position.y = followGameObject.position.y - HEIGHT_SCREEN / 2 - 150;
         }
 
     }

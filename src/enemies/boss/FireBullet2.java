@@ -44,7 +44,7 @@ public class FireBullet2 extends GameObject implements PhysicsBody {
         if (position.x < 200 || position.x >1000||position.y < Player.instance.position.y-400){
             this.setActive(false);
         }
-        if (Physics.bodyInRect(boxCollider, BrickGrey.class) != null && position.y <8300){
+        if (Physics.bodyInRect(boxCollider, BrickGrey.class) != null && position.y <8350){
             this.setActive(false);
         }
         Player player = Physics.bodyInRect(boxCollider,Player.class);

@@ -13,14 +13,14 @@ public class SkillOne extends GameObject implements PhysicsBody, Action {
 
     public SkillOne(Vector2D bossPos) {
         FireBullet fireBulletMid = GameObjectPool.recycle(FireBullet.class);
-        Vector2D velocity = bossPos.substract(Player.instance.position).normalize().multiply(0.5f);
-        fireBulletMid.set(velocity, bossPos.add(0,200));
+        Vector2D velocity = bossPos.substract(Player.instance.position).normalize().multiply(1f);
+        fireBulletMid.set(velocity, bossPos);
 
         FireBullet fireBuletLeft = GameObjectPool.recycle(FireBullet.class);
-        fireBuletLeft.set(velocity.makeAlpha((float) (-Math.PI / 4)), bossPos.add(0,200));
+        fireBuletLeft.set(velocity.makeAlpha((float) (-Math.PI / 4)), bossPos);
 
         FireBullet fireBuletRight = GameObjectPool.recycle(FireBullet.class);
-        fireBuletRight.set(velocity.makeAlpha((float) (Math.PI / 4)), bossPos.add(0,200));
+        fireBuletRight.set(velocity.makeAlpha((float) (Math.PI / 4)), bossPos);
     }
 
     @Override
