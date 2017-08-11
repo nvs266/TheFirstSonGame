@@ -4,6 +4,7 @@ import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
 import enemies.*;
+import items.Thunder;
 import platforms.*;
 
 import java.io.*;

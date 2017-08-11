@@ -1,4 +1,4 @@
-package players;
+package players.bullets;
 
 import Utils.Utils;
 import bases.GameObject;
