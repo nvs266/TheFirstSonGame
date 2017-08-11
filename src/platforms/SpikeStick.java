@@ -11,6 +11,7 @@ public class SpikeStick extends GameObject implements PhysicsBody{
     public SpikeStick() {
         renderer = new Animation(Utils.loadImage("assets/image/spikeStick/up_0.png"));
         boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
+        this.children.add(boxCollider);
     }
 
     @Override

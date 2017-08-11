@@ -24,7 +24,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public int bullets;
     public int totalBullets;
     public AnimationPlayer animationPlayer;
-    private PlayerBulletSprite bulletSprite;
+    public PlayerBulletSprite bulletSprite;
     public int life;
     public boolean immortal; // bat tu
     private boolean added;
