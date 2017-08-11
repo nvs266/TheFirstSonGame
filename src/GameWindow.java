@@ -37,7 +37,7 @@ public class GameWindow extends JFrame implements Setting{
 
     public GameWindow() throws IOException {
         setUpgameWindow();
-        setAudio();
+        //setAudio();
         setupInputs();
         setUpStartupScene();
         this.setVisible(true);
