@@ -13,5 +13,5 @@ public abstract class Scene {
         GameObject.clear();
     }
     public abstract void run();
-    public abstract void render(Graphics2D graphics2D);
+    public abstract void render(Graphics2D graphics2D) throws IOException;
 }
