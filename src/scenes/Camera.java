@@ -45,7 +45,7 @@ public class Camera implements Setting{
             }
         } else if (followGameObject.getClass() == Boss.class) {
             this.position.x = 255;
-            this.position.y = followGameObject.position.y - HEIGHT_SCREEN / 2 ;
+            this.position.y = followGameObject.position.y - HEIGHT_SCREEN / 2 - followGameObject.renderer.getHeight()/2;
         }
 
     }
@@ -57,7 +57,7 @@ public class Camera implements Setting{
             if (followGameObject.getClass() == Player.class) {
                 return position.substract(this.position).add(Player.velocity);
             } else {
-                return position.substract(this.position).add(0, gameObject.renderer.getHeight() / 2 + 50);
+                return position.substract(this.position);
             }
         }
     }

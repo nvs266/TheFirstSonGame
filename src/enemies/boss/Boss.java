@@ -51,10 +51,13 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
         if (Camera.instance.getFollowGameObject() == this) {
             Camera.instance.setPosition();
         }
+        Player player = Physics.bodyInRect(position, boxCollider.width, boxCollider.height, Player.class);
+        if (player!= null){
+            System.out.println(123);
+        }
         if (hp <= 0){
             Player.instance.vitory = true;
         }
-//        System.out.println(position);
     }
 
     @Override

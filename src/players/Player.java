@@ -112,7 +112,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         }
         if (position.y > 8100 && ! boss) {
             GameObject.add(Boss.instance);
-            Boss.instance.position.set(255 + Boss.instance.renderer.getWidth() / 2, this.position.y + 200);
+            Boss.instance.position.set(255 + Boss.instance.renderer.getWidth() / 2, this.position.y + 400);
             Camera.instance.setFollowGameObject(Boss.instance);
             boss = true;
         }
@@ -164,7 +164,6 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     }
 
     private void move() {
-//        System.out.println(position);
 
         if (InputManager.instance.leftPressed) {
             velocity.x -= SPEED_PLAYER;
