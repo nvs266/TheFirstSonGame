@@ -25,7 +25,7 @@ public class IntroScene extends Scene{
 
     @Override
     public void init() throws IOException {
-        frameCounter = new FrameCounter(200);
+        frameCounter = new FrameCounter(100);
         nameTeam = new GameObject();
         nameTeam.position.set(70, 150);
         GameObject.add(nameTeam);
