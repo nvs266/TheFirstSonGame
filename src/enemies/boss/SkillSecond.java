@@ -8,6 +8,8 @@ import physics.BoxCollider;
 import physics.PhysicsBody;
 import players.Player;
 
+import java.util.Random;
+
 /**
  * Created by cuonghx2709 on 8/12/2017.
  */
@@ -21,7 +23,7 @@ public class SkillSecond extends GameObject implements  Action {
         super();
         this.bossPos = bossPos;
         this.angle = 0;
-        this.frameCounter = new FrameCounter(15);
+        this.frameCounter = new FrameCounter(10);
     }
 
     @Override
@@ -30,11 +32,10 @@ public class SkillSecond extends GameObject implements  Action {
             frameCounter.reset();
             FireBullet2 fireBullet2 = GameObjectPool.recycle(FireBullet2.class);
             Vector2D velocity =new Vector2D(-2,0);
-            fireBullet2.set(velocity.makeAlpha((float) (Math.PI)/-angle*180), bossPos.add(-75,120));
+            fireBullet2.set(velocity.makeAlpha((float) (Math.PI)/angle*180), bossPos.add(-75,70));
             FireBullet2 fireBullet2right = GameObjectPool.recycle(FireBullet2.class);
-            fireBullet2right.set(velocity.makeAlpha((float) (Math.PI)/angle*180), bossPos.add(75,100));
+            fireBullet2right.set(velocity.makeAlpha((float) (Math.PI)/angle*180), bossPos.add(75,70));
             angle += 8;
-            System.out.println(angle);
         }
         if (angle > 180){
             return true;

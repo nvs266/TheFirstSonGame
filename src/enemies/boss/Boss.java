@@ -34,7 +34,7 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
                 new SequenceAction(
                         new RepeatnAction(5, new SequenceAction(
                                     new SkillOne(this.position),
-                                    new WaitAction(300))
+                                    new WaitAction(200))
                         ),
                         new SkillSecond(this.position)
                 )
