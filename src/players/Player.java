@@ -164,7 +164,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     }
 
     private void move() {
-        System.out.println(position);
+//        System.out.println(position);
 
         if (InputManager.instance.leftPressed) {
             velocity.x -= SPEED_PLAYER;
