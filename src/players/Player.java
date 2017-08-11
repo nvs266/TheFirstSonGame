@@ -19,8 +19,8 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public  static  Vector2D velocity = new Vector2D();
     private FrameCounter frameCounter;
     private boolean shootEnable;
-    private int bullets;
-    private int totalBullets;
+    public int bullets;
+    public int totalBullets;
     private AnimationPlayer animationPlayer;
     private PlayerBulletSprite bulletSprite;
     public int life;
