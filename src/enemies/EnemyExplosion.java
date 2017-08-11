@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class EnemyExplosion extends GameObject {
     public EnemyExplosion() {
-        renderer = new Animation(1, false,
+        renderer = new Animation(2, false,
                 Utils.loadImage("assets/image/enemy/explosion/1.png"),
                 Utils.loadImage("assets/image/enemy/explosion/2.png"),
                 Utils.loadImage("assets/image/enemy/explosion/3.png"),

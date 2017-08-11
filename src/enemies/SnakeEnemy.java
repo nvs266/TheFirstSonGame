@@ -24,7 +24,7 @@ public class SnakeEnemy extends EnemySprite{
         super();
         this.velocity = new Vector2D();
         x = -0.1f;
-        this.boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
+        this.boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight() - 2);
         children.add(boxCollider);
     }
 
@@ -63,7 +63,7 @@ public class SnakeEnemy extends EnemySprite{
                 x = -x;
             } else {
                 Vector2D currentPos = this.position.clone();
-                position.addUp(500 * x, 0);
+                position.addUp(400 * x, 0);
                 velocity.y += GRAVITY_PLAYER;
                 moveVertical();
                 if (velocity.y != 0) {

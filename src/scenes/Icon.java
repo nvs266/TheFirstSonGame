@@ -11,12 +11,14 @@ import java.awt.*;
 public class Icon extends GameObject {
     Animation bullet;
     Animation health;
+    Animation nipple;
 
     public static Icon instance;
 
     public Icon() {
         bullet = new Animation(Utils.loadImage("assets/image/iconmenu/icon.png"));
         health = new Animation(Utils.loadImage("assets/image/item/itemhp.png"));
+        nipple = new Animation(Utils.loadImage("assets/image/item/item.png"));
         instance = this;
     }
 
@@ -28,8 +30,14 @@ public class Icon extends GameObject {
             }
 
             for (int i = 1; i <= Player.instance.life; i++) {
-                health.render(g2d, new Vector2D(50, 22 * i + 20));
+                health.render(g2d, new Vector2D(70, 22 * i + 20));
             }
+
+            nipple.render(g2d, new Vector2D(120, 42));
+
+            g2d.setColor(Color.RED);
+            g2d.setFont(new Font("serif", Font.BOLD, 20));
+            g2d.drawString("" + Player.instance.totalNipple, 150, 40 );
         }
     }
 }

@@ -4,18 +4,21 @@ import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
 import bases.Vector2D;
+import items.Nipple;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
-import platforms.Thunder;
+import items.Thunder;
 import players.Player;
 
 public abstract class EnemySprite extends GameObject implements PhysicsBody, Setting {
+    public int health;
 
     public EnemySprite() {
         super();
         setRenderer();
         setBoxCollider();
+        health = 1;
     }
 
     protected abstract void setRenderer();
@@ -39,14 +42,14 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
 
                 Player.instance.resetBullet();
 
-                Thunder thunder = GameObjectPool.recycle(Thunder.class);
-                thunder.position.set(this.position);
+                Nipple nipple = GameObjectPool.recycle(Nipple.class);
+                nipple.position.set(this.position);
             } else {
                 if (!Player.instance.immortal) {
                     if (this.getClass() == GumEnemy.class) {
                         Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
                     }
-                    Player.instance.life--;
+//                    Player.instance.life--;
                     Player.instance.immortal = true;
                 }
             }

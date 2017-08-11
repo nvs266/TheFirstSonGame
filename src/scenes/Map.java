@@ -4,6 +4,7 @@ import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
 import enemies.*;
+import items.Thunder;
 import platforms.*;
 
 import java.io.*;
@@ -112,7 +113,7 @@ public class Map implements Setting{
                 break;
             case '6':
                 SnakeEnemy snakeEnemy = GameObjectPool.recycle(SnakeEnemy.class);
-                snakeEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 32);
+                snakeEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 50);
                 break;
             case '7':
                 GhostEnemy ghostEnemy = GameObjectPool.recycle(GhostEnemy.class);
