@@ -18,6 +18,7 @@ public class IntroScene extends Scene{
     GameObject leftIcon;
     GameObject rightIcon;
     GameObject spaceIcon;
+
     Player player;
 
 
