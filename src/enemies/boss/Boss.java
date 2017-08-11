@@ -21,7 +21,7 @@ import java.awt.*;
 
 public class Boss extends GameObject implements PhysicsBody, Setting{
     public static Boss instance = new Boss();
-    public int hp = 50;
+    public int hp = 70;
 
     public Boss() {
         super();

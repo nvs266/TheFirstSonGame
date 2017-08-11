@@ -13,7 +13,7 @@ public class SkillOne extends GameObject implements PhysicsBody, Action {
 
     public SkillOne(Vector2D bossPos) {
         FireBullet fireBulletMid = GameObjectPool.recycle(FireBullet.class);
-        Vector2D velocity = bossPos.substract(Player.instance.position).normalize().multiply(1f);
+        Vector2D velocity = bossPos.substract(Player.instance.position).normalize().multiply(1.5f);
         fireBulletMid.set(velocity, bossPos);
 
         FireBullet fireBuletLeft = GameObjectPool.recycle(FireBullet.class);

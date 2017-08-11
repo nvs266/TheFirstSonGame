@@ -12,12 +12,18 @@ import players.Player;
 
 public class Nipple extends ItemSprite {
     private FrameCounter frameCounter;
+    private Vector2D velocity;
+
+    public void setVelocity(Vector2D velocity) {
+        this.velocity = velocity;
+    }
 
     public Nipple() {
         super();
         renderer = new Animation(Utils.loadImage("assets/image/item/item.png"));
         frameCounter = new FrameCounter(100);
         setBoxCollider();
+        velocity = new Vector2D(0,4);
     }
 
     @Override
@@ -40,7 +46,7 @@ public class Nipple extends ItemSprite {
         PlatformSprite platformSprite = Physics.bodyInRectofsuper(position.add(0,1), boxCollider.width, boxCollider.height, PlatformSprite.class);
 
         if (platformSprite == null){
-            position.addUp(0,4);
+            position.addUp(velocity);
         }
 
         if (frameCounter.run()) {

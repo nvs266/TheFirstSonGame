@@ -12,6 +12,8 @@ import physics.PhysicsBody;
 import platforms.*;
 import players.Player;
 
+import java.util.Random;
+
 public abstract class PlayerBulletSprite extends GameObject implements PhysicsBody {
     public int totalBulletsPerShoot;
     public Vector2D velocity;
@@ -61,8 +63,14 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
         }
         Boss boss = Physics.bodyInRect(this.position.add(0,-15), renderer.getWidth(), renderer.getHeight(),Boss.class);
         if (boss!= null){
+            Random random = new Random();
             boss.hp--;
-            this.setActive(false);
+            if (random.nextInt(2)+1 != 1){
+                Nipple nipple = GameObjectPool.recycle(Nipple.class);
+                nipple.position.set(position);
+                nipple.setVelocity(new Vector2D(random.nextInt(5)-2,random.nextInt(5)-2));
+                this.setActive(false);
+            }
         }
     }
 
