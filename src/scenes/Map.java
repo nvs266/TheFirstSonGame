@@ -4,9 +4,11 @@ import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
 import enemies.*;
-import items.*;
+import items.ExtraBullet;
+import items.HealthItem;
+import items.ThreeRayBulletItem;
+import items.Thunder;
 import platforms.*;
-import players.bullets.ThreeRayBullet;
 
 import java.io.*;
 import java.util.Random;
