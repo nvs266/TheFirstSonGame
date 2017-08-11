@@ -33,13 +33,15 @@ public class GameWindow extends JFrame implements Setting{
     InputManager inputManager = InputManager.instance;
     Scene introScene;
     public boolean pause;
+    MenuScene menuScene;
 
     public GameWindow() throws IOException {
         setUpgameWindow();
-        setAudio();
+        //setAudio();
         setupInputs();
         setUpStartupScene();
         this.setVisible(true);
+        menuScene = new MenuScene("Resume", "Restart", "Exit");
     }
 
     private void setAudio() {
@@ -98,12 +100,10 @@ public class GameWindow extends JFrame implements Setting{
     long lastUpdateTime = -1;
     public void loop() throws IOException {
         while (true) {
-
             {
                 long currentTime = System.nanoTime();
                 if (currentTime - lastUpdateTime > Setting.DELAY){
                     lastUpdateTime = System.nanoTime();
-
                     run();
                     render();
                 }
@@ -132,7 +132,12 @@ public class GameWindow extends JFrame implements Setting{
             SceneManager.instance.getCurrentScene().render(buffBackgroundGraphics2d);
         }
 
-        GameObject.renderAll(buffBackgroundGraphics2d);
+        if (!pause) {
+            GameObject.renderAll(buffBackgroundGraphics2d);
+        } else {
+            buffBackgroundGraphics2d.drawImage(Scene.background, 0, 0, null);
+            menuScene.render(buffBackgroundGraphics2d);
+        }
         Graphics2D graphics2D = (Graphics2D) this.getGraphics();
         graphics2D.drawImage(buffBackground, WIDTH_SCREEN, 0, null);
 
@@ -145,13 +150,28 @@ public class GameWindow extends JFrame implements Setting{
     }
 
     private void run() throws IOException {
-        if (inputManager.xPressed){
-            pause = true;
-        }
-        if (inputManager.pPressed){
-            pause = false;
-        }
-       if (!pause){
+       if (inputManager.escapePressed) {
+           pause = true;
+       }
+
+       if (pause && inputManager.enterPressed) {
+           switch (menuScene.currentIndex) {
+               case 0:
+                   pause = false;
+                   break;
+               case 1:
+                   SceneManager.instance.requestChangeScene(new Level1Scenes());
+                   pause = false;
+                   break;
+               case 2:
+                   System.exit(0);
+                   break;
+               default:
+                   break;
+           }
+       }
+
+        if (!pause){
            GameObject.runAll();
            GameObject.runAllAction();
            GameObject.removeAll();

@@ -5,7 +5,9 @@ import bases.*;
 import bases.renderers.Animation;
 import inputs.InputListener;
 import inputs.InputManager;
+import javafx.scene.media.MediaPlayer;
 import players.Player;
+import tklibs.AudioUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -21,11 +23,17 @@ public class IntroScene extends Scene{
     GameObject spaceIcon;
     private Map map;
     Player player;
+    MediaPlayer introAudio;
 
 
     @Override
     public void init() throws IOException {
-        frameCounter = new FrameCounter(200);
+
+        AudioUtils.initialize();
+        introAudio = AudioUtils.playMedia("assets/music/gameplay/intro.mp3");
+        introAudio.setVolume(0.1d);
+
+        frameCounter = new FrameCounter(100);
         nameTeam = new GameObject();
         nameTeam.position.set(70, 150);
         GameObject.add(nameTeam);
@@ -51,8 +59,6 @@ public class IntroScene extends Scene{
         );
 
         addBackground();
-
-
     }
 
     @Override
@@ -96,6 +102,7 @@ public class IntroScene extends Scene{
         }
         if (player != null && player.position.y > 800) {
             SceneManager.instance.requestChangeScene(new Level1Scenes());
+            introAudio.stop();
         }
     }
 
