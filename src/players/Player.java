@@ -15,8 +15,7 @@ import physics.PhysicsBody;
 import platforms.PlatformSprite;
 import players.bullets.ClassicBullet;
 import players.bullets.PlayerBulletSprite;
-import scenes.Camera;
-import scenes.Map;
+import scenes.*;
 
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
@@ -118,6 +117,10 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 //            Camera.instance.setFollowGameObject(Boss.instance);
 //            boss = true;
 //        }
+
+        if (this.position.y > 9000) {
+            SceneManager.instance.requestChangeScene(new Victory());
+        }
     }
 
     private void checkItem() {
