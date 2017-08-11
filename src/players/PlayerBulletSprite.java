@@ -1,22 +1,20 @@
 package players;
 
-import Utils.Utils;
 import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Vector2D;
-import bases.renderers.Animation;
 import enemies.EnemyExplosion;
 import enemies.EnemySprite;
+import items.Nipple;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
-import platforms.Thunder;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import items.Thunder;
 
 public abstract class PlayerBulletSprite extends GameObject implements PhysicsBody {
     int totalBulletsPerShoot;
+    int damge = 1;
+    Vector2D velocity;
 
     public PlayerBulletSprite() {
         super();
@@ -29,15 +27,19 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
     void hitEnemy() {
         EnemySprite enemySprite = Physics.bodyInRectofsuper(this.position, renderer.getWidth(), renderer.getHeight(),EnemySprite.class);
         if (enemySprite != null) {
-            this.setActive(false);
-            enemySprite.setActive(false);
-
+            enemySprite.health--;
             EnemyExplosion enemyExplosion = GameObjectPool.recycle(EnemyExplosion.class);
             enemyExplosion.position.set(enemySprite.position);
             enemyExplosion.renderer.reset();
 
-            Thunder thunder = GameObjectPool.recycle(Thunder.class);
-            thunder.position.set(enemySprite.position);
+            if (enemySprite.health <= 0) {
+                enemySprite.setActive(false);
+                Nipple nipple = GameObjectPool.recycle(Nipple.class);
+                nipple.position.set(enemySprite.position);
+            }
+            this.setActive(false);
+
+
         }
     }
 

@@ -6,10 +6,11 @@ import bases.actions.RepeatForeverAction;
 import bases.actions.SequenceAction;
 import bases.actions.WaitAction;
 import inputs.InputManager;
+import items.ItemSprite;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
-import platforms.Thunder;
+import items.Thunder;
 import platforms.PlatformSprite;
 import scenes.Camera;
 import scenes.Map;
@@ -30,15 +31,16 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     private FrameCounter frameCounterTrails;
     private FrameCounter immortalCounter;
     private Action immortalAction;
-
+    public int totalNipple;
 
     public Player() {
         super();
+        totalNipple = 0;
         position.set(27 * 32 / 2, -500);
         life = START_LIFE;
         instance = this;
         bullets = totalBullets = START_TOTAL_BULLETS;
-        bulletSprite = new ClassicBullet();
+        bulletSprite = new Classic3Bullet();
         this.frameCounter = new FrameCounter(COOLDOWN);
 
         this.animationPlayer = new AnimationPlayer();
@@ -106,14 +108,12 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     }
 
     private void checkItem() {
-        Thunder thunder = Physics.bodyInRect(position.add(2,2),boxCollider.width, boxCollider.height, Thunder.class);
-        if (thunder == null){
-            thunder = Physics.bodyInRect(position.add(-2,-2),boxCollider.width, boxCollider.height, Thunder.class);
+        ItemSprite itemSprite = Physics.bodyInRectofsuper(position.add(2,2),boxCollider.width, boxCollider.height, ItemSprite.class);
+        if (itemSprite == null){
+            itemSprite = Physics.bodyInRect(position.add(-2,-2),boxCollider.width, boxCollider.height, Thunder.class);
         }
-        if (thunder != null){
-            hero = true;
-            thunder.setActive(false);
-            hero = true;
+        if (itemSprite != null){
+            itemSprite.hitPlayer = true;
         }
     }
 
@@ -132,7 +132,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         velocity.x = 0;
 
         if (InputManager.instance.spacePressed){
-            if (frameCounter.run() && shootEnable && bullets > 0){
+            if (frameCounter.run() && shootEnable && bullets - bulletSprite.totalBulletsPerShoot >= 0){
                 bulletSprite.shoot();
                 bulletSprite.addCartouche();
                 velocity.y = 0;

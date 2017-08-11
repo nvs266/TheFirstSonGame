@@ -7,23 +7,30 @@ import bases.renderers.Animation;
 import items.Thunder;
 import physics.Physics;
 import physics.PhysicsBody;
-import platforms.*;
+import platforms.BrickGrey;
+import platforms.BrickItem;
+import platforms.DirtGlass;
+import platforms.PlatformSprite;
 
 import java.awt.*;
 
-public class ClassicBullet extends PlayerBulletSprite {
-
-    public ClassicBullet() {
+public class Classic3Bullet extends PlayerBulletSprite{
+    public Classic3Bullet() {
         super();
-        totalBulletsPerShoot = 1;
+        velocity = new Vector2D();
+        totalBulletsPerShoot = 3;
     }
 
     @Override
     void setRenderer() {
-        renderer = new Animation(30, false,
-                Utils.loadImage("assets/image/player/bullet/classicBullet/tes1.png"),
-                Utils.loadImage("assets/image/player/bullet/classicBullet/tes2.png"),
-                Utils.loadImage("assets/image/player/bullet/classicBullet/tes3.png")
+        renderer = new Animation(
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test3.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test4.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test5.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test6.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test7.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test8.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test9.png")
         );
     }
 
@@ -34,10 +41,9 @@ public class ClassicBullet extends PlayerBulletSprite {
         hitEnemy();
     }
 
-
     @Override
     void move() {
-        this.position.y += 10;
+        this.position.addUp(velocity);
         PhysicsBody physicsBody = Physics.bodyInRectofsuper(position.add(0,1),boxCollider.width, boxCollider.height, PlatformSprite.class);
         if (physicsBody != null){
             if (physicsBody.getClass() == BrickGrey.class){
@@ -66,9 +72,20 @@ public class ClassicBullet extends PlayerBulletSprite {
 
     @Override
     void shoot() {
-        ClassicBullet bullet = GameObjectPool.recycle(ClassicBullet.class);
-        bullet.renderer.reset();
-        bullet.position.set(Player.instance.position);
+        Classic3Bullet classic3Bullet1 = GameObjectPool.recycle(Classic3Bullet.class);
+        classic3Bullet1.position.set(Player.instance.position);
+        classic3Bullet1.renderer.reset();
+        classic3Bullet1.velocity.set(0, 5);
+
+        Classic3Bullet classic3Bullet2 = GameObjectPool.recycle(Classic3Bullet.class);
+        classic3Bullet2.position.set(Player.instance.position);
+        classic3Bullet2.renderer.reset();
+        classic3Bullet2.velocity.set(2,5);
+
+        Classic3Bullet classic3Bullet3 = GameObjectPool.recycle(Classic3Bullet.class);
+        classic3Bullet3.position.set(Player.instance.position);
+        classic3Bullet3.renderer.reset();
+        classic3Bullet3.velocity.set(-2, 5);
     }
 
     @Override

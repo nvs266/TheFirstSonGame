@@ -1,4 +1,4 @@
-package platforms;
+package items;
 
 import bases.GameObject;
 import physics.BoxCollider;
@@ -6,6 +6,8 @@ import physics.Physics;
 import physics.PhysicsBody;
 
 public abstract class ItemSprite extends GameObject implements PhysicsBody{
+    public boolean hitPlayer = false;
+
     @Override
     public BoxCollider getBoxCollider() {
         return this.boxCollider;

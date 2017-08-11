@@ -7,13 +7,12 @@ import bases.renderers.Animation;
 import java.awt.*;
 
 public class GumEnemy extends EnemySprite {
-
     public Animation left;
     public Animation right;
 
-
     public GumEnemy() {
         super();
+        health = 2;
     }
 
     @Override
