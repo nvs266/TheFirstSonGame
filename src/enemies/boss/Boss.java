@@ -1,6 +1,7 @@
 package enemies.boss;
 
 import Utils.Utils;
+import bases.Audio;
 import bases.GameObject;
 import bases.Setting;
 import bases.Vector2D;
@@ -19,6 +20,7 @@ import java.awt.*;
 public class Boss extends GameObject implements PhysicsBody, Setting{
     public static Boss instance = new Boss();
     public int hp = 20;
+    public static Audio bossAudio;
 
     public Boss() {
         super();

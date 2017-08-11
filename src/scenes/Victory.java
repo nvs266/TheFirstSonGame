@@ -1,17 +1,21 @@
 package scenes;
 
 import Utils.Utils;
+import bases.Audio;
 import bases.GameObject;
 import bases.Setting;
 import bases.Vector2D;
 import bases.renderers.Animation;
+import javafx.scene.media.MediaPlayer;
 import players.Player;
+import tklibs.AudioUtils;
 
 import java.awt.*;
 import java.io.IOException;
 
 public class Victory extends Scene {
     Animation playerAnimation;
+    MediaPlayer victoryMedia;
 
     @Override
     public void init() throws IOException {
@@ -25,10 +29,17 @@ public class Victory extends Scene {
                 Utils.loadImage("assets/image/player/new Image/straight2.png"),
                 Utils.loadImage("assets/image/player/new Image/straight1.png")
         );
+        setVictoryMedia();
     }
 
     private void addBackground() {
         background = Utils.loadImage("assets/image/New folder/background.png");
+    }
+
+    public void setVictoryMedia() {
+        AudioUtils.initialize();
+        victoryMedia = AudioUtils.playMedia("assets/music/gameplay/victory.mp3");
+        victoryMedia.setVolume(0.15d);
     }
 
     @Override
