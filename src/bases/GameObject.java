@@ -6,10 +6,7 @@ import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import players.Player;
-import scenes.Camera;
-import scenes.Scene;
-import scenes.SceneManager;
-import scenes.IntroScene;
+import scenes.*;
 
 import java.awt.*;
 import java.util.*;
@@ -104,6 +101,9 @@ public class GameObject {
             if (gameObject.isActive){
                 gameObject.render(g2d);
             }
+        }
+        if (Icon.instace != null) {
+            Icon.instace.render(g2d);
         }
 
         Scene scene = SceneManager.instance.getCurrentScene();

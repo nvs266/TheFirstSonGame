@@ -74,8 +74,7 @@ public class ClassicBullet extends PlayerBulletSprite {
     public void render(Graphics2D g2d) {
         super.render(g2d);
         if (renderer.isFinished()) {
-            this.setActive(false
-            );
+            this.setActive(false);
         }
     }
 }
