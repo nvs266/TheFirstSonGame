@@ -5,6 +5,7 @@ import bases.actions.Action;
 import bases.actions.RepeatForeverAction;
 import bases.actions.SequenceAction;
 import bases.actions.WaitAction;
+import enemies.boss.Boss;
 import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
@@ -13,6 +14,8 @@ import platforms.Thunder;
 import platforms.PlatformSprite;
 import scenes.Camera;
 import scenes.Map;
+
+import java.util.function.BinaryOperator;
 
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
@@ -31,6 +34,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     private FrameCounter frameCounterTrails;
     private FrameCounter immortalCounter;
     private Action immortalAction;
+    private boolean boss;
 
 
     public Player() {
@@ -95,11 +99,6 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         updateAnimation();
         checkItem();
 
-//        if (Boss.instance == null && this.position.y / HEIGHT_GRID >= 10) {
-//            Boss boss = GameObjectPool.recycle(Boss.class);
-//            boss.position.set(255 + boss.renderer.getWidth() / 2, this.position.y + 200);
-//            Camera.instance.setFollowGameObject(boss);
-//        }
 
         if (Camera.instance.getFollowGameObject() == this) {
             Camera.instance.setPosition();
@@ -108,6 +107,13 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         if (Map.instance != null && Map.instance.getFollowGameObject() == this) {
             Map.instance.readMap(this);
         }
+//        System.out.println(position);
+//        if (position.y > 1000 && ! boss){
+//            GameObject.add(Boss.instance);
+//            Boss.instance.position.set(255 + Boss.instance.renderer.getWidth() / 2, this.position.y + 200);
+//            Camera.instance.setFollowGameObject(Boss.instance);
+//            boss = true;
+//        }
     }
 
     private void checkItem() {
