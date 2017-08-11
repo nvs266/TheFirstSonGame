@@ -13,6 +13,7 @@ public class BrickGlass extends PlatformSprite {
         super();
         renderer = new Animation(Utils.loadImage("assets/image/brick/stone_grass.png"));
         boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
+        this.children.add(boxCollider);
     }
 
     @Override
