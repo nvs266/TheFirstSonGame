@@ -17,6 +17,8 @@ public class SnakeEnemy extends EnemySprite{
     private Vector2D velocity;
     private Vector2D target;
     private float x;
+    private Animation left;
+    private Animation right;
 
     public SnakeEnemy() {
         super();
@@ -28,7 +30,7 @@ public class SnakeEnemy extends EnemySprite{
 
     @Override
     protected void setRenderer() {
-        renderer = new Animation(40, true,
+        left = new Animation(15, true,
                 Utils.loadImage("assets/image/enemy/enemy3/0.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/1.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/2.png"),
@@ -37,6 +39,16 @@ public class SnakeEnemy extends EnemySprite{
                 Utils.loadImage("assets/image/enemy/enemy3/5.png"),
                 Utils.loadImage("assets/image/enemy/enemy3/6.png")
         );
+        right = new Animation(15, true,
+                Utils.loadImage("assets/image/enemy/enemy3/0right.png"),
+                Utils.loadImage("assets/image/enemy/enemy3/1right.png"),
+                Utils.loadImage("assets/image/enemy/enemy3/2right.png"),
+                Utils.loadImage("assets/image/enemy/enemy3/3right.png"),
+                Utils.loadImage("assets/image/enemy/enemy3/4right.png"),
+                Utils.loadImage("assets/image/enemy/enemy3/5right.png"),
+                Utils.loadImage("assets/image/enemy/enemy3/6right.png")
+        );
+        renderer = left;
     }
 
     @Override
@@ -60,6 +72,11 @@ public class SnakeEnemy extends EnemySprite{
                 position.set(currentPos);
             }
             velocity.y = 0;
+        }
+        if (velocity.x > 0){
+            renderer = right;
+        }else {
+            renderer = left;
         }
         position.addUp(velocity);
     }

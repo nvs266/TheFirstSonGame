@@ -16,6 +16,11 @@ public class FrogEnemy extends EnemySprite {
     Vector2D velocity;
     private boolean jump;
     private float direction;
+    private Animation jumpAnimation;
+    private Animation jumpAnimationleft;
+    private Animation animation;
+    private Animation animationleft;
+    private Animation currentAnimation;
 
     public FrogEnemy() {
         super();
@@ -25,17 +30,25 @@ public class FrogEnemy extends EnemySprite {
 
     @Override
     void setBoxCollider() {
-        boxCollider = new BoxCollider(renderer.getWidth() - 20, renderer.getHeight());
+        boxCollider = new BoxCollider(renderer.getWidth() - 20, renderer.getHeight()-2);
         this.children.add(boxCollider);
     }
 
     @Override
     protected void setRenderer() {
-        renderer = new Animation(12, true,
-                Utils.loadImage("assets/image/enemy/enemy5/0.png"),
-                Utils.loadImage("assets/image/enemy/enemy5/1.png"),
-                Utils.loadImage("assets/image/enemy/enemy5/2.png")
+        jumpAnimation = new Animation(12, true,
+                Utils.loadImage("assets/image/enemy/enemy5/1.png")
         );
+        animation = new Animation(12, true,
+                Utils.loadImage("assets/image/enemy/enemy5/0.png")
+                );
+        jumpAnimationleft = new Animation(12, true,
+                Utils.loadImage("assets/image/enemy/enemy5/left1.png")
+        );
+        animationleft = new Animation(12, true,
+                Utils.loadImage("assets/image/enemy/enemy5/left0.png")
+        );
+        renderer = animation;
     }
 
     @Override
@@ -59,6 +72,20 @@ public class FrogEnemy extends EnemySprite {
         }
         moveVertical();
         moveHorizontal();
+        if (velocity.y < 0){
+            if (direction < 0){
+                currentAnimation = jumpAnimationleft;
+            }else {
+                currentAnimation = jumpAnimation;
+            }
+        }else {
+           if (direction < 0){
+                currentAnimation = animationleft;
+            }else {
+                currentAnimation = animation;
+            }
+        }
+        renderer = currentAnimation;
         position.addUp(velocity);
     }
 

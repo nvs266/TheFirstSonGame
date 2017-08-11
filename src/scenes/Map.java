@@ -104,6 +104,11 @@ public class Map implements Setting{
             case '5':
                 GumEnemy gumEnemy = GameObjectPool.recycle(GumEnemy.class);
                 gumEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
+                if (gumEnemy.position.x > 460){
+                    gumEnemy.renderer = gumEnemy.right;
+                }else {
+                    gumEnemy.renderer = gumEnemy.left;
+                }
                 break;
             case '6':
                 SnakeEnemy snakeEnemy = GameObjectPool.recycle(SnakeEnemy.class);
