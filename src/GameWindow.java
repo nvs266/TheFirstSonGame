@@ -3,6 +3,7 @@ import bases.Setting;
 import inputs.InputManager;
 import javafx.scene.media.MediaPlayer;
 import scenes.*;
+import scenes.Icon;
 import tklibs.AudioUtils;
 
 
@@ -22,13 +23,18 @@ import java.io.*;
 public class GameWindow extends JFrame implements Setting{
     MediaPlayer mediaPlayer;
     BufferedImage buffBackground;
+    BufferedImage buffBackgroundLeft;
+    BufferedImage buffBackgroundRight;
     Graphics2D buffBackgroundGraphics2d;
+    Graphics2D buffBackgroundGraphics2dLeft;
+    Graphics2D buffBackgroundGraphics2dRight;
+
     InputManager inputManager = InputManager.instance;
     Scene introScene;
 
     public GameWindow() throws IOException {
         setUpgameWindow();
-        setAudio();
+//        setAudio();
         setupInputs();
         setUpStartupScene();
         this.setVisible(true);
@@ -69,8 +75,8 @@ public class GameWindow extends JFrame implements Setting{
 
     private void setUpgameWindow() {
         this.setResizable(false);
-        this.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
-        this.setLocation(400, 50);
+        this.setSize(WIDTH_SCREEN * 3, HEIGHT_SCREEN);
+        this.setLocation(100, 50);
         this.setTitle("the first son");
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -79,7 +85,12 @@ public class GameWindow extends JFrame implements Setting{
             }
         });
         buffBackground = new BufferedImage(WIDTH_SCREEN, HEIGHT_SCREEN, BufferedImage.TYPE_INT_ARGB);
+        buffBackgroundLeft = new BufferedImage(WIDTH_SCREEN, HEIGHT_SCREEN, BufferedImage.TYPE_INT_ARGB);
+        buffBackgroundRight = new BufferedImage(WIDTH_SCREEN, HEIGHT_SCREEN, BufferedImage.TYPE_INT_ARGB);
+
         buffBackgroundGraphics2d = (Graphics2D) buffBackground.getGraphics();
+        buffBackgroundGraphics2dLeft = (Graphics2D) buffBackgroundLeft.getGraphics();
+        buffBackgroundGraphics2dRight = (Graphics2D) buffBackgroundRight.getGraphics();
     }
 
     long lastUpdateTime = -1;
@@ -97,15 +108,29 @@ public class GameWindow extends JFrame implements Setting{
     private void render() {
         buffBackgroundGraphics2d.setColor(Color.BLACK);
         buffBackgroundGraphics2d.fillRect(0,0, WIDTH_SCREEN, HEIGHT_SCREEN);
+        buffBackgroundGraphics2dLeft.setColor(Color.BLACK);
+        buffBackgroundGraphics2dLeft.fillRect(0,0, WIDTH_SCREEN, HEIGHT_SCREEN);
+        buffBackgroundGraphics2dRight.setColor(Color.BLACK);
+        buffBackgroundGraphics2dRight.fillRect(0,0, WIDTH_SCREEN, HEIGHT_SCREEN);
+
         if (Scene.background != null) {
             buffBackgroundGraphics2d.drawImage(Scene.background, 0, 0, null);
+            buffBackgroundGraphics2dLeft.drawImage(Scene.background, 0, 0, null);
+            buffBackgroundGraphics2dRight.drawImage(Scene.background, 0, 0, null);
         }
         if (SceneManager.instance != null && SceneManager.instance.getCurrentScene() == null) {
             introScene.render(buffBackgroundGraphics2d);
         }
         GameObject.renderAll(buffBackgroundGraphics2d);
         Graphics2D graphics2D = (Graphics2D) this.getGraphics();
-        graphics2D.drawImage(buffBackground, 0, 0, null);
+        graphics2D.drawImage(buffBackground, WIDTH_SCREEN, 0, null);
+
+        if (Icon.instance != null) {
+            Icon.instance.render(buffBackgroundGraphics2dLeft);
+        }
+        graphics2D.drawImage(buffBackgroundLeft, 0, 0, null);
+
+        graphics2D.drawImage(buffBackgroundRight, WIDTH_SCREEN * 2, 0, null);
     }
 
     private void run() throws IOException {

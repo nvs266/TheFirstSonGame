@@ -18,6 +18,7 @@ public class Level1Scenes extends Scene{
         addBackground();
         loadMap();
         addPlayer();
+        Icon icon = new Icon();
     }
 
     @Override

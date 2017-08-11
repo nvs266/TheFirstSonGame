@@ -102,9 +102,7 @@ public class GameObject {
                 gameObject.render(g2d);
             }
         }
-        if (Icon.instace != null) {
-            Icon.instace.render(g2d);
-        }
+
 
         Scene scene = SceneManager.instance.getCurrentScene();
 

@@ -34,7 +34,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     public Player() {
         super();
-        position.set(300, -500);
+        position.set(27 * 32 / 2, -500);
         life = START_LIFE;
         instance = this;
         bullets = totalBullets = START_TOTAL_BULLETS;
@@ -57,6 +57,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
                         new WaitAction(3)
                 )
         );
+        Camera.instance.position = this.position.add(-WIDTH_SCREEN/2, -HEIGHT_SCREEN / 2);
     }
 
     @Override
