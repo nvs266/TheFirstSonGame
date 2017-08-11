@@ -112,11 +112,12 @@ public class Player extends GameObject implements Setting, PhysicsBody {
             Map.instance.readMap(this);
         }
         System.out.println(position);
-        if (position.y > 1000 && ! boss){
+        if (position.y > 1000 && ! boss) {
             GameObject.add(Boss.instance);
             Boss.instance.position.set(255 + Boss.instance.renderer.getWidth() / 2, this.position.y + 200);
             Camera.instance.setFollowGameObject(Boss.instance);
             boss = true;
+        }
 
 
         if (this.position.y > 9000) {
