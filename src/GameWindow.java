@@ -106,7 +106,7 @@ public class GameWindow extends JFrame implements Setting{
         }
     }
 
-    private void render() {
+    private void render() throws IOException {
         buffBackgroundGraphics2d.setColor(Color.BLACK);
         buffBackgroundGraphics2d.fillRect(0,0, WIDTH_SCREEN, HEIGHT_SCREEN);
         buffBackgroundGraphics2dLeft.setColor(Color.BLACK);
