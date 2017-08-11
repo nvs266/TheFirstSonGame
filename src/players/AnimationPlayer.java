@@ -116,12 +116,12 @@ public class AnimationPlayer implements Renderer{
                 Utils.loadImage("assets/image/player/6.png")
         );
         leftAnimation = new Animation(4,true,
-                Utils.loadImage("assets/image/player/1 - copy.png"),
-                Utils.loadImage("assets/image/player/2 - copy.png"),
-                Utils.loadImage("assets/image/player/3 - copy.png"),
-                Utils.loadImage("assets/image/player/4 - copy.png"),
-                Utils.loadImage("assets/image/player/5 - copy.png"),
-                Utils.loadImage("assets/image/player/6 - copy.png")
+                Utils.loadImage("assets/image/player/1left.png"),
+                Utils.loadImage("assets/image/player/2left.png"),
+                Utils.loadImage("assets/image/player/3left.png"),
+                Utils.loadImage("assets/image/player/4left.png"),
+                Utils.loadImage("assets/image/player/5left.png"),
+                Utils.loadImage("assets/image/player/6left.png")
         );
         jumpleftAnimation1 = new Animation(18,false,
                 Utils.loadImage("assets/image/player/7.png")
@@ -130,10 +130,10 @@ public class AnimationPlayer implements Renderer{
                 Utils.loadImage("assets/image/player/8.png")
         );
         jumprightAnimation1 = new Animation(18,false,
-                Utils.loadImage("assets/image/player/7 - copy.png")
+                Utils.loadImage("assets/image/player/7left.png")
         );
         jumprightAnimation2 = new Animation(18,false,
-                Utils.loadImage("assets/image/player/8 - copy.png")
+                Utils.loadImage("assets/image/player/8left.png")
         );
 
         fallstraight = new Animation(4, true,
