@@ -71,8 +71,8 @@ public class IntroScene extends Scene{
             }
             graphics2D.setColor(Color.WHITE);
             graphics2D.setFont(new Font("serif", Font.BOLD, 40));
-            nameTeam.position = Camera.instance.posInCamera(nameTeam, nameTeam.position);
-            graphics2D.drawString("CHS TEAM", nameTeam.position.x, nameTeam.position.y);
+            Vector2D posNameTeamInCamera = Camera.instance.posInCamera(nameTeam, nameTeam.position);
+            graphics2D.drawString("CHS TEAM", posNameTeamInCamera.x, posNameTeamInCamera.y);
         }
         if (player != null && player.position.y > 800) {
             SceneManager.instance.requestChangeScene(new Level1Scenes());

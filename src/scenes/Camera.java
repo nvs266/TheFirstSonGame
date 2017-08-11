@@ -7,7 +7,7 @@ import enemies.boss.Boss;
 import players.Player;
 
 public class Camera implements Setting{
-    private Vector2D position;
+    public Vector2D position;
     private boolean isLock;
     private int count = 0;
     private int coutMax = 0;
