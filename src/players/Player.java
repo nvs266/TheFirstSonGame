@@ -6,6 +6,8 @@ import bases.actions.RepeatForeverAction;
 import bases.actions.SequenceAction;
 import bases.actions.WaitAction;
 import inputs.InputManager;
+import items.ItemSprite;
+import items.Nipple;
 import items.Thunder;
 import physics.BoxCollider;
 import physics.Physics;
@@ -23,7 +25,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     private boolean shootEnable;
     public int bullets;
     public int totalBullets;
-    private AnimationPlayer animationPlayer;
+    public AnimationPlayer animationPlayer;
     private PlayerBulletSprite bulletSprite;
     public int life;
     public boolean immortal; // bat tu
@@ -119,15 +121,12 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     }
 
     private void checkItem() {
-        Thunder thunder = Physics.bodyInRect(position.add(2,2),boxCollider.width, boxCollider.height, Thunder.class);
-        if (thunder == null){
-            thunder = Physics.bodyInRect(position.add(-2,-2),boxCollider.width, boxCollider.height, Thunder.class);
+        ItemSprite itemSprite = Physics.bodyInRectofsuper(position.add(2,2),boxCollider.width, boxCollider.height, ItemSprite.class);
+        if (itemSprite == null){
+            itemSprite = Physics.bodyInRect(position.add(-2,-2),boxCollider.width, boxCollider.height, ItemSprite.class);
         }
-        if (thunder != null){
-            thunder.setActive(false);
-            hero = true;
-            trail = true;
-            animationPlayer.setHero(true);
+        if (itemSprite != null){
+            itemSprite.hitPlayer = true;
         }
     }
 

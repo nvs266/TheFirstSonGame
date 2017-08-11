@@ -126,7 +126,7 @@ public class GameObject {
                 g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f));
                 g2d.setColor(Color.WHITE);
                 g2d.setFont(new Font("serif", Font.BOLD, 40));
-                g2d.drawString("LOOSED", 100, 300 );
+                g2d.drawString("LOST", 100, 300 );
             }
         }
 

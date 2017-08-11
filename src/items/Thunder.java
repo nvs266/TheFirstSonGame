@@ -19,6 +19,8 @@ public class Thunder extends ItemSprite {
         if (this.hitPlayer && isActive()) {
             this.setActive(false);
             Player.instance.hero = true;
+            Player.instance.trail = true;
+            Player.instance.animationPlayer.setHero(true);
         }
         super.run(parentPosition);
         PlatformSprite platformSprite = Physics.bodyInRectofsuper(position.add(0,1), boxCollider.width, boxCollider.height, PlatformSprite.class);
