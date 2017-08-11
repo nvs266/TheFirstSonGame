@@ -9,7 +9,17 @@ import bases.renderers.Animation;
 public class Cartouche extends GameObject {
 
     public Cartouche() {
-        renderer = new Animation(Utils.loadImage("assets/image/New folder/1.png"));
+        renderer = new Animation(3, true,
+                Utils.loadImage("assets/image/New folder/1.png"),
+                Utils.loadImage("assets/image/New folder/2.png"),
+                Utils.loadImage("assets/image/New folder/3.png"),
+                Utils.loadImage("assets/image/New folder/4.png"),
+                Utils.loadImage("assets/image/New folder/5.png"),
+                Utils.loadImage("assets/image/New folder/6.png"),
+                Utils.loadImage("assets/image/New folder/7.png"),
+                Utils.loadImage("assets/image/New folder/8.png")
+        );
+
     }
 
     public void setCartouche(Vector2D position) {
