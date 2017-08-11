@@ -23,6 +23,7 @@ public class GameObject {
     public Vector<GameObject> children ;
     private boolean isActive;
     public Renderer renderer;
+    private boolean pause;
 
     public static Camera camera = new Camera();
 
