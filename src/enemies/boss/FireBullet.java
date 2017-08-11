@@ -4,6 +4,7 @@ import Utils.Utils;
 import bases.GameObject;
 import bases.Vector2D;
 import bases.renderers.Animation;
+import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
@@ -55,7 +56,7 @@ public class FireBullet extends GameObject implements PhysicsBody {
             this.setActive(false);
         }
         Player player = Physics.bodyInRect(boxCollider,Player.class);
-        if (player!= null && !player.immortal){
+        if (player!= null && !player.immortal&& !InputManager.instance.immotal){
             player.life--;
             player.immortal = true;
         }

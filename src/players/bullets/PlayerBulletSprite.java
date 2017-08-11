@@ -59,7 +59,7 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
 
             this.setActive(false);
         }
-        Boss boss = Physics.bodyInRectofsuper(this.position, renderer.getWidth(), renderer.getHeight(),Boss.class);
+        Boss boss = Physics.bodyInRect(this.position, renderer.getWidth(), renderer.getHeight(),Boss.class);
         if (boss!= null){
             boss.hp--;
         }
