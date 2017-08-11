@@ -93,10 +93,10 @@ public class GameObject {
             if (camera.getFollowGameObject() != null) {
                 renderer.render(g2d, camera.posInCamera(this ,screenPosition));
                         g2d.setColor(Color.RED);
-                if (boxCollider != null) {
-                    Vector2D newVetor = camera.posInCamera(this, screenPosition);
-                    g2d.drawRect((int) (newVetor.x - boxCollider.width *0.5), (int) (newVetor.y - boxCollider.height * 0.5), (int) boxCollider.width, (int) boxCollider.height);
-                }
+//                if (boxCollider != null) {
+//                    Vector2D newVetor = camera.posInCamera(this, screenPosition);
+//                    g2d.drawRect((int) (newVetor.x - boxCollider.width *0.5), (int) (newVetor.y - boxCollider.height * 0.5), (int) boxCollider.width, (int) boxCollider.height);
+//                }
             } else renderer.render(g2d, screenPosition);
         }
     }

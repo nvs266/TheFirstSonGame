@@ -54,7 +54,7 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
         if (hp <= 0){
             Player.instance.vitory = true;
         }
-        System.out.println(position);
+//        System.out.println(position);
     }
 
     @Override
