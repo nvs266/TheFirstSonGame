@@ -1,12 +1,14 @@
 package enemies;
 
 import Utils.Utils;
+import bases.Audio;
 import bases.GameObject;
 import bases.renderers.Animation;
 
 import java.awt.*;
 
 public class EnemyExplosion extends GameObject {
+    public static Audio enemyExplosionAudio;
     public EnemyExplosion() {
         renderer = new Animation(1, false,
                 Utils.loadImage("assets/image/enemy/explosion/1.png"),
@@ -46,6 +48,7 @@ public class EnemyExplosion extends GameObject {
                 Utils.loadImage("assets/image/enemy/explosion/35.png"),
                 Utils.loadImage("assets/image/enemy/explosion/36.png")
                 );
+        enemyExplosionAudio = new Audio("assets/music/enmemies/explosion.wav");
     }
 
     @Override

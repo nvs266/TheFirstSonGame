@@ -52,6 +52,7 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
             enemySprite.health--;
             EnemyExplosion enemyExplosion = GameObjectPool.recycle(EnemyExplosion.class);
             enemyExplosion.position.set(enemySprite.position);
+            EnemyExplosion.enemyExplosionAudio.play();
             enemyExplosion.renderer.reset();
 
             if (enemySprite.health <= 0) {

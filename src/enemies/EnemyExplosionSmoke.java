@@ -1,6 +1,7 @@
 package enemies;
 
 import Utils.Utils;
+import bases.Audio;
 import bases.GameObject;
 import bases.Vector2D;
 import bases.renderers.Animation;
@@ -11,6 +12,7 @@ import java.awt.*;
  * Created by cuonghx2709 on 8/10/2017.
  */
 public class EnemyExplosionSmoke extends GameObject{
+    public static Audio enemyExplosionSmokeAudio;
     public EnemyExplosionSmoke(){
         this.renderer = new Animation(5,false,
                 Utils.loadImage("assets/image/enemy/explosion/exp1.png"),
@@ -27,6 +29,7 @@ public class EnemyExplosionSmoke extends GameObject{
                 Utils.loadImage("assets/image/enemy/explosion/exp12.png"),
                 Utils.loadImage("assets/image/enemy/explosion/exp13.png")
         );
+        enemyExplosionSmokeAudio = new Audio("assets/music/enmemies/explosion.wav");
     }
 
     @Override

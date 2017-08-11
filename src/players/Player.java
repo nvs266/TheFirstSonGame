@@ -35,6 +35,8 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     private Action immortalAction;
     private boolean boss;
     public int totalNipple;
+    public Audio shootAudio;
+    public static Audio cryAudio;
 
     public Player() {
         super();
@@ -147,6 +149,8 @@ public class Player extends GameObject implements Setting, PhysicsBody {
             if (frameCounter.run() && shootEnable && bullets > 0){
                 bulletSprite.shoot();
                 bulletSprite.addCartouche();
+                this.shootAudio = new Audio("assets/music/player/shoot.wav");
+                shootAudio.play();
                 velocity.y = 0;
                 bullets -= bulletSprite.totalBulletsPerShoot;
                 frameCounter.reset();
