@@ -73,7 +73,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
          if (frameCounterTrails.run()&& renderer != null &&renderer.getCurrentImage() != null &&  hero) {
             if (trail){
                 Trail trail = GameObjectPool.recycle(Trail.class);
-                trail.setTrail(this.position, 0.04f, renderer.getCurrentImage());
+                trail.setTrail(this.position, 0.06f, renderer.getCurrentImage());
                 frameCounterTrails.reset();
             }
         }
