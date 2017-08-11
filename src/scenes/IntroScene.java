@@ -30,8 +30,8 @@ public class IntroScene extends Scene{
     public void init() throws IOException {
 
         AudioUtils.initialize();
-        introAudio = AudioUtils.playMedia("assets/music/gameplay/intro.mp3");
-        introAudio.setVolume(0.1d);
+        this.introAudio = AudioUtils.playMedia("assets/music/gameplay/intro.mp3");
+        this.introAudio.setVolume(0.1d);
 
         frameCounter = new FrameCounter(100);
         nameTeam = new GameObject();
@@ -102,7 +102,7 @@ public class IntroScene extends Scene{
         }
         if (player != null && player.position.y > 800) {
             SceneManager.instance.requestChangeScene(new Level1Scenes());
-            introAudio.stop();
+            this.introAudio.stop();
         }
     }
 
@@ -115,4 +115,9 @@ public class IntroScene extends Scene{
         Camera.instance.setFollowGameObject(player);
     }
 
+    @Override
+    public void deInit() {
+        super.deInit();
+        introAudio.stop();
+    }
 }

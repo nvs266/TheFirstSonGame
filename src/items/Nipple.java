@@ -33,7 +33,7 @@ public class Nipple extends ItemSprite {
         if (hitPlayer && isActive()) {
             Player.instance.totalNipple++;
             this.setActive(false);
-            itemAudio = new Audio("assets/music/player/smile.wav");
+            itemAudio = new Audio("assets/music/player/item.wav");
             itemAudio.play();
         }
 
