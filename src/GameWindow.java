@@ -37,18 +37,10 @@ public class GameWindow extends JFrame implements Setting{
 
     public GameWindow() throws IOException {
         setUpgameWindow();
-        //setAudio();
         setupInputs();
         setUpStartupScene();
         this.setVisible(true);
         menuScene = new MenuScene("Resume", "Restart", "Exit");
-    }
-
-    private void setAudio() {
-        AudioUtils.initialize();
-        mediaPlayer = AudioUtils.playMedia("assets/music/gameplay/soundtrack.mp3");
-        mediaPlayer.setVolume(0.1d);
-        mediaPlayer.play();
     }
 
     private void setUpStartupScene() throws IOException {
@@ -152,14 +144,17 @@ public class GameWindow extends JFrame implements Setting{
     private void run() throws IOException {
        if (inputManager.escapePressed) {
            pause = true;
+           Level1Scenes.lv1Audio.pause();
        }
 
        if (pause && inputManager.enterPressed) {
            switch (menuScene.currentIndex) {
                case 0:
                    pause = false;
+                   Level1Scenes.lv1Audio.play();
                    break;
                case 1:
+                   Level1Scenes.lv1Audio.stop();
                    SceneManager.instance.requestChangeScene(new Level1Scenes());
                    pause = false;
                    break;
@@ -175,7 +170,7 @@ public class GameWindow extends JFrame implements Setting{
            GameObject.runAll();
            GameObject.runAllAction();
            GameObject.removeAll();
-       }
+        }
         SceneManager.instance.changeSceneIfNeeded();
 
     }

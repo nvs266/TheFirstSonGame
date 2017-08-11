@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Level1Scenes extends Scene{
     private Map map;
-    public MediaPlayer lv1Audio;
+    public static MediaPlayer lv1Audio;
 
     @Override
     public void init() throws IOException {
@@ -22,9 +22,7 @@ public class Level1Scenes extends Scene{
         loadMap();
         addPlayer();
         Icon icon = new Icon();
-        AudioUtils.initialize();
-        lv1Audio = AudioUtils.playMedia("assets/music/gameplay/soundtrack.mp3");
-        lv1Audio.setVolume(0.1d);
+        setLv1Audio();
     }
 
     @Override
@@ -37,6 +35,11 @@ public class Level1Scenes extends Scene{
 
     }
 
+    public void setLv1Audio() {
+        AudioUtils.initialize();
+        this.lv1Audio = AudioUtils.playMedia("assets/music/gameplay/soundtrack.mp3");
+        this.lv1Audio.setVolume(0.1d);
+    }
 
     private void addBackground() {
         background = Utils.loadImage("assets/image/New folder/background.png");
@@ -51,4 +54,5 @@ public class Level1Scenes extends Scene{
         Camera.instance.setFollowGameObject(player);
         Map.instance.setFollowGameObject(player);
     }
+
 }
