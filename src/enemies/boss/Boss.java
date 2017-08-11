@@ -7,6 +7,7 @@ import bases.Vector2D;
 import bases.actions.*;
 import bases.renderers.Animation;
 import physics.BoxCollider;
+import physics.Physics;
 import physics.PhysicsBody;
 import players.Player;
 import scenes.Camera;
@@ -16,6 +17,7 @@ import java.awt.*;
 
 public class Boss extends GameObject implements PhysicsBody, Setting{
     public static Boss instance = new Boss();
+    public int hp = 10;
 
     public Boss() {
         super();
@@ -25,7 +27,7 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
                 Utils.loadImage("assets/image/boss/boss2.png")
                 );
 
-        boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
+        boxCollider = new BoxCollider(300, 300);
         this.children.add(boxCollider);
         Action action = new RepeatForeverAction(
                 new SequenceAction(
@@ -49,6 +51,10 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
         if (Camera.instance.getFollowGameObject() == this) {
             Camera.instance.setPosition();
         }
+        if (hp <= 0){
+            Player.instance.vitory = true;
+        }
+        System.out.println(position);
     }
 
     @Override

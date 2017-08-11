@@ -23,7 +23,7 @@ public class GameObject {
     public Vector<GameObject> children ;
     private boolean isActive;
     public Renderer renderer;
-    private boolean pause;
+    private static boolean lost;
 
     public static Camera camera = new Camera();
 
@@ -92,6 +92,11 @@ public class GameObject {
         if (renderer != null){
             if (camera.getFollowGameObject() != null) {
                 renderer.render(g2d, camera.posInCamera(this ,screenPosition));
+                        g2d.setColor(Color.RED);
+                if (boxCollider != null) {
+                    Vector2D newVetor = camera.posInCamera(this, screenPosition);
+                    g2d.drawRect((int) (newVetor.x - boxCollider.width *0.5), (int) (newVetor.y - boxCollider.height * 0.5), (int) boxCollider.width, (int) boxCollider.height);
+                }
             } else renderer.render(g2d, screenPosition);
         }
     }
@@ -120,12 +125,16 @@ public class GameObject {
                 g2d.drawString("-1", Player.instance.position.x - Camera.instance.getPosition().x + 20, Player.instance.position.y - Camera.instance.getPosition().y - 20);
             }
             if (Player.instance.life == 0) {
+                lost = true;
+            }
+            if (lost){
                 Player.instance.setActive(false);
                 g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f));
                 g2d.setColor(Color.WHITE);
                 g2d.setFont(new Font("serif", Font.BOLD, 40));
                 g2d.drawString("LOST", 100, 300 );
             }
+
         }
 
     }

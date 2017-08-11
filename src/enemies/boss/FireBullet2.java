@@ -5,7 +5,9 @@ import bases.GameObject;
 import bases.Vector2D;
 import bases.renderers.Animation;
 import physics.BoxCollider;
+import physics.Physics;
 import physics.PhysicsBody;
+import platforms.BrickGrey;
 import players.Player;
 
 import java.awt.*;
@@ -40,6 +42,14 @@ public class FireBullet2 extends GameObject implements PhysicsBody {
         super.run(parentPosition);
         if (position.x < 200 || position.x >1000||position.y < Player.instance.position.y-400){
             this.setActive(false);
+        }
+        if (Physics.bodyInRect(boxCollider, BrickGrey.class) != null && position.y <8300){
+            this.setActive(false);
+        }
+        Player player = Physics.bodyInRect(boxCollider,Player.class);
+        if (player!= null && !player.immortal){
+            player.life--;
+            player.immortal = true;
         }
         this.position.set(position.substract(velocity));
     }

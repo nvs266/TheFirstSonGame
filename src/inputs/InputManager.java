@@ -11,6 +11,7 @@ public class InputManager {
     public boolean spacePressed;
     public boolean xPressed ;
     public boolean pPressed ;
+    public boolean immotal;
 
     public static final InputManager instance = new InputManager();
 
@@ -44,6 +45,9 @@ public class InputManager {
                 break;
             case KeyEvent.VK_P:
                 pPressed = true;
+                break;
+            case KeyEvent.VK_F6:
+                immotal = true;
                 break;
             default:
                 break;

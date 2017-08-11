@@ -1,6 +1,7 @@
 package enemies;
 
 import bases.*;
+import inputs.InputManager;
 import items.Nipple;
 import physics.BoxCollider;
 import physics.Physics;
@@ -47,7 +48,10 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
                     if (this.getClass() == GumEnemy.class) {
                         Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
                     }
-//                    Player.instance.life--;
+                    if (!InputManager.instance.immotal){
+                        Player.instance.life--;
+                    }
+
                     Player.cryAudio = new Audio("assets/music/player/cry.wav");
                     Player.cryAudio.play();
                     Player.instance.immortal = true;

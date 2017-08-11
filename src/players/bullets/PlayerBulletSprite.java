@@ -3,6 +3,7 @@ package players.bullets;
 import bases.*;
 import enemies.EnemyExplosion;
 import enemies.EnemySprite;
+import enemies.boss.Boss;
 import items.Nipple;
 import items.Thunder;
 import physics.BoxCollider;
@@ -57,6 +58,10 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
             }
 
             this.setActive(false);
+        }
+        Boss boss = Physics.bodyInRectofsuper(this.position, renderer.getWidth(), renderer.getHeight(),Boss.class);
+        if (boss!= null){
+            boss.hp--;
         }
     }
 
