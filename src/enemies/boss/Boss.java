@@ -37,20 +37,14 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
                 )
         );
         this.addAction(action);
-
+        Camera.instance.setFollowGameObject(this);
         instance = this;
     }
 
-    @Override
-    public void render(Graphics2D g2d) {
-        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
-        super.render(g2d);
-    }
 
     @Override
     public void run(Vector2D parentPosition) {
         super.run(parentPosition);
-        position.y = Player.instance.position.y + 200;
 
         if (Camera.instance.getFollowGameObject() == this) {
             Camera.instance.setPosition();
