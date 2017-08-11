@@ -1,4 +1,4 @@
-package players;
+package players.bullets;
 
 import Utils.Utils;
 import bases.GameObjectPool;
@@ -11,10 +11,11 @@ import platforms.BrickGrey;
 import platforms.BrickItem;
 import platforms.DirtGlass;
 import platforms.PlatformSprite;
+import players.Player;
 
 import java.awt.*;
 
-public class Classic3Bullet extends PlayerBulletSprite{
+public class Classic3Bullet extends PlayerBulletSprite {
     public Classic3Bullet() {
         super();
         velocity = new Vector2D();
@@ -42,7 +43,7 @@ public class Classic3Bullet extends PlayerBulletSprite{
     }
 
     @Override
-    void move() {
+    public void move() {
         this.position.addUp(velocity);
         PhysicsBody physicsBody = Physics.bodyInRectofsuper(position.add(0,1),boxCollider.width, boxCollider.height, PlatformSprite.class);
         if (physicsBody != null){
@@ -71,7 +72,7 @@ public class Classic3Bullet extends PlayerBulletSprite{
     }
 
     @Override
-    void shoot() {
+    public void shoot() {
         Classic3Bullet classic3Bullet1 = GameObjectPool.recycle(Classic3Bullet.class);
         classic3Bullet1.position.set(Player.instance.position);
         classic3Bullet1.renderer.reset();

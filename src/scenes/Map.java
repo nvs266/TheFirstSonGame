@@ -129,7 +129,8 @@ public class Map implements Setting{
                 break;
             case '9':
                 Thunder thunder = GameObjectPool.recycle(Thunder.class);
-                thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 32);
+                thunder.renderer.reset();
+                thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 40);
                 break;
             default:
                 break;

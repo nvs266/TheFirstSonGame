@@ -12,6 +12,9 @@ import physics.Physics;
 import physics.PhysicsBody;
 import items.Thunder;
 import platforms.PlatformSprite;
+import players.bullets.ClassicBullet;
+import players.bullets.PlayerBulletSprite;
+import players.bullets.ThreeRayBullet;
 import scenes.Camera;
 import scenes.Map;
 
@@ -23,7 +26,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public int bullets;
     public int totalBullets;
     private AnimationPlayer animationPlayer;
-    private PlayerBulletSprite bulletSprite;
+    public PlayerBulletSprite bulletSprite;
     public int life;
     public boolean immortal; // bat tu
     private boolean added;
@@ -40,7 +43,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         life = START_LIFE;
         instance = this;
         bullets = totalBullets = START_TOTAL_BULLETS;
-        bulletSprite = new Classic3Bullet();
+        bulletSprite = new ThreeRayBullet();
         this.frameCounter = new FrameCounter(COOLDOWN);
 
         this.animationPlayer = new AnimationPlayer();
