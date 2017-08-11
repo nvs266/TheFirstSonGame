@@ -1,9 +1,6 @@
 package enemies;
 
-import bases.GameObject;
-import bases.GameObjectPool;
-import bases.Setting;
-import bases.Vector2D;
+import bases.*;
 import items.Nipple;
 import physics.BoxCollider;
 import physics.Physics;
@@ -37,6 +34,7 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
                 setActive(false);
 
                 EnemyExplosionSmoke enemyExplosionSmoke = GameObjectPool.recycle(EnemyExplosionSmoke.class);
+                EnemyExplosionSmoke.enemyExplosionSmokeAudio.play();
                 enemyExplosionSmoke.position.set(this.position);
                 enemyExplosionSmoke.renderer.reset();
 
@@ -50,6 +48,8 @@ public abstract class EnemySprite extends GameObject implements PhysicsBody, Set
                         Player.velocity.y = SPEED_JUMPP_HIT_ENEMY;
                     }
 //                    Player.instance.life--;
+                    Player.cryAudio = new Audio("assets/music/player/cry.wav");
+                    Player.cryAudio.play();
                     Player.instance.immortal = true;
                 }
             }
