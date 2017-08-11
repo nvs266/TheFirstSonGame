@@ -5,6 +5,7 @@ import bases.actions.Action;
 import bases.actions.RepeatForeverAction;
 import bases.actions.SequenceAction;
 import bases.actions.WaitAction;
+import enemies.boss.Boss;
 import inputs.InputManager;
 import items.ItemSprite;
 import items.Nipple;
@@ -73,7 +74,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
          if (frameCounterTrails.run()&& renderer != null &&renderer.getCurrentImage() != null &&  hero) {
             if (trail){
                 Trail trail = GameObjectPool.recycle(Trail.class);
-                trail.setTrail(this.position, 0.04f, renderer.getCurrentImage());
+                trail.setTrail(this.position, 0.06f, renderer.getCurrentImage());
                 frameCounterTrails.reset();
             }
         }
@@ -110,13 +111,13 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         if (Map.instance != null && Map.instance.getFollowGameObject() == this) {
             Map.instance.readMap(this);
         }
-//        System.out.println(position);
-//        if (position.y > 1000 && ! boss){
-//            GameObject.add(Boss.instance);
-//            Boss.instance.position.set(255 + Boss.instance.renderer.getWidth() / 2, this.position.y + 200);
-//            Camera.instance.setFollowGameObject(Boss.instance);
-//            boss = true;
-//        }
+        System.out.println(position);
+        if (position.y > 1000 && ! boss){
+            GameObject.add(Boss.instance);
+            Boss.instance.position.set(255 + Boss.instance.renderer.getWidth() / 2, this.position.y + 200);
+            Camera.instance.setFollowGameObject(Boss.instance);
+            boss = true;
+
 
         if (this.position.y > 9000) {
             SceneManager.instance.requestChangeScene(new Victory());

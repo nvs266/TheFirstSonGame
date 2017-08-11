@@ -5,7 +5,11 @@ import bases.GameObject;
 import bases.Vector2D;
 import bases.renderers.Animation;
 import physics.BoxCollider;
+import physics.Physics;
 import physics.PhysicsBody;
+import platforms.BrickGrey;
+import platforms.PlatformSprite;
+import players.Player;
 
 import java.awt.*;
 
@@ -13,7 +17,17 @@ public class FireBullet extends GameObject implements PhysicsBody {
     private Vector2D velocity;
 
     public FireBullet() {
-        renderer = new Animation(Utils.loadImage("assets/image/player/bullet/classicBullet/0.png"));
+        renderer = new Animation(2, true,
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test1.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test2.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test3.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test4.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test5.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test6.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test7.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test8.png"),
+                Utils.loadImage("assets/image/player/bullet/classicBullet/test9.png")
+        );
 
         boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
         this.children.add(boxCollider);
@@ -34,6 +48,9 @@ public class FireBullet extends GameObject implements PhysicsBody {
     @Override
     public void run(Vector2D parentPosition) {
         super.run(parentPosition);
+        if (position.x < 200 || position.x >1000||position.y < Player.instance.position.y-400){
+            this.setActive(false);
+        }
         this.position.set(position.substract(velocity));
     }
 

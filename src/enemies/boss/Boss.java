@@ -8,13 +8,14 @@ import bases.actions.*;
 import bases.renderers.Animation;
 import physics.BoxCollider;
 import physics.PhysicsBody;
+import players.Player;
 import scenes.Camera;
 
 import java.awt.*;
 
 
 public class Boss extends GameObject implements PhysicsBody, Setting{
-    public static Boss instance = null;
+    public static Boss instance = new Boss();
 
     public Boss() {
         super();
@@ -28,13 +29,11 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
         this.children.add(boxCollider);
         Action action = new RepeatForeverAction(
                 new SequenceAction(
-                        new RepeatnAction(300,new MoveByAction(new Vector2D(0, 1), 1)),
-                        new RepeatnAction(5,
-                            new SequenceAction(
-                                    new WaitAction(300),
-                                    new SkillOne(this.position)
-                            )
-                                )
+                        new RepeatnAction(5, new SequenceAction(
+                                    new SkillOne(this.position),
+                                    new WaitAction(300))
+                        ),
+                        new SkillSecond(this.position)
                 )
         );
         this.addAction(action);
@@ -51,6 +50,7 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
     @Override
     public void run(Vector2D parentPosition) {
         super.run(parentPosition);
+        position.y = Player.instance.position.y + 200;
 
         if (Camera.instance.getFollowGameObject() == this) {
             Camera.instance.setPosition();
