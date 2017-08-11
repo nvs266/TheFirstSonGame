@@ -45,7 +45,7 @@ public class GameWindow extends JFrame implements Setting{
     private void setAudio() {
         AudioUtils.initialize();
         mediaPlayer = AudioUtils.playMedia("assets/music/gameplay/soundtrack.mp3");
-        mediaPlayer.setVolume(1d);
+        mediaPlayer.setVolume(0.1d);
         mediaPlayer.play();
     }
 
