@@ -1,13 +1,19 @@
 package players;
 
+import Utils.Utils;
 import bases.GameObject;
 import bases.GameObjectPool;
+import bases.Vector2D;
+import bases.renderers.Animation;
 import enemies.EnemyExplosion;
 import enemies.EnemySprite;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
 import platforms.Thunder;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class PlayerBulletSprite extends GameObject implements PhysicsBody {
     int totalBulletsPerShoot;
@@ -17,7 +23,6 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
         setRenderer();
         setBoxCollider();
     }
-
 
     abstract void setRenderer();
 

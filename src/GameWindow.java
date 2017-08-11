@@ -1,14 +1,9 @@
 import bases.GameObject;
-import bases.GameObjectPool;
 import bases.Setting;
-import com.sun.deploy.util.BlackList;
-import enemies.*;
-import enemies.boss.Boss;
 import inputs.InputManager;
-import javafx.scene.paint.*;
-import platforms.*;
-import players.Player;
+import javafx.scene.media.MediaPlayer;
 import scenes.*;
+import tklibs.AudioUtils;
 
 
 import javax.swing.*;
@@ -21,28 +16,34 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-import static javafx.scene.paint.Color.GREEN;
-
 /**
  * Created by cuonghx2709 on 7/31/2017.
  */
 public class GameWindow extends JFrame implements Setting{
-
+    MediaPlayer mediaPlayer;
     BufferedImage buffBackground;
     Graphics2D buffBackgroundGraphics2d;
     InputManager inputManager = InputManager.instance;
-    Scene startupScene;
+    Scene introScene;
 
     public GameWindow() throws IOException {
         setUpgameWindow();
+        setAudio();
         setupInputs();
         setUpStartupScene();
         this.setVisible(true);
     }
 
+    private void setAudio() {
+        AudioUtils.initialize();
+        mediaPlayer = AudioUtils.playMedia("assets/music/gameplay/soundtrack.mp3");
+        mediaPlayer.setVolume(1d);
+        mediaPlayer.play();
+    }
+
     private void setUpStartupScene() throws IOException {
-        startupScene = new StartingScene();
-        startupScene.init();
+        introScene = new IntroScene();
+        introScene.init();
     }
 
 
@@ -96,7 +97,12 @@ public class GameWindow extends JFrame implements Setting{
     private void render() {
         buffBackgroundGraphics2d.setColor(Color.BLACK);
         buffBackgroundGraphics2d.fillRect(0,0, WIDTH_SCREEN, HEIGHT_SCREEN);
-
+        if (Scene.background != null) {
+            buffBackgroundGraphics2d.drawImage(Scene.background, 0, 0, null);
+        }
+        if (SceneManager.instance != null && SceneManager.instance.getCurrentScene() == null) {
+            introScene.render(buffBackgroundGraphics2d);
+        }
         GameObject.renderAll(buffBackgroundGraphics2d);
         Graphics2D graphics2D = (Graphics2D) this.getGraphics();
         graphics2D.drawImage(buffBackground, 0, 0, null);
