@@ -5,17 +5,16 @@ import bases.actions.Action;
 import bases.actions.RepeatForeverAction;
 import bases.actions.SequenceAction;
 import bases.actions.WaitAction;
-import enemies.boss.Boss;
 import inputs.InputManager;
+import items.Thunder;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
-import platforms.Thunder;
 import platforms.PlatformSprite;
+import players.bullets.ClassicBullet;
+import players.bullets.PlayerBulletSprite;
 import scenes.Camera;
 import scenes.Map;
-
-import java.util.function.BinaryOperator;
 
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
@@ -35,7 +34,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     private FrameCounter immortalCounter;
     private Action immortalAction;
     private boolean boss;
-
+    public int totalNipple;
 
     public Player() {
         super();
@@ -63,6 +62,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
                 )
         );
         Camera.instance.position = this.position.add(-WIDTH_SCREEN/2, -HEIGHT_SCREEN / 2);
+        totalNipple = 0;
     }
 
     @Override
