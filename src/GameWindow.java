@@ -8,6 +8,7 @@ import tklibs.AudioUtils;
 
 
 import javax.swing.*;
+import javax.xml.validation.SchemaFactoryConfigurationError;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -34,7 +35,7 @@ public class GameWindow extends JFrame implements Setting{
 
     public GameWindow() throws IOException {
         setUpgameWindow();
-        //setAudio();
+        setAudio();
         setupInputs();
         setUpStartupScene();
         this.setVisible(true);
@@ -121,6 +122,11 @@ public class GameWindow extends JFrame implements Setting{
         if (SceneManager.instance != null && SceneManager.instance.getCurrentScene() == null) {
             introScene.render(buffBackgroundGraphics2d);
         }
+
+        if (SceneManager.instance != null && SceneManager.instance.getCurrentScene() != null && SceneManager.instance.getCurrentScene().getClass() == Victory.class) {
+            SceneManager.instance.getCurrentScene().render(buffBackgroundGraphics2d);
+        }
+
         GameObject.renderAll(buffBackgroundGraphics2d);
         Graphics2D graphics2D = (Graphics2D) this.getGraphics();
         graphics2D.drawImage(buffBackground, WIDTH_SCREEN, 0, null);

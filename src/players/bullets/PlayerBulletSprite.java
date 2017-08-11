@@ -1,9 +1,6 @@
 package players.bullets;
 
-import bases.FrameCounter;
-import bases.GameObject;
-import bases.GameObjectPool;
-import bases.Vector2D;
+import bases.*;
 import enemies.EnemyExplosion;
 import enemies.EnemySprite;
 import items.Nipple;
@@ -22,6 +19,7 @@ public abstract class PlayerBulletSprite extends GameObject implements PhysicsBo
     public Vector2D velocity;
     public FrameCounter frameCounter;
     public FrameCounter frameCounterHero;
+    public Audio itemAudio;
 
     public PlayerBulletSprite() {
         super();

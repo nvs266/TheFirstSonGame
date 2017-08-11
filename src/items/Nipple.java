@@ -1,6 +1,7 @@
 package items;
 
 import Utils.Utils;
+import bases.Audio;
 import bases.FrameCounter;
 import bases.Vector2D;
 import bases.renderers.Animation;
@@ -32,6 +33,8 @@ public class Nipple extends ItemSprite {
         if (hitPlayer && isActive()) {
             Player.instance.totalNipple++;
             this.setActive(false);
+            itemAudio = new Audio("assets/music/player/smile.wav");
+            itemAudio.play();
         }
 
         PlatformSprite platformSprite = Physics.bodyInRectofsuper(position.add(0,1), boxCollider.width, boxCollider.height, PlatformSprite.class);

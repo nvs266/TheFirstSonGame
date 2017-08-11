@@ -1,6 +1,7 @@
 package items;
 
 import Utils.Utils;
+import bases.Audio;
 import bases.Vector2D;
 import bases.renderers.Animation;
 import physics.Physics;
@@ -19,6 +20,10 @@ public class Thunder extends ItemSprite {
         if (this.hitPlayer && isActive()) {
             this.setActive(false);
             Player.instance.hero = true;
+            Player.instance.trail = true;
+            Player.instance.animationPlayer.setHero(true);
+            itemAudio = new Audio("assets/music/player/item.wav");
+            itemAudio.play();
         }
         super.run(parentPosition);
         PlatformSprite platformSprite = Physics.bodyInRectofsuper(position.add(0,1), boxCollider.width, boxCollider.height, PlatformSprite.class);

@@ -27,6 +27,10 @@ public class SceneManager {
         return currentScene;
     }
 
+    public Scene getNextScene() {
+        return nextScene;
+    }
+
     public void requestChangeScene(Scene scene) {
         nextScene = scene;
     }

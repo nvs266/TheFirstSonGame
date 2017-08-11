@@ -7,6 +7,8 @@ import bases.actions.SequenceAction;
 import bases.actions.WaitAction;
 import enemies.boss.Boss;
 import inputs.InputManager;
+import items.ItemSprite;
+import items.Nipple;
 import items.Thunder;
 import physics.BoxCollider;
 import physics.Physics;
@@ -14,8 +16,7 @@ import physics.PhysicsBody;
 import platforms.PlatformSprite;
 import players.bullets.ClassicBullet;
 import players.bullets.PlayerBulletSprite;
-import scenes.Camera;
-import scenes.Map;
+import scenes.*;
 
 public class Player extends GameObject implements Setting, PhysicsBody {
     public static Player instance;
@@ -24,7 +25,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     private boolean shootEnable;
     public int bullets;
     public int totalBullets;
-    private AnimationPlayer animationPlayer;
+    public AnimationPlayer animationPlayer;
     private PlayerBulletSprite bulletSprite;
     public int life;
     public boolean immortal; // bat tu
@@ -73,7 +74,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
          if (frameCounterTrails.run()&& renderer != null &&renderer.getCurrentImage() != null &&  hero) {
             if (trail){
                 Trail trail = GameObjectPool.recycle(Trail.class);
-                trail.setTrail(this.position, 0.04f, renderer.getCurrentImage());
+                trail.setTrail(this.position, 0.06f, renderer.getCurrentImage());
                 frameCounterTrails.reset();
             }
         }
@@ -116,19 +117,20 @@ public class Player extends GameObject implements Setting, PhysicsBody {
             Boss.instance.position.set(255 + Boss.instance.renderer.getWidth() / 2, this.position.y + 200);
             Camera.instance.setFollowGameObject(Boss.instance);
             boss = true;
+
+
+        if (this.position.y > 9000) {
+            SceneManager.instance.requestChangeScene(new Victory());
         }
     }
 
     private void checkItem() {
-        Thunder thunder = Physics.bodyInRect(position.add(2,2),boxCollider.width, boxCollider.height, Thunder.class);
-        if (thunder == null){
-            thunder = Physics.bodyInRect(position.add(-2,-2),boxCollider.width, boxCollider.height, Thunder.class);
+        ItemSprite itemSprite = Physics.bodyInRectofsuper(position.add(2,2),boxCollider.width, boxCollider.height, ItemSprite.class);
+        if (itemSprite == null){
+            itemSprite = Physics.bodyInRect(position.add(-2,-2),boxCollider.width, boxCollider.height, ItemSprite.class);
         }
-        if (thunder != null){
-            thunder.setActive(false);
-            hero = true;
-            trail = true;
-            animationPlayer.setHero(true);
+        if (itemSprite != null){
+            itemSprite.hitPlayer = true;
         }
     }
 
