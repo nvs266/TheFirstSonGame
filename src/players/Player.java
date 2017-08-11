@@ -27,6 +27,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public boolean immortal; // bat tu
     private boolean added;
     public boolean hero;
+    public boolean trail;
     private FrameCounter frameCounterTrails;
     private FrameCounter immortalCounter;
     private Action immortalAction;
@@ -62,14 +63,18 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     @Override
     public void run(Vector2D parentPosition) {
-         if (frameCounterTrails.run()&& renderer != null &&renderer.getCurrentImage() != null &&  hero ) {
-            Trail trail = GameObjectPool.recycle(Trail.class);
-            trail.setTrail(this.position, 0.04f, renderer.getCurrentImage());
-            frameCounterTrails.reset();
+         if (frameCounterTrails.run()&& renderer != null &&renderer.getCurrentImage() != null &&  hero) {
+            if (trail){
+                Trail trail = GameObjectPool.recycle(Trail.class);
+                trail.setTrail(this.position, 0.04f, renderer.getCurrentImage());
+                frameCounterTrails.reset();
+            }
         }
 
         if (immortal) {
             hero = false;
+            trail = false;
+            animationPlayer.setHero(false);
             if (!added){
                 addAction(immortalAction);
                 added = true;
@@ -111,9 +116,10 @@ public class Player extends GameObject implements Setting, PhysicsBody {
             thunder = Physics.bodyInRect(position.add(-2,-2),boxCollider.width, boxCollider.height, Thunder.class);
         }
         if (thunder != null){
-            hero = true;
             thunder.setActive(false);
             hero = true;
+            trail = true;
+            animationPlayer.setHero(true);
         }
     }
 
