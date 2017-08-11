@@ -40,8 +40,7 @@ public class Camera implements Setting{
                 this.position.x = followGameObject.position.x -  WIDTH_SCREEN / 2;
             }
             else {
-                if (this.position.x <= 240) this.position.x+= 3;
-                else if (this.position.x >= 256) this.position.x--;
+                this.position.x = 247;
                 this.position.y = followGameObject.position.y -  HEIGHT_SCREEN / 2;
             }
         } else if (followGameObject.getClass() == Boss.class) {

@@ -37,6 +37,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public int totalNipple;
     public Audio shootAudio;
     public static Audio cryAudio;
+    public boolean vitory;
 
     public Player() {
         super();
@@ -117,7 +118,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         }
 
 
-        if (this.position.y > 9000) {
+        if (vitory) {
             SceneManager.instance.requestChangeScene(new Victory());
         }
     }
@@ -163,6 +164,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     }
 
     private void move() {
+        System.out.println(position);
 
         if (InputManager.instance.leftPressed) {
             velocity.x -= SPEED_PLAYER;

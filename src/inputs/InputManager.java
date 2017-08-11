@@ -9,8 +9,10 @@ public class InputManager {
     public boolean leftPressed;
     public boolean rightPressed;
     public boolean spacePressed;
+    public boolean immotal;
     public boolean escapePressed;
     public boolean enterPressed;
+
 
     public static final InputManager instance = new InputManager();
 
@@ -44,6 +46,9 @@ public class InputManager {
                 break;
             case KeyEvent.VK_ENTER:
                 enterPressed = true;
+                break;
+            case KeyEvent.VK_F6:
+                immotal = true;
                 break;
             default:
                 break;

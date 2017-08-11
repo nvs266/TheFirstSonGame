@@ -21,7 +21,7 @@ public class SkillSecond extends GameObject implements  Action {
         super();
         this.bossPos = bossPos;
         this.angle = 0;
-        this.frameCounter = new FrameCounter(20);
+        this.frameCounter = new FrameCounter(15);
     }
 
     @Override
@@ -30,8 +30,10 @@ public class SkillSecond extends GameObject implements  Action {
             frameCounter.reset();
             FireBullet2 fireBullet2 = GameObjectPool.recycle(FireBullet2.class);
             Vector2D velocity =new Vector2D(-2,0);
-            fireBullet2.set(velocity.makeAlpha((float) (Math.PI)/angle*180), bossPos.add(-20,100));
-            angle += 10;
+            fireBullet2.set(velocity.makeAlpha((float) (Math.PI)/-angle*180), bossPos.add(-75,120));
+            FireBullet2 fireBullet2right = GameObjectPool.recycle(FireBullet2.class);
+            fireBullet2right.set(velocity.makeAlpha((float) (Math.PI)/angle*180), bossPos.add(75,100));
+            angle += 8;
             System.out.println(angle);
         }
         if (angle > 180){
