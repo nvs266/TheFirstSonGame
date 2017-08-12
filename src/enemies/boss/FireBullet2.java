@@ -28,9 +28,6 @@ public class FireBullet2 extends GameObject implements PhysicsBody {
                 Utils.loadImage("assets/image/boss/bullet/2.png")
         );
 
-        Boss.bossAudio = new Audio("assets/music/enmemies/boss/boss.wav");
-        Boss.bossAudio.play();
-
         boxCollider = new BoxCollider(renderer.getWidth(), renderer.getHeight());
         this.children.add(boxCollider);
     }

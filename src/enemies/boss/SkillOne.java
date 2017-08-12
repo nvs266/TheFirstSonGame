@@ -1,5 +1,6 @@
 package enemies.boss;
 
+import bases.Audio;
 import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Vector2D;
@@ -21,6 +22,8 @@ public class SkillOne extends GameObject implements PhysicsBody, Action {
 
         FireBullet fireBuletRight = GameObjectPool.recycle(FireBullet.class);
         fireBuletRight.set(velocity.makeAlpha((float) (Math.PI / 4)), bossPos);
+        Boss.bossAudio = new Audio("assets/music/enmemies/boss/boss.wav");
+        Boss.bossAudio.play();
     }
 
     @Override
