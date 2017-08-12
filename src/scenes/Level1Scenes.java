@@ -42,7 +42,7 @@ public class Level1Scenes extends Scene{
     }
 
     private void addBackground() {
-        background = Utils.loadImage("assets/image/New folder/background.png");
+        background = Utils.loadImage("assets/image/New folder/newbackground.png");
     }
 
     private void loadMap() throws IOException {

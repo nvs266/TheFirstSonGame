@@ -80,7 +80,7 @@ public class IntroScene extends Scene{
     }
 
     private void addBackground() {
-        background = Utils.loadImage("assets/image/New folder/background.png");
+        background = Utils.loadImage("assets/image/New folder/newbackground.png");
     }
 
     private void addPlayer() {
