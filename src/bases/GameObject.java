@@ -145,7 +145,7 @@ public class GameObject {
                 g2d.drawString("LOST", 150, 150 );
 
                 g2d.setColor(Color.PINK);
-                g2d.setFont(LoadFont.loadFont("assets/font/Fighting Spirit 2.ttf",30));
+                g2d.setFont(LoadFont.loadFont("assets/font/Fighting Spirit 2.ttf",23));
                 g2d.drawString("Press Enter To Player Again!", 5, 300 );
 
                 if (InputManager.instance.enterPressed) {
