@@ -7,6 +7,7 @@ import bases.actions.SequenceAction;
 import bases.actions.WaitAction;
 import enemies.boss.Boss;
 import enemies.boss.Explosion;
+import enemies.boss.ExplosionAction;
 import inputs.InputManager;
 import items.ItemSprite;
 import physics.BoxCollider;
@@ -25,7 +26,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public int bullets;
     public int totalBullets;
     public AnimationPlayer animationPlayer;
-    private PlayerBulletSprite bulletSprite;
+    public PlayerBulletSprite bulletSprite;
     public int life;
     public boolean immortal; // bat tu
     private boolean added;
@@ -66,7 +67,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
                         new WaitAction(3)
                 )
         );
-        victorycounter = new FrameCounter(50);
+        victorycounter = new FrameCounter(100);
         Camera.instance.position = this.position.add(-WIDTH_SCREEN/2, -HEIGHT_SCREEN / 2);
         totalNipple = 0;
     }
@@ -122,9 +123,11 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
 
         if (victory) {
-            if (victorycounter.run()){
+            if (victorycounter.run()) {
                 SceneManager.instance.requestChangeScene(new Victory());
+                Level1Scenes.lv1Audio.stop();
             }
+
         }
     }
 

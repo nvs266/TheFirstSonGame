@@ -4,10 +4,14 @@ import bases.GameObject;
 import bases.GameObjectPool;
 import bases.Setting;
 import enemies.*;
+import items.ExtraBullet;
+import items.HealthItem;
+import items.ThreeRayBulletItem;
 import items.Thunder;
 import platforms.*;
 
 import java.io.*;
+import java.util.Random;
 
 public class Map implements Setting{
     private char map[][];
@@ -121,16 +125,34 @@ public class Map implements Setting{
                 break;
             case '8':
                 FrogEnemy frogEnemy = GameObjectPool.recycle(FrogEnemy.class);
-                frogEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 40);
+                frogEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
                 break;
             case 'D':
                 SpikeStick spikeStick = GameObjectPool.recycle(SpikeStick.class);
                 spikeStick.position.set(j * WIDTH_GRID, i * HEIGHT_GRID);
                 break;
             case '9':
-                Thunder thunder = GameObjectPool.recycle(Thunder.class);
-                thunder.refresh();
-                thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
+                int n = new Random().nextInt(3);
+                switch (n) {
+                    case 0:
+                        ExtraBullet extraBullet = GameObjectPool.recycle(ExtraBullet.class);
+                        extraBullet.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
+                        break;
+                    case 1:
+                        HealthItem healthItem = GameObjectPool.recycle(HealthItem.class);
+                        healthItem.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
+                        break;
+                    case 2:
+                        ThreeRayBulletItem threeRayBullet = GameObjectPool.recycle(ThreeRayBulletItem.class);
+                        threeRayBullet.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
+                        break;
+                    case 3:
+                        Thunder thunder = GameObjectPool.recycle(Thunder.class);
+                        thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 'B':
                 GravelDirt gravelDirt = GameObjectPool.recycle(GravelDirt.class);

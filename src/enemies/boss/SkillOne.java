@@ -21,6 +21,13 @@ public class SkillOne extends GameObject implements PhysicsBody, Action {
 
         FireBullet fireBuletRight = GameObjectPool.recycle(FireBullet.class);
         fireBuletRight.set(velocity.makeAlpha((float) (Math.PI / 4)), bossPos);
+
+        FireBullet fireBuletLeft2 = GameObjectPool.recycle(FireBullet.class);
+        fireBuletLeft2.set(velocity.makeAlpha((float) (-Math.PI / 6)), bossPos);
+
+        FireBullet fireBuletRight2 = GameObjectPool.recycle(FireBullet.class);
+        fireBuletRight2.set(velocity.makeAlpha((float) (Math.PI / 6)), bossPos);
+
     }
 
     @Override
@@ -30,6 +37,7 @@ public class SkillOne extends GameObject implements PhysicsBody, Action {
 
     @Override
     public boolean run(GameObject gameObject) {
+        Boss.instance.setAttackMode(true);
         return true;
     }
 

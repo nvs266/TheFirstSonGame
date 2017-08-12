@@ -151,6 +151,7 @@ public class GameObject {
         if (scene == null || scene.getClass() == IntroScene.class) return;
 
         for (GameObject gameObject: gameObjects) {
+            if (Player.instance!= null)
             if (gameObject.isActive && Player.instance.position.y - gameObject.position.y > 500) {
                 gameObject.remove();
             }

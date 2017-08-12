@@ -36,6 +36,7 @@ public class SkillSecond extends GameObject implements  Action {
             FireBullet2 fireBullet2right = GameObjectPool.recycle(FireBullet2.class);
             fireBullet2right.set(velocity.makeAlpha((float) (Math.PI)/angle*180), bossPos.add(75,70));
             angle += 8;
+            Boss.instance.setAttackMode(true);
         }
         if (angle > 180){
             return true;
