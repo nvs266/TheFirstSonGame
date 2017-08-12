@@ -21,16 +21,17 @@ public class IntroScene extends Scene{
     private Map map;
     Player player;
     public static MediaPlayer introAudio;
-
+    boolean check;
 
     @Override
     public void init() throws IOException {
+        check = false;
 
         AudioUtils.initialize();
         this.introAudio = AudioUtils.playMedia("assets/music/gameplay/intro.mp3");
         this.introAudio.setVolume(0.1d);
 
-        frameCounter = new FrameCounter(100);
+        frameCounter = new FrameCounter(50);
         nameTeam = new GameObject();
         nameTeam.position.set(70, 150);
         GameObject.add(nameTeam);
@@ -55,9 +56,6 @@ public class IntroScene extends Scene{
     @Override
     public void render(Graphics2D graphics2D) throws IOException {
         if (!frameCounter.run()) {
-            graphics2D.setColor(Color.WHITE);
-            graphics2D.setFont(new Font("serif", Font.BOLD, 40));
-            graphics2D.drawString("CHS TEAM", nameTeam.position.x, nameTeam.position.y);
             playerAnimation.render(graphics2D, new Vector2D(Setting.WIDTH_SCREEN / 2, Setting.HEIGHT_SCREEN / 2));
         } else {
             if (player == null) {
@@ -65,10 +63,15 @@ public class IntroScene extends Scene{
                 player.position.set(Setting.WIDTH_SCREEN / 2, -500);
                 loadMap();
             }
-            graphics2D.setColor(Color.WHITE);
-            graphics2D.setFont(new Font("serif", Font.BOLD, 40));
-            Vector2D posNameTeamInCamera = Camera.instance.posInCamera(nameTeam, nameTeam.position);
-            graphics2D.drawString("THE FIRST SON", posNameTeamInCamera.x, posNameTeamInCamera.y);
+            if (Player.instance != null && Player.velocity.y != 0) {
+                check = true;
+            }
+            if (check) {
+                graphics2D.setColor(Color.WHITE);
+                graphics2D.setFont(new Font("serif", Font.BOLD, 40));
+                Vector2D posNameTeamInCamera = Camera.instance.posInCamera(nameTeam, nameTeam.position);
+                graphics2D.drawString("THE FIRST SON", posNameTeamInCamera.x, posNameTeamInCamera.y);
+            }
         }
         if (player != null && player.position.y > 800) {
             SceneManager.instance.requestChangeScene(new Level1Scenes());
