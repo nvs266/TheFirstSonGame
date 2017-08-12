@@ -1,5 +1,6 @@
 import bases.GameObject;
 import bases.Setting;
+import enemies.boss.Boss;
 import inputs.InputManager;
 import javafx.scene.media.MediaPlayer;
 import players.Player;
@@ -116,6 +117,10 @@ public class GameWindow extends JFrame implements Setting{
             buffBackgroundGraphics2d.drawImage(Scene.background, 0, 0, null);
             buffBackgroundGraphics2dLeft.drawImage(Scene.background, 0, 0, null);
             buffBackgroundGraphics2dRight.drawImage(Scene.background, 0, 0, null);
+//            if (Boss.instance.position.x >8000){
+//                buffBackgroundGraphics2dRight.setColor(Color.GREEN);
+//                buffBackgroundGraphics2dRight.drawString(String.format("%s", Boss.instance.hp),100,100);
+//            }
         }
         if (SceneManager.instance != null && SceneManager.instance.getCurrentScene() == null) {
             introScene.render(buffBackgroundGraphics2d);

@@ -6,6 +6,8 @@ import bases.actions.RepeatForeverAction;
 import bases.actions.SequenceAction;
 import bases.actions.WaitAction;
 import enemies.boss.Boss;
+import enemies.boss.Explosion;
+import enemies.boss.ExplosionAction;
 import inputs.InputManager;
 import items.ItemSprite;
 import physics.BoxCollider;
@@ -37,7 +39,8 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public int totalNipple;
     public Audio shootAudio;
     public static Audio cryAudio;
-    public boolean vitory;
+    public boolean victory;
+    private FrameCounter victorycounter;
 
     public Player() {
         super();
@@ -64,6 +67,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
                         new WaitAction(3)
                 )
         );
+        victorycounter = new FrameCounter(100);
         Camera.instance.position = this.position.add(-WIDTH_SCREEN/2, -HEIGHT_SCREEN / 2);
         totalNipple = 0;
     }
@@ -118,11 +122,12 @@ public class Player extends GameObject implements Setting, PhysicsBody {
         }
 
 
-        if (vitory) {
-            if (Level1Scenes.lv1Audio != null) {
+        if (victory) {
+            if (victorycounter.run()) {
+                SceneManager.instance.requestChangeScene(new Victory());
                 Level1Scenes.lv1Audio.stop();
             }
-            SceneManager.instance.requestChangeScene(new Victory());
+
         }
     }
 

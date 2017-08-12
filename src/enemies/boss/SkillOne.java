@@ -14,7 +14,7 @@ public class SkillOne extends GameObject implements PhysicsBody, Action {
 
     public SkillOne(Vector2D bossPos) {
         FireBullet fireBulletMid = GameObjectPool.recycle(FireBullet.class);
-        Vector2D velocity = bossPos.substract(Player.instance.position).normalize().multiply(1f);
+        Vector2D velocity = bossPos.substract(Player.instance.position).normalize().multiply(1.5f);
         fireBulletMid.set(velocity, bossPos);
 
         FireBullet fireBuletLeft = GameObjectPool.recycle(FireBullet.class);
@@ -22,8 +22,15 @@ public class SkillOne extends GameObject implements PhysicsBody, Action {
 
         FireBullet fireBuletRight = GameObjectPool.recycle(FireBullet.class);
         fireBuletRight.set(velocity.makeAlpha((float) (Math.PI / 4)), bossPos);
+
+        FireBullet fireBuletLeft2 = GameObjectPool.recycle(FireBullet.class);
+        fireBuletLeft2.set(velocity.makeAlpha((float) (-Math.PI / 6)), bossPos);
+
+        FireBullet fireBuletRight2 = GameObjectPool.recycle(FireBullet.class);
+        fireBuletRight2.set(velocity.makeAlpha((float) (Math.PI / 6)), bossPos);
         Boss.bossAudio = new Audio("assets/music/enmemies/boss/boss.wav");
         Boss.bossAudio.play();
+
     }
 
     @Override
@@ -33,6 +40,7 @@ public class SkillOne extends GameObject implements PhysicsBody, Action {
 
     @Override
     public boolean run(GameObject gameObject) {
+        Boss.instance.setAttackMode(true);
         return true;
     }
 

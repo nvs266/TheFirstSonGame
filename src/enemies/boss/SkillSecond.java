@@ -32,11 +32,13 @@ public class SkillSecond extends GameObject implements  Action {
         if (frameCounter.run()){
             frameCounter.reset();
             FireBullet2 fireBullet2 = GameObjectPool.recycle(FireBullet2.class);
-            Vector2D velocity =new Vector2D(-2,0);
+            Vector2D velocity =new Vector2D(-2.5f,0);
             fireBullet2.set(velocity.makeAlpha((float) (Math.PI)/angle*180), bossPos.add(-75,70));
             FireBullet2 fireBullet2right = GameObjectPool.recycle(FireBullet2.class);
             fireBullet2right.set(velocity.makeAlpha((float) (Math.PI)/angle*180), bossPos.add(75,70));
             angle += 8;
+
+            Boss.instance.setAttackMode(true);
 
             Boss.bossAudio.play();
         }
