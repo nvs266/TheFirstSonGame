@@ -75,7 +75,7 @@ public class GameWindow extends JFrame implements Setting{
         this.setResizable(false);
         this.setSize(WIDTH_SCREEN * 3, HEIGHT_SCREEN);
         this.setLocation(100, 50);
-        this.setTitle("the first son");
+        this.setTitle("The First Son");
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -117,10 +117,6 @@ public class GameWindow extends JFrame implements Setting{
             buffBackgroundGraphics2d.drawImage(Scene.background, 0, 0, null);
             buffBackgroundGraphics2dLeft.drawImage(Scene.background, 0, 0, null);
             buffBackgroundGraphics2dRight.drawImage(Scene.background, 0, 0, null);
-//            if (Boss.instance.position.x >8000){
-//                buffBackgroundGraphics2dRight.setColor(Color.GREEN);
-//                buffBackgroundGraphics2dRight.drawString(String.format("%s", Boss.instance.hp),100,100);
-//            }
         }
         if (SceneManager.instance != null && SceneManager.instance.getCurrentScene() == null) {
             introScene.render(buffBackgroundGraphics2d);
@@ -203,7 +199,6 @@ public class GameWindow extends JFrame implements Setting{
            GameObject.removeAll();
         }
         SceneManager.instance.changeSceneIfNeeded();
-
     }
 
     public void setPause(boolean pause) {
