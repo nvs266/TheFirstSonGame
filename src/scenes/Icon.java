@@ -26,11 +26,11 @@ public class Icon extends GameObject {
     public void render(Graphics2D g2d) {
         if (Player.instance != null) {
             for (int i = 1; i <= Player.instance.bullets; i++) {
-                bullet.render(g2d, new Vector2D(20, 22 * i + 20));
+                bullet.render(g2d, new Vector2D(20, 30 * i + 20));
             }
 
             for (int i = 1; i <= Player.instance.life; i++) {
-                health.render(g2d, new Vector2D(70, 22 * i + 20));
+                health.render(g2d, new Vector2D(70, 30 * i + 20));
             }
 
             nipple.render(g2d, new Vector2D(120, 42));
