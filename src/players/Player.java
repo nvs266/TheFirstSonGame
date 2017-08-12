@@ -44,7 +44,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
 
     public Player() {
         super();
-        position.set(27 * 32 / 2, -500);
+        position.set(27 * 32 / 2, 100);
         life = START_LIFE;
         instance = this;
         bullets = totalBullets = START_TOTAL_BULLETS;

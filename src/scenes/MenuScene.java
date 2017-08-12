@@ -21,11 +21,12 @@ public class MenuScene implements InputListener{
 
     public void render(Graphics2D graphics2D) {
         for (int i = 0; i < titles.size(); i++) {
-            graphics2D.setColor(Color.WHITE);
             graphics2D.setFont(new Font("serif", Font.BOLD, 30));
             if (i == currentIndex) {
+                graphics2D.setColor(Color.RED);
                 graphics2D.drawString(titles.get(i), 50, 50 * i + 200);
             } else {
+                graphics2D.setColor(Color.WHITE);
                 graphics2D.drawString(titles.get(i), 70, 50 * i + 200);
 
             }
@@ -34,11 +35,11 @@ public class MenuScene implements InputListener{
 
     @Override
     public boolean onKeyPressed(int keyCode) {
-        if (keyCode == KeyEvent.VK_LEFT) {
+        if (keyCode == KeyEvent.VK_RIGHT) {
             currentIndex++;
             if (currentIndex >= titles.size()) currentIndex = 0;
         }
-        if (keyCode == KeyEvent.VK_RIGHT) {
+        if (keyCode == KeyEvent.VK_LEFT) {
             currentIndex--;
             if (currentIndex < 0) currentIndex = titles.size() - 1;
         }

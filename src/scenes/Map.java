@@ -117,7 +117,7 @@ public class Map implements Setting{
                 break;
             case '6':
                 SnakeEnemy snakeEnemy = GameObjectPool.recycle(SnakeEnemy.class);
-                snakeEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 32);
+                snakeEnemy.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
                 break;
             case '7':
                 GhostEnemy ghostEnemy = GameObjectPool.recycle(GhostEnemy.class);
@@ -136,19 +136,19 @@ public class Map implements Setting{
                 switch (n) {
                     case 0:
                         ExtraBullet extraBullet = GameObjectPool.recycle(ExtraBullet.class);
-                        extraBullet.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
+                        extraBullet.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 70);
                         break;
                     case 1:
                         HealthItem healthItem = GameObjectPool.recycle(HealthItem.class);
-                        healthItem.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
+                        healthItem.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 70);
                         break;
                     case 2:
                         ThreeRayBulletItem threeRayBullet = GameObjectPool.recycle(ThreeRayBulletItem.class);
-                        threeRayBullet.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
+                        threeRayBullet.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 70);
                         break;
                     case 3:
                         Thunder thunder = GameObjectPool.recycle(Thunder.class);
-                        thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 60);
+                        thunder.position.set(j * WIDTH_GRID, i * HEIGHT_GRID - 70);
                         break;
                     default:
                         break;
