@@ -136,8 +136,8 @@ public class GameObject {
                 g2d.drawString("LOST", 150, 150 );
 
                 g2d.setColor(Color.PINK);
-                g2d.setFont(new Font("serif", Font.BOLD, 40));
-                g2d.drawString("Press Enter To Player Again!", 30, 300 );
+                g2d.setFont(new Font("serif", Font.BOLD, 30));
+                g2d.drawString("Press Enter To Player Again!", 5, 300 );
 
                 if (InputManager.instance.enterPressed) {
                     SceneManager.instance.requestChangeScene(new Level1Scenes());
