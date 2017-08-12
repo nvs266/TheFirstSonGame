@@ -33,7 +33,7 @@ public class Victory extends Scene {
     }
 
     private void addBackground() {
-        background = Utils.loadImage("assets/image/New folder/background.png");
+        background = Utils.loadImage("assets/image/New folder/newbackground.png");
     }
 
     public void setVictoryMedia() {
