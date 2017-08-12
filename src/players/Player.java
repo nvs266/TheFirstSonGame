@@ -42,6 +42,8 @@ public class Player extends GameObject implements Setting, PhysicsBody {
     public boolean victory;
     private FrameCounter victorycounter;
 
+    public  static Audio lostAudio;
+
     public Player() {
         super();
         position.set(27 * 32 / 2, 100);
@@ -67,6 +69,7 @@ public class Player extends GameObject implements Setting, PhysicsBody {
                         new WaitAction(3)
                 )
         );
+        lostAudio = new Audio("assets/music/player/lost.wav");
         victorycounter = new FrameCounter(100);
         Camera.instance.position = this.position.add(-WIDTH_SCREEN/2, -HEIGHT_SCREEN / 2);
         totalNipple = 0;
