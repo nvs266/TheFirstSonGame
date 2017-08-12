@@ -25,6 +25,7 @@ public class GameObject {
     private boolean isActive;
     public Renderer renderer;
     private static boolean lost;
+    private static boolean added;
 
     public static Camera camera = new Camera();
 
@@ -130,6 +131,13 @@ public class GameObject {
                 lost = true;
             }
             if (lost){
+                if (!added) {
+                    Player.lostAudio.play();
+                    added = true;
+                }
+                if (Level1Scenes.lv1Audio != null) {
+                    Level1Scenes.lv1Audio.stop();
+                }
                 Player.instance.setActive(false);
 //                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f));
                 g2d.setColor(Color.WHITE);
