@@ -2,6 +2,7 @@ package bases;
 
 import bases.actions.Action;
 import bases.renderers.Renderer;
+import inputs.InputManager;
 import physics.BoxCollider;
 import physics.Physics;
 import physics.PhysicsBody;
@@ -129,10 +130,18 @@ public class GameObject {
             }
             if (lost){
                 Player.instance.setActive(false);
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f));
+//                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f));
                 g2d.setColor(Color.WHITE);
                 g2d.setFont(new Font("serif", Font.BOLD, 40));
-                g2d.drawString("LOST", 100, 300 );
+                g2d.drawString("LOST", 150, 150 );
+
+                g2d.setColor(Color.PINK);
+                g2d.setFont(new Font("serif", Font.BOLD, 30));
+                g2d.drawString("Press Enter To Player Again!", 5, 300 );
+
+                if (InputManager.instance.enterPressed) {
+                    SceneManager.instance.requestChangeScene(new Level1Scenes());
+                }
             }
 
         }
@@ -176,5 +185,6 @@ public class GameObject {
         gameObjects.clear();
         GameObjectPool.clear();
         Physics.clear();
+        lost = false;
     }
 }

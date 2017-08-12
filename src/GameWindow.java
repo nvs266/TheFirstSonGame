@@ -3,6 +3,8 @@ import bases.Setting;
 import enemies.boss.Boss;
 import inputs.InputManager;
 import javafx.scene.media.MediaPlayer;
+import players.Player;
+import players.bullets.ThreeRayBullet;
 import scenes.*;
 import scenes.Icon;
 import tklibs.AudioUtils;
@@ -34,14 +36,14 @@ public class GameWindow extends JFrame implements Setting{
     InputManager inputManager = InputManager.instance;
     Scene introScene;
     public boolean pause;
-    MenuScene menuScene;
+    MenuScene shoppingScene;
 
     public GameWindow() throws IOException {
         setUpgameWindow();
         setupInputs();
         setUpStartupScene();
         this.setVisible(true);
-        menuScene = new MenuScene("Resume", "Restart", "Exit");
+        shoppingScene = new MenuScene("Three Rays - 10 Nipples", "Health - 10 Nipples", "Extra Bullet - 20 Nipples","Superman - 30 Nipples");
     }
 
     private void setUpStartupScene() throws IOException {
@@ -55,7 +57,6 @@ public class GameWindow extends JFrame implements Setting{
         this.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-
             }
 
             @Override
@@ -133,7 +134,7 @@ public class GameWindow extends JFrame implements Setting{
             GameObject.renderAll(buffBackgroundGraphics2d);
         } else {
             buffBackgroundGraphics2d.drawImage(Scene.background, 0, 0, null);
-            menuScene.render(buffBackgroundGraphics2d);
+            shoppingScene.render(buffBackgroundGraphics2d);
         }
         Graphics2D graphics2D = (Graphics2D) this.getGraphics();
         graphics2D.drawImage(buffBackground, WIDTH_SCREEN, 0, null);
@@ -142,6 +143,13 @@ public class GameWindow extends JFrame implements Setting{
             Icon.instance.render(buffBackgroundGraphics2dLeft);
         }
         graphics2D.drawImage(buffBackgroundLeft, 0, 0, null);
+
+        if (Player.instance != null && Player.instance.totalNipple >= 10) {
+            buffBackgroundGraphics2dRight.setColor(Color.RED);
+            buffBackgroundGraphics2dRight.setFont(new Font("serif", Font.BOLD, 20));
+            buffBackgroundGraphics2dRight.drawString("Press Escape To Shop", 30, 150 );
+            buffBackgroundGraphics2dRight.drawString("Press Enter To Buy and Resume game", 30, 170 );
+        }
 
         graphics2D.drawImage(buffBackgroundRight, WIDTH_SCREEN * 2, 0, null);
     }
@@ -154,28 +162,38 @@ public class GameWindow extends JFrame implements Setting{
            }
        }
 
-       if (pause && inputManager.enterPressed) {
-           switch (menuScene.currentIndex) {
+       if (pause && inputManager.enterPressed && Player.instance != null) {
+           switch (shoppingScene.currentIndex) {
                case 0:
-                   pause = false;
-                   if (Level1Scenes.lv1Audio != null) {
-                       Level1Scenes.lv1Audio.play();
+                   if (Player.instance.totalNipple >= 10 && Player.instance.bulletSprite.getClass() != ThreeRayBullet.class) {
+                       Player.instance.bulletSprite = new ThreeRayBullet();
+                        Player.instance.totalNipple -= 10;
                    }
                    break;
                case 1:
-                   if (Level1Scenes.lv1Audio != null) {
-                       Level1Scenes.lv1Audio.stop();
-                   } else {
-                       IntroScene.introAudio.stop();
+                   if (Player.instance.totalNipple >= 10 && Player.instance.life < 4) {
+                       Player.instance.life++;
+                       Player.instance.totalNipple -= 10;
                    }
-                   SceneManager.instance.requestChangeScene(new Level1Scenes());
-                   pause = false;
                    break;
                case 2:
-                   System.exit(0);
+                   if (Player.instance.totalNipple >= 20) {
+                       Player.instance.totalBullets += 3;
+                       Player.instance.totalNipple -= 20;
+                   }
+                   break;
+               case 3:
+                   if (!Player.instance.hero && Player.instance.totalNipple >= 30) {
+                       Player.instance.hero = true;
+                       Player.instance.totalNipple -= 30;
+                   }
                    break;
                default:
                    break;
+           }
+           pause = false;
+           if (Level1Scenes.lv1Audio != null) {
+               Level1Scenes.lv1Audio.play();
            }
        }
 

@@ -35,7 +35,7 @@ public class Trail extends GameObject {
         g2d.setComposite(makeTransparent(alpha));
 
 
-        g2d.drawImage(image,  (int)(position.x - image.getWidth()/2 - camera.getPosition().x + Player.velocity.x), (int)(position.y - image.getHeight()/2 - camera.getPosition().y + Player.velocity.y), null);
+        g2d.drawImage(image,  (int)(position.x - image.getWidth()/2 - camera.getPosition().x + Player.instance.velocity.x), (int)(position.y - image.getHeight()/2 - camera.getPosition().y + Player.instance.velocity.y), null);
         g2d.setComposite(makeTransparent(1));
     }
 

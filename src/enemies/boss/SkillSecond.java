@@ -24,6 +24,7 @@ public class SkillSecond extends GameObject implements  Action {
         this.bossPos = bossPos;
         this.angle = 0;
         this.frameCounter = new FrameCounter(10);
+        Boss.bossAudio = new Audio("assets/music/enmemies/boss/boss.wav");
     }
 
     @Override
@@ -36,7 +37,10 @@ public class SkillSecond extends GameObject implements  Action {
             FireBullet2 fireBullet2right = GameObjectPool.recycle(FireBullet2.class);
             fireBullet2right.set(velocity.makeAlpha((float) (Math.PI)/angle*180), bossPos.add(75,70));
             angle += 8;
+
             Boss.instance.setAttackMode(true);
+
+            Boss.bossAudio.play();
         }
         if (angle > 180){
             return true;
