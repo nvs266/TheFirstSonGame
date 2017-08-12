@@ -105,4 +105,10 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
     public BoxCollider getBoxCollider() {
         return this.boxCollider;
     }
+
+    @Override
+    public void refresh() {
+        super.refresh();
+        hp = 100;
+    }
 }
