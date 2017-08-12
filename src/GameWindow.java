@@ -1,8 +1,10 @@
 import bases.GameObject;
+import bases.LoadFont;
 import bases.Setting;
 import enemies.boss.Boss;
 import inputs.InputManager;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.*;
 import players.Player;
 import players.bullets.ThreeRayBullet;
 import scenes.*;
@@ -14,6 +16,7 @@ import javax.swing.*;
 import javax.xml.validation.SchemaFactoryConfigurationError;
 import java.awt.*;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
@@ -38,12 +41,18 @@ public class GameWindow extends JFrame implements Setting{
     public boolean pause;
     MenuScene shoppingScene;
 
+
     public GameWindow() throws IOException {
         setUpgameWindow();
         setupInputs();
         setUpStartupScene();
+        LoadFont();
         this.setVisible(true);
         shoppingScene = new MenuScene("Three Rays - 10 Nipples", "Health - 10 Nipples", "Extra Bullet - 20 Nipples","Superman - 30 Nipples");
+    }
+
+    private void LoadFont() {
+        LoadFont.instance = LoadFont.loadFont("assets/font/Fighting Spirit 2.ttf",20);
     }
 
     private void setUpStartupScene() throws IOException {
@@ -142,7 +151,7 @@ public class GameWindow extends JFrame implements Setting{
 
         if (Player.instance != null && Player.instance.totalNipple >= 10) {
             buffBackgroundGraphics2dRight.setColor(Color.RED);
-            buffBackgroundGraphics2dRight.setFont(new Font("serif", Font.BOLD, 20));
+            buffBackgroundGraphics2dRight.setFont(LoadFont.instance);
             buffBackgroundGraphics2dRight.drawString("Press Escape To Shop", 30, 150 );
             buffBackgroundGraphics2dRight.drawString("Press Enter To Buy and Resume game", 30, 170 );
         }

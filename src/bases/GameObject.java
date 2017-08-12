@@ -116,13 +116,14 @@ public class GameObject {
         if (scene != null && scene.getClass() != IntroScene.class && Player.instance != null) {
             end = System.nanoTime();
             if (end - start >0) {
+                g2d.setFont(LoadFont.instance);
                 g2d.drawString("fps: " + 1000000000/(end - start), 50, 60);
             }
             start = System.nanoTime();
 
             if (Player.instance.immortal) {
                 g2d.setColor(Color.RED);
-                g2d.setFont(new Font("serif", Font.BOLD, 20));
+                g2d.setFont(LoadFont.instance);
                 g2d.drawString("-1", Player.instance.position.x - Camera.instance.getPosition().x + 20, Player.instance.position.y - Camera.instance.getPosition().y - 20);
             }
             if (Player.instance.life == 0) {
@@ -132,11 +133,11 @@ public class GameObject {
                 Player.instance.setActive(false);
 //                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f));
                 g2d.setColor(Color.WHITE);
-                g2d.setFont(new Font("serif", Font.BOLD, 40));
+                g2d.setFont(LoadFont.loadFont("assets/font/Fighting Spirit 2.ttf",40));
                 g2d.drawString("LOST", 150, 150 );
 
                 g2d.setColor(Color.PINK);
-                g2d.setFont(new Font("serif", Font.BOLD, 30));
+                g2d.setFont(LoadFont.loadFont("assets/font/Fighting Spirit 2.ttf",30));
                 g2d.drawString("Press Enter To Player Again!", 5, 300 );
 
                 if (InputManager.instance.enterPressed) {

@@ -2,6 +2,7 @@ package scenes;
 
 import Utils.Utils;
 import bases.GameObject;
+import bases.LoadFont;
 import bases.Vector2D;
 import bases.renderers.Animation;
 import enemies.boss.Boss;
@@ -39,15 +40,15 @@ public class Icon extends GameObject {
             if (Physics.find(Boss.class) != null){
                 boss.render(g2d,new Vector2D(200,80));
                 g2d.setColor(Color.BLUE);
-                g2d.setFont(new Font("serif", Font.BOLD, 20));
+                g2d.setFont(LoadFont.instance);
                 g2d.drawString("" + Boss.instance.hp, 220, 60 );
             }
 
             nipple.render(g2d, new Vector2D(120, 42));
 
             g2d.setColor(Color.RED);
-            g2d.setFont(new Font("serif", Font.BOLD, 20));
-            g2d.drawString("" + Player.instance.totalNipple, 150, 40 );
+            g2d.setFont(LoadFont.instance);
+            g2d.drawString("" + Player.instance.totalNipple, 150, 50 );
         }
     }
 }
