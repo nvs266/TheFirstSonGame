@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class Boss extends GameObject implements PhysicsBody, Setting{
     public static Boss instance = new Boss();
-    public int hp = 100;
+    public int hp = 300;
     public static Audio bossAudio;
     public Animation attack;
     private Animation normal;
@@ -109,6 +109,7 @@ public class Boss extends GameObject implements PhysicsBody, Setting{
     @Override
     public void refresh() {
         super.refresh();
-        hp = 100;
+        hp = 300;
+        this.setActive(true);
     }
 }

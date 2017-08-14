@@ -39,9 +39,8 @@ public class Icon extends GameObject {
             }
             if (Physics.find(Boss.class) != null){
                 boss.render(g2d,new Vector2D(200,80));
-                g2d.setColor(Color.BLUE);
-                g2d.setFont(LoadFont.instance);
-                g2d.drawString("" + Boss.instance.hp, 220, 60 );
+                g2d.setColor(Color.RED);
+                g2d.fillRect(145,140,(int) Boss.instance.hp/3,20);
             }
 
             nipple.render(g2d, new Vector2D(120, 42));
